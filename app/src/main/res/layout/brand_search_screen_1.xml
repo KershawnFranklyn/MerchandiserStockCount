@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/SMJBackground">
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <ScrollView
+        android:id="@+id/brand_search_screen_1_mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/brand_search_screen_1_mainLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <SearchView
+                android:id="@+id/brandSearchView"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"
+                android:background="@color/GhostWhite" />
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/brandTblBrandLbl"
+                    android:layout_width="275dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/SMJTextBlue"
+                    android:text="Brand"
+                    android:textAlignment="center"
+                    android:textColor="@color/GhostWhite"
+                    android:textSize="24dp" />
+
+                <TextView
+                    android:id="@+id/brandTblSearchLbl"
+                    android:layout_width="137dp"
+                    android:layout_height="wrap_content"
+                    android:background="@color/SMJTextBlue"
+                    android:text="Select"
+                    android:textAlignment="center"
+                    android:textColor="@color/GhostWhite"
+                    android:textSize="24dp" />
+
+            </TableRow>
+
+            <TableLayout
+                android:id="@+id/brandTbl"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+
+            <LinearLayout
+                android:id="@+id/brandHorizontalLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/itemBrandLinearLayout"
+                    android:layout_width="275dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:context=".ItemBrandActivity">
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/selectBrandBtnLinearLayout"
+                    android:layout_width="137dp"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"></LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

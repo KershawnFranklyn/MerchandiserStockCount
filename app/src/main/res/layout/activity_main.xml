@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@color/SMJBackground"
+    android:orientation="vertical">
+
+
+    <include layout="@layout/toolbar_layout" />
+
+    <ScrollView
+        android:id="@+id/activity_main_mainScrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:id="@+id/activity_main_mainLinearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/custLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/custNameTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/SMJBackground"
+                    android:paddingLeft="15dp"
+                    android:text="Customer Name:"
+                    android:textColor="@color/SMJTextBlue"
+                    android:textSize="24dp" />
+
+                <Button
+                    android:id="@+id/chooseCustBtn"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Choose a Customer"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="@color/GhostWhite"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/displayCustTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/GhostWhite"
+                    android:text="Chosen Customer Name"
+                    android:textAlignment="center"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="6dp"
+                    android:textSize="24dp"
+                    android:textColor="@color/SMJTextBlue"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemNameLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/itemNameTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/SMJBackground"
+                    android:paddingLeft="15dp"
+                    android:text="Item Brand:"
+                    android:textColor="@color/SMJTextBlue"
+                    android:textSize="24dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <Button
+                    android:id="@+id/chooseItemNameBtn"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Choose a Item Name"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="@color/GhostWhite"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/displayItemNameTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:text="Chosen an Item Brand"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="24dp"
+                    android:textColor="@color/SMJTextBlue"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/itemTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/SMJBackground"
+                    android:paddingLeft="15dp"
+                    android:text="Item Brand:"
+                    android:textColor="@color/SMJTextBlue"
+                    android:textSize="24dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <Button
+                    android:id="@+id/chooseItemBtn"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Choose a Item Brand"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="@color/GhostWhite"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/displayItemIxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:text="Chosen an Item Brand"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="24dp"
+                    android:textColor="@color/SMJTextBlue" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/packSizeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/packSizeTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/SMJBackground"
+                    android:paddingLeft="15dp"
+                    android:text="Item Pack Size:"
+                    android:textColor="@color/SMJTextBlue"
+                    android:textSize="24dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"/>
+
+                <Button
+                    android:id="@+id/choosePackSizeBtn"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Choose an Item Pack Size"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="@color/GhostWhite"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/displayPackSizeTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:text="Chosen Item Pack Size"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="24dp"
+                    android:textColor="@color/SMJTextBlue"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/itemFlavorLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/itemFlavorTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/SMJBackground"
+                    android:paddingLeft="15dp"
+                    android:text="Item Flavor:"
+                    android:textColor="@color/SMJTextBlue"
+                    android:textSize="24dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp" />
+
+                <Button
+                    android:id="@+id/itemFlavorBtn"
+                    android:layout_width="240dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Choose an Item Flavor"
+                    android:background="@drawable/rounded_button"
+                    android:textColor="@color/GhostWhite"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:id="@+id/displayItemFlavorTxtView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/White"
+                    android:text="Chosen Item Flavor"
+                    android:textAlignment="center"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="24dp"
+                    android:textColor="@color/SMJTextBlue"/>
+            </LinearLayout>
+            <Button
+                android:id="@+id/nxtBtn"
+                android:layout_width="240dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Next"
+                android:background="@drawable/rounded_button"
+                android:textColor="@color/GhostWhite"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:textSize="16dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
