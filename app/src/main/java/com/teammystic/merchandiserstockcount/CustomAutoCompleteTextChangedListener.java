@@ -48,36 +48,37 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher{
         MainActivity mainActivity = ((MainActivity) context);
 
         // query the database based on the user input
-        mainActivity.item = mainActivity.getCustomerNameFromDb(userInput.toString());
-        mainActivity.item = mainActivity.getCustomerAccountFromDb(userInput.toString());
-        mainActivity.item = mainActivity.getItemNameFromDb(userInput.toString());
-        mainActivity.item = mainActivity.getItemBrandFromDb(userInput.toString());
-        mainActivity.item = mainActivity.getItemPackSizeFromDb(userInput.toString());
-        mainActivity.item = mainActivity.getItemFlavorFromDb(userInput.toString());
+        mainActivity.CustomerNameInputItem = mainActivity.getCustomerNameFromDb(userInput.toString());
+        mainActivity.CustomerAccountInputItem = mainActivity.getCustomerAccountFromDb(userInput.toString());
+        mainActivity.ItemNameInputItem = mainActivity.getItemNameFromDb(userInput.toString());
+        mainActivity.ItemBrandInputItem = mainActivity.getItemBrandFromDb(userInput.toString());
+        mainActivity.ItemPackSizeInputItem = mainActivity.getItemPackSizeFromDb(userInput.toString());
+        mainActivity.ItemFlavorInputItem = mainActivity.getItemFlavorFromDb(userInput.toString());
 
         // update the adapater
+
         mainActivity.CustomerNameAdapter.notifyDataSetChanged();
-        mainActivity.CustomerNameAdapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.item);
+        mainActivity.CustomerNameAdapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.CustomerNameInputItem);
         mainActivity.CustomerNameAutoComplete.setAdapter(mainActivity.CustomerNameAdapter);
 
         mainActivity.CustomerAccountAdapter.notifyDataSetChanged();
-        mainActivity.CustomerAccountAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.item);
+        mainActivity.CustomerAccountAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.CustomerAccountInputItem);
         mainActivity.CustomerAccountAutoComplete.setAdapter(mainActivity.CustomerAccountAdapter);
 
         mainActivity.ItemNameAdapter.notifyDataSetChanged();
-        mainActivity.ItemNameAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.item);
+        mainActivity.ItemNameAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.ItemNameInputItem);
         mainActivity.ItemNameAutoComplete.setAdapter(mainActivity.ItemNameAdapter);
 
         mainActivity.ItemBrandAdapter.notifyDataSetChanged();
-        mainActivity.ItemBrandAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.item);
+        mainActivity.ItemBrandAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.ItemBrandInputItem);
         mainActivity.ItemBrandAutoComplete.setAdapter(mainActivity.ItemBrandAdapter);
 
         mainActivity.ItemPackSizeAdapter.notifyDataSetChanged();
-        mainActivity.ItemPackSizeAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.item);
+        mainActivity.ItemPackSizeAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.ItemPackSizeInputItem);
         mainActivity.ItemPackSizeAutoComplete.setAdapter(mainActivity.ItemPackSizeAdapter);
 
         mainActivity.ItemFlavorAdapter.notifyDataSetChanged();
-        mainActivity.ItemFlavorAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.item);
+        mainActivity.ItemFlavorAdapter = new ArrayAdapter<String >(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.ItemFlavorInputItem);
         mainActivity.ItemFlavorAutoComplete.setAdapter(mainActivity.ItemFlavorAdapter);
 
     }

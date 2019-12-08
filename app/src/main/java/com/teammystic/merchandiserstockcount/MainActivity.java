@@ -49,7 +49,12 @@ public class MainActivity extends AppCompatActivity {
     DatabaseOpenHelper databaseH;
 
     // just to add some initial value
-    String[] item = new String[] {"Please search..."};
+    String[] CustomerNameInputItem = new String[] {"Please search..."};
+    String[] CustomerAccountInputItem = new String[] {"Please search..."};
+    String[] ItemNameInputItem = new String[]{"Please search..."};
+    String[] ItemBrandInputItem = new String[]{"Please search..."};
+    String[] ItemPackSizeInputItem = new String[]{"Please search..."};
+    String[] ItemFlavorInputItem = new String[]{"Please search..."};
 
 
     /*End of cited code*/
@@ -94,22 +99,22 @@ public class MainActivity extends AppCompatActivity {
             ItemFlavorAutoComplete.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
 
             // set our adapter
-            CustomerNameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
+            CustomerNameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, CustomerNameInputItem);
             CustomerNameAutoComplete.setAdapter(CustomerNameAdapter);
 
-            CustomerAccountAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
+            CustomerAccountAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, CustomerAccountInputItem);
             CustomerAccountAutoComplete.setAdapter(CustomerAccountAdapter);
 
-            ItemNameAdapter = new ArrayAdapter<String >(this, android.R.layout.simple_dropdown_item_1line, item);
+            ItemNameAdapter = new ArrayAdapter<String >(this, android.R.layout.simple_dropdown_item_1line, ItemNameInputItem);
             ItemNameAutoComplete.setAdapter(ItemNameAdapter);
 
-            ItemBrandAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
+            ItemBrandAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ItemBrandInputItem);
             ItemBrandAutoComplete.setAdapter(ItemBrandAdapter);
 
-            ItemPackSizeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
+            ItemPackSizeAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ItemPackSizeInputItem);
             ItemPackSizeAutoComplete.setAdapter(ItemPackSizeAdapter);
 
-            ItemFlavorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, item);
+            ItemFlavorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ItemFlavorInputItem);
             ItemFlavorAutoComplete.setAdapter(ItemFlavorAdapter);
 
         } catch (NullPointerException e) {
@@ -247,6 +252,7 @@ public class MainActivity extends AppCompatActivity {
 
         return itemFlavorItem;
     }
+
 }
 
 
