@@ -20,7 +20,7 @@ public class DatabaseAccess {
     private SQLiteDatabase database;
     private static DatabaseAccess instance;
 
-    private DatabaseAccess(Context context){
+    DatabaseAccess(Context context){
         this.openHelper = new DatabaseOpenHelper(context);
     }
 

@@ -61,17 +61,20 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24dp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView2"
+            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+                android:id="@+id/customerNameAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/GhostWhite"
-                android:hint="Enter Customer Name"
+                android:completionThreshold="1"
+                android:hint="Enter Customer Account"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
-                android:textSize="24dp" />
+                android:textSize="24dp">
+            </com.teammystic.merchandiserstockcount.CustomAutoCompleteView>
+
 
             <Space
                 android:layout_width="match_parent"
@@ -88,17 +91,20 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24dp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView3"
+            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+                android:id="@+id/customerAccountAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/GhostWhite"
+                android:completionThreshold="1"
                 android:hint="Enter Customer Name"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
-                android:textSize="24dp" />
+                android:textSize="24dp"
+                android:inputType="number"/>
+
 
             <Space
                 android:layout_width="match_parent"
@@ -120,14 +126,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView4"
+                <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+                    android:id="@+id/itemNameAutoCompleteTextView"
                     android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_weight="1"
                     android:background="@color/GhostWhite"
+                    android:completionThreshold="1"
                     android:hint="Enter Item Name"
                     android:textColor="@color/SMJTextBlue"
                     android:textColorHint="@color/LightGrey"
@@ -159,13 +166,14 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24dp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView6"
+            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+                android:id="@+id/itemBrandAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/GhostWhite"
+                android:completionThreshold="1"
                 android:hint="Enter Item Brand"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
@@ -186,13 +194,14 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24dp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView7"
+            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+                android:id="@+id/itemPackSizeAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/GhostWhite"
+                android:completionThreshold="1"
                 android:hint="Enter Item Pack Size"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
@@ -213,13 +222,14 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24dp" />
 
-            <AutoCompleteTextView
-                android:id="@+id/autoCompleteTextView8"
+            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+                android:id="@+id/itemFlavorAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:background="@color/GhostWhite"
+                android:completionThreshold="1"
                 android:hint="Enter Item Flavor"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
@@ -241,7 +251,7 @@
                 android:textSize="24dp" />
 
             <EditText
-                android:id="@+id/editText2"
+                android:id="@+id/numberOfCasesEditTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
