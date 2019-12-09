@@ -61,6 +61,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBar);
         setTitle("Enter Information");
         setSupportActionBar(toolbar);
+        final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
 
 /***************************************************************************************
  *    Title: Android AutocompleteTextView with Database Data as Suggestions
@@ -122,6 +125,18 @@ public class MainActivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        final Button button = findViewById(R.id.submitButton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                databaseAccess.open();
+                databaseAccess.insertData();
+                databaseAccess.close();
+
+            }
+        });
 
     }
 

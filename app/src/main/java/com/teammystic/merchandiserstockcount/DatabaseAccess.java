@@ -112,4 +112,11 @@ public class DatabaseAccess {
         cursor.close();
         return list;
     }
+
+    public void insertData(){
+        Log.i(TAG, "insertData: Testing that the data is inputed into the database");
+        database.rawQuery("INSERT INTO [StockCountSavedData] (Route, CustAcct, " +
+                "[Customer Name], ITEMID, ITEMNAME, ItemBrand, ItemPackSize, Flavor) VALUES" +
+                "('133', '1005000', 'Test', '55550000', 'Test', 'Test Brand', '300ml', 'test flavor')", null);
+    }
 }

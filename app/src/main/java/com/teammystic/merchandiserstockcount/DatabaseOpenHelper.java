@@ -37,7 +37,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT [Customer Name] FROM SalesData WHERE [Customer Name] LIKE '" + searchTerm + "%'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT [Customer Name] FROM SalesData WHERE [Customer Name] LIKE '" + searchTerm + "%' ORDER BY [Customer Name] ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -66,7 +66,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT CustAcct FROM SalesData WHERE CustAcct LIKE '" + searchTerm + "%'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT CustAcct FROM SalesData WHERE CustAcct LIKE '" + searchTerm + "%'ORDER BY CustAcct ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -95,7 +95,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT ITEMNAME FROM SalesData WHERE ITEMNAME LIKE '" + searchTerm + "%'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT ITEMNAME FROM SalesData WHERE ITEMNAME LIKE '" + searchTerm + "%' ORDER BY ITEMNAME ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -124,7 +124,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT ItemBrand FROM SalesData WHERE ItemBrand LIKE '" + searchTerm + "%'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT ItemBrand FROM SalesData WHERE ItemBrand LIKE '" + searchTerm + "%' ORDER BY ItemBrand ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -153,7 +153,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT ItemPackSize FROM SalesData WHERE ItemPackSize LIKE '" + searchTerm + "%'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT ItemPackSize FROM SalesData WHERE ItemPackSize LIKE '" + searchTerm + "%' ORDER BY ItemPackSize ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -183,7 +183,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT Flavor FROM SalesData WHERE Flavor LIKE '" + searchTerm + "%'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT Flavor FROM SalesData WHERE Flavor LIKE '" + searchTerm + "%' ORDER BY Flavor ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/SMJBackground">
@@ -140,15 +141,15 @@
                     android:textColorHint="@color/LightGrey"
                     android:textSize="24dp" />
 
-                <TextView
-                    android:id="@+id/textView6"
+                <!--                -->
+                <ImageButton
+                    android:id="@+id/imageButton"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="15dp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
-                    android:textSize="15dp" />
+                    app:srcCompat="@drawable/icons8_camera_40"
+                    android:background="@color/SMJBackground"/>
+
             </LinearLayout>
 
             <Space
@@ -268,7 +269,7 @@
                 android:layout_height="20dp" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/submitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
