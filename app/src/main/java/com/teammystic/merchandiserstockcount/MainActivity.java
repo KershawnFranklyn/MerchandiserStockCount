@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.net.Inet4Address;
 import java.util.List;
@@ -131,9 +132,22 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
                 databaseAccess.open();
-                databaseAccess.insertData();
+                Boolean test = databaseAccess.insertData();
                 databaseAccess.close();
+
+                //cite here
+                if(test == true)
+                {
+                    Toast toast = Toast.makeText(MainActivity.this, "Data saved", Toast.LENGTH_LONG);
+                    toast.show();
+                }
+                else if (test == false)
+                {
+                    Toast.makeText(MainActivity.this, "Data not saved", Toast.LENGTH_LONG).show();
+                }
+
 
             }
         });

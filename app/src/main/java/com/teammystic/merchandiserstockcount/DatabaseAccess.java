@@ -1,5 +1,6 @@
 package com.teammystic.merchandiserstockcount;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -7,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.nfc.Tag;
 import android.provider.ContactsContract;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,10 +115,29 @@ public class DatabaseAccess {
         return list;
     }
 
-    public void insertData(){
-        Log.i(TAG, "insertData: Testing that the data is inputed into the database");
-        database.rawQuery("INSERT INTO [StockCountSavedData] (Route, CustAcct, " +
-                "[Customer Name], ITEMID, ITEMNAME, ItemBrand, ItemPackSize, Flavor) VALUES" +
-                "('133', '1005000', 'Test', '55550000', 'Test', 'Test Brand', '300ml', 'test flavor')", null);
+
+
+    public boolean insertData(){
+        Log.i(TAG, "insertData: Testing that the data is inputted into the database");
+        //cite below
+        ContentValues contextValues = new ContentValues();
+        contextValues.put("Route", 133);
+        contextValues.put("CustAcct", 1005000);
+        contextValues.put("[Customer Name]", "Test");
+        contextValues.put("ITEMID", "55550000");
+        contextValues.put("ITEMNAME", "Test Name");
+        contextValues.put("ItemBrand", "Test Brand");
+        contextValues.put("ItemPackSize", "300ml");
+        contextValues.put("Flavor", "test flavor");
+        Long result = database.insert("StockCountSavedData", null, contextValues );
+
+        if(result == -1)
+        {
+            return false;
+        }
+        else {
+            return true;
+        }
+
     }
 }
