@@ -119,7 +119,14 @@ public class DatabaseAccess {
 
     public boolean insertData(){
         Log.i(TAG, "insertData: Testing that the data is inputted into the database");
-        //cite below
+/***************************************************************************************
+ *    Title: Android SQLite Database Tutorial (Select, Insert, Update, Delete)
+ *    Author: Singh, Mithilesh
+ *    Date: 2017
+ *    Code version: 1.0
+ *    Availability: http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
+ *    Code Adapted to fit this project
+ ***************************************************************************************/
         ContentValues contextValues = new ContentValues();
         contextValues.put("Route", 133);
         contextValues.put("CustAcct", 1005000);

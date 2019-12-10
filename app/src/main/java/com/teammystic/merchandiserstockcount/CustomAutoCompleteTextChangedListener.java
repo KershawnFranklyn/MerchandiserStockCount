@@ -4,7 +4,7 @@
  *    Date: 2013
  *    Code version: 1.0
  *    Availability: https://www.androidcode.ninja/android-autocompletetextview-example-sqlite-database/
- *
+ *    Code Adapted to fit this project
  ***************************************************************************************/
 
 package com.teammystic.merchandiserstockcount;

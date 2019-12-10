@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
  *    Date: 2013
  *    Code version: 1.0
  *    Availability: https://www.androidcode.ninja/android-autocompletetextview-example-sqlite-database/
- *
+ *    Code Adapted to fit this project
  ***************************************************************************************/
 
     int autoTextSection = 0;
@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
  *    Date: 2013
  *    Code version: 1.0
  *    Availability: https://www.androidcode.ninja/android-autocompletetextview-example-sqlite-database/
- *
+ *    Code Adapted to fit this project
  ***************************************************************************************/
 
         try{
@@ -137,7 +137,15 @@ public class MainActivity extends AppCompatActivity {
                 Boolean test = databaseAccess.insertData();
                 databaseAccess.close();
 
-                //cite here
+
+/***************************************************************************************
+ *    Title: Android SQLite Database Tutorial (Select, Insert, Update, Delete)
+ *    Author: Singh, Mithilesh
+ *    Date: 2017
+ *    Code version: 1.0
+ *    Availability: http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
+ *    Code Adapted to fit this project
+ ***************************************************************************************/
                 if(test == true)
                 {
                     Toast toast = Toast.makeText(MainActivity.this, "Data saved", Toast.LENGTH_LONG);
@@ -160,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
  *    Date: 2013
  *    Code version: 1.0
  *    Availability: https://www.androidcode.ninja/android-autocompletetextview-example-sqlite-database/
- *
+ *    Code Adapted to fit this project
  ***************************************************************************************/
 
     // this function is used in CustomAutoCompleteTextChangedListener.java
