@@ -3,6 +3,7 @@ package com.teammystic.merchandiserstockcount;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,10 +12,13 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import java.net.Inet4Address;
 import java.util.List;
+
+import static android.widget.Toast.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -57,6 +61,14 @@ public class MainActivity extends AppCompatActivity {
     String[] ItemPackSizeInputItem = new String[]{"Please search..."};
     String[] ItemFlavorInputItem = new String[]{"Please search..."};
 
+    String routeNumber;
+    String custName;
+    String custAccount;
+    String itemName;
+    String itemBrand;
+    String itemPackSize;
+    String itemFlavor;
+    String numOfCases;
 
     /*End of cited code*/
 
@@ -64,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+    @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,40 +135,50 @@ public class MainActivity extends AppCompatActivity {
             ItemFlavorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, ItemFlavorInputItem);
             ItemFlavorAutoComplete.setAdapter(ItemFlavorAdapter);
 
+
         } catch (NullPointerException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        final Button button = findViewById(R.id.submitButton);
+        final Button button = findViewById(R.id.nextButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                EditText routeNum = findViewById(R.id.routeNumberEditText);
+                routeNumber = routeNum.getText().toString();
+                EditText customerNameEdit = findViewById(R.id.customerNameAutoCompleteTextView);
+                custName = customerNameEdit.getText().toString();
+                EditText customerAccEdit = findViewById(R.id.customerAccountAutoCompleteTextView);
+                custAccount = customerAccEdit.getText().toString();
+                EditText itemNameEdit = findViewById(R.id.itemNameAutoCompleteTextView);
+                itemName = itemNameEdit.getText().toString();
+                EditText itemBrandEdit = findViewById(R.id.itemBrandAutoCompleteTextView);
+                itemBrand = itemBrandEdit.getText().toString();
 
-                databaseAccess.open();
-                Boolean test = databaseAccess.insertData();
-                databaseAccess.close();
+                Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class);
+                intent.putExtra("routeNumberIntent", routeNumber);
+                intent.putExtra("customerNameIntent", custName);
+                intent.putExtra("customerAccountIntent", custAccount);
+                intent.putExtra("itemNameIntent", itemName);
+                intent.putExtra("itemBrandIntent", itemBrand);
+                startActivity(intent);
+                //databaseAccess.open();
+                //Boolean test = databaseAccess.insertData();
+                //databaseAccess.close();
 
 
-/***************************************************************************************
- *    Title: Android SQLite Database Tutorial (Select, Insert, Update, Delete)
- *    Author: Singh, Mithilesh
- *    Date: 2017
- *    Code version: 1.0
- *    Availability: http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
- *    Code Adapted to fit this project
- ***************************************************************************************/
-                if(test == true)
-                {
-                    Toast toast = Toast.makeText(MainActivity.this, "Data saved", Toast.LENGTH_LONG);
-                    toast.show();
-                }
-                else if (test == false)
-                {
-                    Toast.makeText(MainActivity.this, "Data not saved", Toast.LENGTH_LONG).show();
-                }
+///***************************************************************************************
+// *    Title: Android SQLite Database Tutorial (Select, Insert, Update, Delete)
+// *    Author: Singh, Mithilesh
+// *    Date: 2017
+// *    Code version: 1.0
+// *    Availability: http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
+// *    Code Adapted to fit this project
+// ***************************************************************************************/
+
 
 
             }

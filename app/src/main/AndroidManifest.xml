@@ -16,11 +16,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CustomerNameActivity"/>
-        <activity android:name=".ItemBrandActivity"/>
-        <activity android:name=".PackSizeActivity"/>
-        <activity android:name=".ItemFlavorActivity"/>
-        <activity android:name=".ItemNameActivity"/>
+        <activity android:name=".ConfirmationActivity"/>
 
     </application>
 
