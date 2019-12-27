@@ -24,7 +24,7 @@
 
         <TextView
             android:id="@+id/displayRouteNumberTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="155sp"
             android:layout_height="match_parent"
             android:text="Route Number:"
             android:textColor="@color/SMJTextBlue"
@@ -34,11 +34,12 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayRouteNumberInputTextView"
+        <EditText
+            android:id="@+id/displayRouteNumberInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -56,8 +57,8 @@
 
         <TextView
             android:id="@+id/displayCustomerNameTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="155sp"
+            android:layout_height="wrap_content"
             android:text="Customer Name:"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
@@ -66,11 +67,12 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayCustomerNameInputTextView"
+        <EditText
+            android:id="@+id/displayCustomerNameInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -88,9 +90,9 @@
 
         <TextView
             android:id="@+id/displayCustomerAccountTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Customer Acc. No:"
+            android:layout_width="155sp"
+            android:layout_height="wrap_content"
+            android:text="Customer Acc.\nNo:"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -98,11 +100,12 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayCustomerAccountInputTextView"
+        <EditText
+            android:id="@+id/displayCustomerAccountInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -120,7 +123,7 @@
 
         <TextView
             android:id="@+id/displayItemNameTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="155sp"
             android:layout_height="match_parent"
             android:text="Item Name:"
             android:textColor="@color/SMJTextBlue"
@@ -130,11 +133,12 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayItemNameInputTextView"
+        <EditText
+            android:id="@+id/displayItemNameInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -152,7 +156,7 @@
 
         <TextView
             android:id="@+id/displayItemBrandTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="155sp"
             android:layout_height="match_parent"
             android:text="Item Brand:"
             android:textColor="@color/SMJTextBlue"
@@ -162,11 +166,12 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayItemBrandInputTextView"
+        <EditText
+            android:id="@+id/displayItemBrandInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -184,7 +189,7 @@
 
         <TextView
             android:id="@+id/displayItemPackSizeTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="155sp"
             android:layout_height="match_parent"
             android:text="Item Pack Size:"
             android:textColor="@color/SMJTextBlue"
@@ -194,11 +199,12 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayItemPackSizeInputTextView"
+        <EditText
+            android:id="@+id/displayItemPackSizeInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -216,7 +222,7 @@
 
         <TextView
             android:id="@+id/displayItemFlavorTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="155sp"
             android:layout_height="match_parent"
             android:text="Item Flavor:"
             android:textColor="@color/SMJTextBlue"
@@ -226,11 +232,12 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayItemFlavorInputTextView"
+        <EditText
+            android:id="@+id/displayItemFlavorInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
@@ -248,7 +255,7 @@
 
         <TextView
             android:id="@+id/displayNoOfCasesTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="155sp"
             android:layout_height="match_parent"
             android:text="Num. of Cases:"
             android:textColor="@color/SMJTextBlue"
@@ -258,14 +265,33 @@
             android:layout_width="5sp"
             android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/displayNoOfCasesInputTextView"
+        <EditText
+            android:id="@+id/displayNoOfCasesInputEditTextView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@color/GhostWhite"
             android:textColor="@color/SMJTextBlue"
             android:textSize="20sp" />
 
     </LinearLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="220sp"/>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:background="@drawable/rounded_button"
+        android:text="Submit"
+        android:paddingStart="10sp"
+        android:paddingEnd="10sp"
+        android:layout_marginTop="5sp"
+        android:layout_marginBottom="5sp"
+        android:textSize="24sp"
+        android:layout_marginRight="5sp"/>
 
 </LinearLayout>

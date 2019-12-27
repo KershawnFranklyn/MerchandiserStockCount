@@ -3,6 +3,7 @@ package com.teammystic.merchandiserstockcount;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirmation_screen_ver_1_0);
         toolbar = findViewById(R.id.toolBar);
-        setTitle("Enter Information");
+        setTitle("Confirm Information");
         setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
@@ -29,24 +30,37 @@ public class ConfirmationActivity extends AppCompatActivity {
         String customerAccountString = intent.getStringExtra("customerAccountIntent");
         String itemNameString = intent.getStringExtra("itemNameIntent");
         String itemBrandString = intent.getStringExtra("itemBrandIntent");
+        String itemPackSizeString = intent.getStringExtra("itemPackSizeIntent");
+        String itemFlavorString = intent.getStringExtra("itemFlavorIntent");
+        String numOfCasesString = intent.getStringExtra("numOfCasesIntent");
 
-        //Toast toast = Toast.makeText(ConfirmationActivity.this,routeNumberString , Toast.LENGTH_SHORT);
-        //toast.show();
+        Toast toast = Toast.makeText(ConfirmationActivity.this,"Please confirm information. Click 'Submit' to save.", Toast.LENGTH_LONG);
+        toast.show();
 
-        TextView routeNumTextView = findViewById(R.id.displayRouteNumberInputTextView);
+        EditText routeNumTextView = findViewById(R.id.displayRouteNumberInputEditTextView);
         routeNumTextView.setText(routeNumberString);
 
-        TextView custNameTextView = findViewById(R.id.displayCustomerNameInputTextView);
+        EditText custNameTextView = findViewById(R.id.displayCustomerNameInputEditTextView);
         custNameTextView.setText(customerNameString);
 
-        TextView custAccTextView = findViewById(R.id.displayCustomerAccountInputTextView);
+        EditText custAccTextView = findViewById(R.id.displayCustomerAccountInputEditTextView);
         custAccTextView.setText(customerAccountString);
 
-        TextView itemNameTextView = findViewById(R.id.displayItemNameInputTextView);
+        EditText itemNameTextView = findViewById(R.id.displayItemNameInputEditTextView);
         itemNameTextView.setText(itemNameString);
 
-        TextView itemBrandTextView = findViewById(R.id.displayItemBrandInputTextView);
+        EditText itemBrandTextView = findViewById(R.id.displayItemBrandInputEditTextView);
         itemBrandTextView.setText(itemBrandString);
+
+        EditText itemPackSizeTextView = findViewById(R.id.displayItemPackSizeInputEditTextView);
+        itemPackSizeTextView.setText(itemPackSizeString);
+
+        EditText itemFlavorTextView = findViewById(R.id.displayItemFlavorInputEditTextView);
+        itemFlavorTextView.setText(itemFlavorString);
+
+        EditText numOfCasesTextView = findViewById(R.id.displayNoOfCasesInputEditTextView);
+        numOfCasesTextView.setText(numOfCasesString);
+
 
     }
 }

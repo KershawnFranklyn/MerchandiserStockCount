@@ -75,8 +75,6 @@ public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;
 
 
-
-
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,6 +155,12 @@ public class MainActivity extends AppCompatActivity {
                 itemName = itemNameEdit.getText().toString();
                 EditText itemBrandEdit = findViewById(R.id.itemBrandAutoCompleteTextView);
                 itemBrand = itemBrandEdit.getText().toString();
+                EditText itemPackSizeEdit = findViewById(R.id.itemPackSizeAutoCompleteTextView);
+                itemPackSize = itemPackSizeEdit.getText().toString();
+                EditText itemFlavorEdit = findViewById(R.id.itemFlavorAutoCompleteTextView);
+                itemFlavor = itemFlavorEdit.getText().toString();
+                EditText numOfCasesEdit = findViewById(R.id.numberOfCasesEditTextView);
+                numOfCases = numOfCasesEdit.getText().toString();
 
                 Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class);
                 intent.putExtra("routeNumberIntent", routeNumber);
@@ -164,6 +168,9 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("customerAccountIntent", custAccount);
                 intent.putExtra("itemNameIntent", itemName);
                 intent.putExtra("itemBrandIntent", itemBrand);
+                intent.putExtra("itemPackSizeIntent", itemPackSize);
+                intent.putExtra("itemFlavorIntent", itemFlavor);
+                intent.putExtra("numOfCasesIntent", numOfCases);
                 startActivity(intent);
                 //databaseAccess.open();
                 //Boolean test = databaseAccess.insertData();
