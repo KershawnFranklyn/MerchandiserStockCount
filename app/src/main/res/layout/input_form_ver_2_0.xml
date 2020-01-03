@@ -62,7 +62,7 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24sp" />
 
-            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
                 android:id="@+id/customerNameAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
                 android:textSize="24sp">
-            </com.teammystic.merchandiserstockcount.CustomAutoCompleteView>
+            </com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView>
 
 
             <Space
@@ -92,7 +92,7 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24sp" />
 
-            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
                 android:id="@+id/customerAccountAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+                <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
                     android:id="@+id/itemNameAutoCompleteTextView"
                     android:layout_width="300sp"
                     android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24sp" />
 
-            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
                 android:id="@+id/itemBrandAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -197,7 +197,7 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24sp" />
 
-            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
                 android:id="@+id/itemPackSizeAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -225,7 +225,7 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24sp" />
 
-            <com.teammystic.merchandiserstockcount.CustomAutoCompleteView
+            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
                 android:id="@+id/itemFlavorAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

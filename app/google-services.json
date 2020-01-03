@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "792161435825",
+    "firebase_url": "https://stock-count-barcode-scanner.firebaseio.com",
+    "project_id": "stock-count-barcode-scanner",
+    "storage_bucket": "stock-count-barcode-scanner.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792161435825:android:2bde49942d8e502579a290",
+        "android_client_info": {
+          "package_name": "com.ecng3020project.merchandiserstockcount"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792161435825-dgnhdsgg9d67m4rfai426sp3slq22cq3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBCad9kkvdaj4wGEksrXagrLTxbBKMWI6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792161435825-dgnhdsgg9d67m4rfai426sp3slq22cq3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

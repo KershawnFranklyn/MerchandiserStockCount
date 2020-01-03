@@ -1,9 +1,8 @@
-package com.teammystic.merchandiserstockcount;
+package com.ecng3020project.merchandiserstockcount;
 
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 /*Code adapted from https://www.javahelps.com/2015/04/import-and-use-external-database-in.html*/
 
@@ -31,8 +30,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
  *    Code Adapted to fit this project
  ***************************************************************************************/
 
-    public List<com.teammystic.merchandiserstockcount.MyObject> CustomerNameRead(String searchTerm) {
-        List<com.teammystic.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.teammystic.merchandiserstockcount.MyObject>();
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerNameRead(String searchTerm) {
+        List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -45,7 +44,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
                 // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("Customer Name"));
-                com.teammystic.merchandiserstockcount.MyObject myObject = new com.teammystic.merchandiserstockcount.MyObject(objectName);
+                com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
                 // add to list
                 recordsList.add(myObject);
@@ -60,8 +59,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
-    public List<com.teammystic.merchandiserstockcount.MyObject> CustomerAccountRead(String searchTerm) {
-        List<com.teammystic.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.teammystic.merchandiserstockcount.MyObject>();
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerAccountRead(String searchTerm) {
+        List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -74,7 +73,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
                 // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("CustAcct"));
-                com.teammystic.merchandiserstockcount.MyObject myObject = new com.teammystic.merchandiserstockcount.MyObject(objectName);
+                com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
                 // add to list
                 recordsList.add(myObject);
@@ -89,8 +88,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
-    public List<com.teammystic.merchandiserstockcount.MyObject> ItemNameRead(String searchTerm) {
-        List<com.teammystic.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.teammystic.merchandiserstockcount.MyObject>();
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameRead(String searchTerm) {
+        List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -103,7 +102,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
                 // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("ITEMNAME"));
-                com.teammystic.merchandiserstockcount.MyObject myObject = new com.teammystic.merchandiserstockcount.MyObject(objectName);
+                com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
                 // add to list
                 recordsList.add(myObject);
@@ -118,8 +117,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
-    public List<com.teammystic.merchandiserstockcount.MyObject> ItemBrandRead(String searchTerm) {
-        List<com.teammystic.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.teammystic.merchandiserstockcount.MyObject>();
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandRead(String searchTerm) {
+        List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -132,7 +131,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
                 // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("ItemBrand"));
-                com.teammystic.merchandiserstockcount.MyObject myObject = new com.teammystic.merchandiserstockcount.MyObject(objectName);
+                com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
                 // add to list
                 recordsList.add(myObject);
@@ -147,8 +146,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
-    public List<com.teammystic.merchandiserstockcount.MyObject> ItemPackSizeRead(String searchTerm) {
-        List<com.teammystic.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.teammystic.merchandiserstockcount.MyObject>();
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeRead(String searchTerm) {
+        List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -161,7 +160,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
                 // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("ItemPackSize"));
-                com.teammystic.merchandiserstockcount.MyObject myObject = new com.teammystic.merchandiserstockcount.MyObject(objectName);
+                com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
                 // add to list
                 recordsList.add(myObject);
@@ -176,8 +175,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
-    public List<com.teammystic.merchandiserstockcount.MyObject> ItemFlavorRead(String searchTerm) {
-        List<com.teammystic.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.teammystic.merchandiserstockcount.MyObject>();
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorRead(String searchTerm) {
+        List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         
         SQLiteDatabase db = this.getWritableDatabase();
@@ -191,7 +190,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
                 // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("Flavor"));
-                com.teammystic.merchandiserstockcount.MyObject myObject = new com.teammystic.merchandiserstockcount.MyObject(objectName);
+                com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
                 // add to list
                 recordsList.add(myObject);

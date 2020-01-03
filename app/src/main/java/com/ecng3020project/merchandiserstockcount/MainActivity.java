@@ -1,4 +1,4 @@
-package com.teammystic.merchandiserstockcount;
+package com.ecng3020project.merchandiserstockcount;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,18 +7,12 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-import java.net.Inet4Address;
 import java.util.List;
-
-import static android.widget.Toast.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -172,9 +166,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("itemFlavorIntent", itemFlavor);
                 intent.putExtra("numOfCasesIntent", numOfCases);
                 startActivity(intent);
-                //databaseAccess.open();
-                //Boolean test = databaseAccess.insertData();
-                //databaseAccess.close();
+
 
 
 ///***************************************************************************************
@@ -207,13 +199,13 @@ public class MainActivity extends AppCompatActivity {
 
         //if(autoTextSection = 1)
         // add items on the array dynamically
-        List<com.teammystic.merchandiserstockcount.MyObject> customerNameValue = databaseH.CustomerNameRead(searchTerm);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> customerNameValue = databaseH.CustomerNameRead(searchTerm);
         int rowCount = customerNameValue.size();
 
         String[] CustomerNameItem = new String[rowCount];
         int x = 0;
 
-        for (com.teammystic.merchandiserstockcount.MyObject record : customerNameValue) {
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : customerNameValue) {
 
             CustomerNameItem[x] = record.objectName;
             x++;
@@ -227,13 +219,13 @@ public class MainActivity extends AppCompatActivity {
 
         //if(autoTextSection = 1)
         // add items on the array dynamically
-        List<com.teammystic.merchandiserstockcount.MyObject> customerAccountValue = databaseH.CustomerAccountRead(searchTerm);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> customerAccountValue = databaseH.CustomerAccountRead(searchTerm);
         int rowCount = customerAccountValue.size();
 
         String[] CustomerAccountItem = new String[rowCount];
         int x = 0;
 
-        for (com.teammystic.merchandiserstockcount.MyObject record : customerAccountValue) {
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : customerAccountValue) {
 
             CustomerAccountItem[x] = record.objectName;
             x++;
@@ -247,13 +239,13 @@ public class MainActivity extends AppCompatActivity {
 
         //if(autoTextSection = 1)
         // add items on the array dynamically
-        List<com.teammystic.merchandiserstockcount.MyObject> itemNameValue = databaseH.ItemNameRead(searchTerm);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemNameValue = databaseH.ItemNameRead(searchTerm);
         int rowCount = itemNameValue.size();
 
         String[] itemNameItem = new String[rowCount];
         int x = 0;
 
-        for (com.teammystic.merchandiserstockcount.MyObject record : itemNameValue) {
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : itemNameValue) {
 
             itemNameItem[x] = record.objectName;
             x++;
@@ -266,13 +258,13 @@ public class MainActivity extends AppCompatActivity {
 
         //if(autoTextSection = 1)
         // add items on the array dynamically
-        List<com.teammystic.merchandiserstockcount.MyObject> itemBrandValue = databaseH.ItemBrandRead(searchTerm);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemBrandValue = databaseH.ItemBrandRead(searchTerm);
         int rowCount = itemBrandValue.size();
 
         String[] itemBrandItem = new String[rowCount];
         int x = 0;
 
-        for (com.teammystic.merchandiserstockcount.MyObject record : itemBrandValue) {
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : itemBrandValue) {
 
             itemBrandItem[x] = record.objectName;
             x++;
@@ -285,13 +277,13 @@ public class MainActivity extends AppCompatActivity {
 
         //if(autoTextSection = 1)
         // add items on the array dynamically
-        List<com.teammystic.merchandiserstockcount.MyObject> itemPackSizeValue = databaseH.ItemPackSizeRead(searchTerm);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemPackSizeValue = databaseH.ItemPackSizeRead(searchTerm);
         int rowCount = itemPackSizeValue.size();
 
         String[] itemPackSizeItem = new String[rowCount];
         int x = 0;
 
-        for (com.teammystic.merchandiserstockcount.MyObject record : itemPackSizeValue) {
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : itemPackSizeValue) {
 
             itemPackSizeItem[x] = record.objectName;
             x++;
@@ -304,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
 
         //if(autoTextSection = 1)
         // add items on the array dynamically
-        List<com.teammystic.merchandiserstockcount.MyObject> itemFlavorValue = databaseH.ItemFlavorRead(searchTerm);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemFlavorValue = databaseH.ItemFlavorRead(searchTerm);
         int rowCount = itemFlavorValue.size();
 
         Log.i(TAG, "ItemFlavorRead: This Runs");
@@ -312,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
         String[] itemFlavorItem = new String[rowCount];
         int x = 0;
 
-        for (com.teammystic.merchandiserstockcount.MyObject record : itemFlavorValue) {
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : itemFlavorValue) {
 
             itemFlavorItem[x] = record.objectName;
             x++;

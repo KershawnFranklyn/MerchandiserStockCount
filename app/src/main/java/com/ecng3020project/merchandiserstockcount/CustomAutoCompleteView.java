@@ -7,7 +7,7 @@
  *
  ***************************************************************************************/
 
-package com.teammystic.merchandiserstockcount;
+package com.ecng3020project.merchandiserstockcount;
 
 import android.content.Context;
 import android.util.AttributeSet;

@@ -1,15 +1,11 @@
-package com.teammystic.merchandiserstockcount;
+package com.ecng3020project.merchandiserstockcount;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.media.audiofx.LoudnessEnhancer;
-import android.nfc.Tag;
-import android.provider.ContactsContract;
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,28 +112,42 @@ public class DatabaseAccess {
         return list;
     }
 
+    public void createTable(){
+        Log.i(TAG, "createTable: Testing that the Table would be created");
 
+        database.execSQL("CREATE TABLE IF NOT EXISTS SavedInputData (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "Route TEXT NOT NULL,CustAcct TEXT NOT NULL, [Customer Name] TEXT    NOT NULL," +
+                "ITEMNAME TEXT NOT NULL, ItemBrand TEXT NOT NULL, ItemPackSize TEXT NOT NULL, " +
+                "Flavor TEXT NOT NULL, NumberOfCases TEXT NOT NULL )");
+    }
 
-    public boolean insertData(){
+    /***************************************************************************************
+     *    Title: Android SQLite Database Tutorial (Select, Insert, Update, Delete)
+     *    Author: Singh, Mithilesh
+     *    Date: 2017
+     *    Code version: 1.0
+     *    Availability: http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
+     *    Code Adapted to fit this project
+     ***************************************************************************************/
+
+    public Boolean insertData(String routeNoVar, String customerNoVar, String custNameVar,
+                              String itemNameVar, String itemBrandNameVar, String itemPackSizeVar,
+                              String flavorVar, String numOfCasesVar){
         Log.i(TAG, "insertData: Testing that the data is inputted into the database");
-/***************************************************************************************
- *    Title: Android SQLite Database Tutorial (Select, Insert, Update, Delete)
- *    Author: Singh, Mithilesh
- *    Date: 2017
- *    Code version: 1.0
- *    Availability: http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
- *    Code Adapted to fit this project
- ***************************************************************************************/
+        createTable();
+
         ContentValues contextValues = new ContentValues();
-        contextValues.put("Route", 133);
-        contextValues.put("CustAcct", 1005000);
-        contextValues.put("[Customer Name]", "Test");
-        contextValues.put("ITEMID", "55550000");
-        contextValues.put("ITEMNAME", "Test Name");
-        contextValues.put("ItemBrand", "Test Brand");
-        contextValues.put("ItemPackSize", "300ml");
-        contextValues.put("Flavor", "test flavor");
-        Long result = database.insert("StockCountSavedData", null, contextValues );
+        contextValues.put("Route", routeNoVar);
+        contextValues.put("CustAcct", customerNoVar);
+        contextValues.put("[Customer Name]", custNameVar);
+        contextValues.put("ITEMNAME", itemNameVar);
+        contextValues.put("ItemBrand", itemBrandNameVar);
+        contextValues.put("ItemPackSize", itemPackSizeVar);
+        contextValues.put("Flavor", flavorVar);
+        contextValues.put("NumberOfCases", numOfCasesVar);
+
+        Long result = database.insert("SavedInputData", null, contextValues );
+
 
         if(result == -1)
         {

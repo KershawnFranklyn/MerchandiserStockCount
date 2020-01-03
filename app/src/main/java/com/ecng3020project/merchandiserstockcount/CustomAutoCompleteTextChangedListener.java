@@ -7,7 +7,7 @@
  *    Code Adapted to fit this project
  ***************************************************************************************/
 
-package com.teammystic.merchandiserstockcount;
+package com.ecng3020project.merchandiserstockcount;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
