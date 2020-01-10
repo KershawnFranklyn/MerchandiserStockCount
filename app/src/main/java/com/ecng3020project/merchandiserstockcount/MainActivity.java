@@ -5,12 +5,20 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.cloud.FirebaseVisionCloudDetectorOptions;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+import com.google.firebase.ml.vision.label.FirebaseVisionCloudImageLabelerOptions;
 
 import java.util.List;
 
@@ -168,18 +176,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
 
 
+            }
+        });
 
-///***************************************************************************************
-// *    Title: Android SQLite Database Tutorial (Select, Insert, Update, Delete)
-// *    Author: Singh, Mithilesh
-// *    Date: 2017
-// *    Code version: 1.0
-// *    Availability: http://www.codebind.com/android-tutorials-and-examples/android-sqlite-tutorial-example/
-// *    Code Adapted to fit this project
-// ***************************************************************************************/
-
-
-
+        final ImageButton imageButton = findViewById(R.id.cameraImageButton);
+        imageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, BarcodeScanningActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -312,6 +317,8 @@ public class MainActivity extends AppCompatActivity {
 
         return itemFlavorItem;
     }
+
+
 
 }
 

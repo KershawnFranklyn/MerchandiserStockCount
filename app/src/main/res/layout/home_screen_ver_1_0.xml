@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/SMJBackground">
+
+    <include
+        layout="@layout/toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <Space
+            android:id="@+id/header_space"
+            android:layout_width="match_parent"
+            android:layout_height="100sp" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/smjpic" />
+
+        <Space
+            android:id="@+id/spacer_for_button"
+            android:layout_width="match_parent"
+            android:layout_height="45sp" />
+
+        <Button
+            android:id="@+id/newEntryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="New Entry"
+            android:background="@drawable/rounded_button"
+            android:textColor="@color/GhostWhite"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
+            android:layout_marginRight="5sp"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
