@@ -3,9 +3,9 @@
     <string name="routeNumberString">Route Number</string>
     <string name="routeNumberEditTextViewString">Enter Route Number</string>
     <string name="customerNameString">Customer Name</string>
-    <string name="customerNameAutoCompleteTextViewString">Enter Customer Account</string>
+    <string name="customerNameAutoCompleteTextViewString">Enter Customer Name</string>
     <string name="customerAccountNumberString">Customer Account Number</string>
-    <string name="customerAccountAutoCompleteTextViewString">Enter Customer Name</string>
+    <string name="customerAccountAutoCompleteTextViewString">Enter Customer Account Number</string>
     <string name="itemNameString">Item Name</string>
     <string name="itemNameAutoCompleteTextViewString">Enter Item Name</string>
     <string name="itemBrandString">Item Brand</string>

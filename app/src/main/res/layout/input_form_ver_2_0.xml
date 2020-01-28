@@ -100,7 +100,7 @@
                 android:layout_marginRight="20sp"
                 android:background="@color/GhostWhite"
                 android:completionThreshold="1"
-                android:hint="@string/customerNameAutoCompleteTextViewString"
+                android:hint="@string/customerAccountAutoCompleteTextViewString"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
                 android:textSize="24sp"

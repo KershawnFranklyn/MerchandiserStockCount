@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "792161435825-bubhm7bvg77ol1rf0ih0p8s8guvf927v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ecng3020project.merchandiserstockcount",
+            "certificate_hash": "5444c11acb63bb69633541f7ebaba38240b8b7c1"
+          }
+        },
+        {
           "client_id": "792161435825-dgnhdsgg9d67m4rfai426sp3slq22cq3.apps.googleusercontent.com",
           "client_type": 3
         }

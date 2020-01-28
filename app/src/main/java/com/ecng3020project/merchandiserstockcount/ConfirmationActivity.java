@@ -2,6 +2,7 @@ package com.ecng3020project.merchandiserstockcount;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,6 +38,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         String numOfCasesString = intent.getStringExtra("numOfCasesIntent");
 
         Toast toast = Toast.makeText(ConfirmationActivity.this,"Please confirm information. Click 'Submit' to save.", Toast.LENGTH_LONG);
+        toast.setGravity(Gravity.BOTTOM, 0, 250);
         toast.show();
 
         final EditText routeNumTextView = findViewById(R.id.displayRouteNumberInputEditTextView);
@@ -79,6 +81,8 @@ public class ConfirmationActivity extends AppCompatActivity {
 
                 if(test == true){
                     Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
+                    Intent intent = new Intent(ConfirmationActivity.this, HomePageActivity.class);
+                    startActivity(intent);
                     toast.show();
                 }
 
@@ -92,9 +96,6 @@ public class ConfirmationActivity extends AppCompatActivity {
 
 
     }
-
-
-
 
 
 }

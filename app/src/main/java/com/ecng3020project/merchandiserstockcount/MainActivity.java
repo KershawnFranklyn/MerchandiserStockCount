@@ -1,11 +1,14 @@
 package com.ecng3020project.merchandiserstockcount;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.camera.core.Preview;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.firebase.ml.vision.FirebaseVision;
 import com.google.firebase.ml.vision.cloud.FirebaseVisionCloudDetectorOptions;
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
@@ -21,6 +25,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import com.google.firebase.ml.vision.label.FirebaseVisionCloudImageLabelerOptions;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
     CustomAutoCompleteView ItemBrandAutoComplete;
     CustomAutoCompleteView ItemPackSizeAutoComplete;
     CustomAutoCompleteView ItemFlavorAutoComplete;
-
 
     // adapter for auto-complete
     ArrayAdapter<String> CustomerNameAdapter;
@@ -86,6 +90,9 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Enter Information");
         setSupportActionBar(toolbar);
         final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+
+
+
 
 /***************************************************************************************
  *    Title: Android AutocompleteTextView with Database Data as Suggestions
@@ -183,14 +190,16 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BarcodeScanningActivity.class);
+                Intent intent = new Intent(MainActivity.this, CameraMainActivity.class);
                 startActivity(intent);
             }
         });
 
     }
 
-/***************************************************************************************
+
+
+    /***************************************************************************************
  *    Title: Android AutocompleteTextView with Database Data as Suggestions
  *    Author: Dalisay, Mike
  *    Date: 2013
@@ -321,6 +330,3 @@ public class MainActivity extends AppCompatActivity {
 
 
 }
-
-
-
