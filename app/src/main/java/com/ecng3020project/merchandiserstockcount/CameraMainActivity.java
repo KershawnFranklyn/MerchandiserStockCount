@@ -3,12 +3,18 @@ package com.ecng3020project.merchandiserstockcount;
 import android.content.pm.PackageManager;
 import android.graphics.Camera;
 import android.graphics.Matrix;
+import android.graphics.Point;
+import android.graphics.Rect;
+import android.media.Image;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.PersistableBundle;
+import android.util.Log;
 import android.util.Rational;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,15 +23,42 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraX;
+import androidx.camera.core.ImageAnalysis;
+import androidx.camera.core.ImageAnalysisConfig;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureConfig;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.core.PreviewConfig;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.ml.vision.FirebaseVision;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcode;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetector;
+import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOptions;
+import com.google.firebase.ml.vision.common.FirebaseVisionImage;
+import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
+
+import java.io.File;
+import java.util.List;
+
+import static android.widget.Toast.LENGTH_SHORT;
+
 public class CameraMainActivity extends AppCompatActivity {
 
-    //WOULD NEED TO CHANGE
+    /***************************************************************************************
+     *    Title:
+     *    Author:
+     *    Date:
+     *    Code version: 1.0
+     *    Availability: https://github.com/journaldev/journaldev/blob/master/Android/AndroidCameraX/app/src/main/java/com/journaldev/androidcamerax/MainActivity.java
+     *    Code Adapted to fit this project
+     ***************************************************************************************/
 
     private int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
@@ -68,8 +101,119 @@ public class CameraMainActivity extends AppCompatActivity {
                 }
         );
 
+
+        ImageCaptureConfig imageCaptureConfig = new ImageCaptureConfig.Builder().setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
+                .setTargetRotation(getWindowManager().getDefaultDisplay().getRotation()).build();
+        final ImageCapture imgCap = new ImageCapture(imageCaptureConfig);
+
+        findViewById(R.id.imgCapture).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                File file = new File(Environment.getExternalStorageDirectory() + "/" + System.currentTimeMillis() + ".png");
+                imgCap.takePicture(file, new ImageCapture.OnImageSavedListener() {
+                    @Override
+                    public void onImageSaved(@NonNull File file) {
+                        String msg = "Pic captured at " + file.getAbsolutePath();
+                        Toast.makeText(getBaseContext(), msg,Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onError(@NonNull ImageCapture.UseCaseError useCaseError, @NonNull String message, @Nullable Throwable cause) {
+                        String msg = "Pic capture failed : " + message;
+                        Toast.makeText(getBaseContext(), msg,Toast.LENGTH_LONG).show();
+                        if(cause != null){
+                            cause.printStackTrace();
+                        }
+                    }
+                });
+            }
+        });
+
+        /***************************************************************************************
+         *    Title: Analyze images
+         *    Author:
+         *    Date:
+         *    Code version: 1.0
+         *    Availability: https://developer.android.com/training/camerax/analyze
+         *    Code Adapted to fit this project
+         ***************************************************************************************/
+
+        ImageAnalysisConfig config =
+                new ImageAnalysisConfig.Builder()
+                        .setTargetResolution(new Size(1280, 720))
+                        .setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
+                        .build();
+
+        ImageAnalysis imageAnalysis = new ImageAnalysis(config);
+
+        imageAnalysis.setAnalyzer(
+                new ImageAnalysis.Analyzer(){
+                    @Override
+                    public void analyze(ImageProxy imageProxy, int rotationDegrees) {
+
+                        /***************************************************************************************
+                         *    Title: Scan Barcodes with ML Kit on Android
+                         *    Author:
+                         *    Date:
+                         *    Code version: 1.0
+                         *    Availability: https://firebase.google.com/docs/ml-kit/android/read-barcodes
+                         *    Code Adapted to fit this project
+                         ***************************************************************************************/
+
+                        if (imageProxy == null || imageProxy.getImage() == null) {
+                            return;
+                        }
+                        FirebaseVisionBarcodeDetectorOptions options =
+                                new FirebaseVisionBarcodeDetectorOptions.Builder()
+                                        .setBarcodeFormats(
+                                                FirebaseVisionBarcode.FORMAT_ALL_FORMATS)
+                                        .build();
+
+                        FirebaseVisionBarcodeDetector detector = FirebaseVision.getInstance()
+                                .getVisionBarcodeDetector(options);
+
+                        Image mediaImage = imageProxy.getImage();
+                        int rotation = degreesToFirebaseRotation(rotationDegrees);
+                        FirebaseVisionImage image = FirebaseVisionImage.fromMediaImage(mediaImage, rotation);
+
+                        Task<List<FirebaseVisionBarcode>> result = detector.detectInImage(image)
+                                .addOnSuccessListener(new OnSuccessListener<List<FirebaseVisionBarcode>>() {
+                                    @Override
+                                    public void onSuccess(List<FirebaseVisionBarcode> barcodes) {
+                                        // Task completed successfully
+                                        // ...
+                                        Log.d("Barcode Scanner", "onSuccess: Barcodescanner Successful", null);
+
+                                        for (FirebaseVisionBarcode barcode: barcodes) {
+                                            Rect bounds = barcode.getBoundingBox();
+                                            Point[] corners = barcode.getCornerPoints();
+
+                                            String rawValue = barcode.getRawValue();
+
+                                            int valueType = barcode.getValueType();
+
+                                    }
+
+                                        //To get data from it
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        // Task failed with an exception
+                                        Log.e("BarcodeScannerError", "Error in scanning", null);
+                                        Toast toast;
+                                        toast = Toast.makeText(getBaseContext(), "Error scanning", LENGTH_SHORT);
+                                    }
+                                });
+
+                    }
+                }
+        );
+
         //bind to lifecycle:
-        CameraX.bindToLifecycle((LifecycleOwner)this, preview);
+        CameraX.bindToLifecycle((LifecycleOwner)this, preview, imageAnalysis);
 
     }
 
@@ -112,7 +256,7 @@ public class CameraMainActivity extends AppCompatActivity {
             if(allPermissionsGranted()){
                 startCamera();
             } else{
-                Toast.makeText(this, "Permissions not granted by the user.", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Permissions not granted by the user.", LENGTH_SHORT).show();
                 finish();
             }
         }
@@ -125,5 +269,21 @@ public class CameraMainActivity extends AppCompatActivity {
             }
         }
         return true;
+    }
+
+    public int degreesToFirebaseRotation(int degrees) {
+        switch (degrees) {
+            case 0:
+                return FirebaseVisionImageMetadata.ROTATION_0;
+            case 90:
+                return FirebaseVisionImageMetadata.ROTATION_90;
+            case 180:
+                return FirebaseVisionImageMetadata.ROTATION_180;
+            case 270:
+                return FirebaseVisionImageMetadata.ROTATION_270;
+            default:
+                throw new IllegalArgumentException(
+                        "Rotation must be 0, 90, 180, or 270.");
+        }
     }
 }
