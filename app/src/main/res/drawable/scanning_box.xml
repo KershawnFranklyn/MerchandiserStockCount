@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- /***************************************************************************************
+     *    Title: Drawable resources  :   Android Developers
+     *    Author:
+     *    Date:
+     *    Code version: 1.0
+     *    Availability: https://developer.android.com/guide/topics/resources/drawable-resource#Shape.
+     *    Code Adapted to fit this project
+     ***************************************************************************************/ -->
+
+<shape
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <stroke
+        android:width="2dp"
+        android:color="@color/Black"/>
+
+    <size
+        android:height="200dp"
+        android:width="200dp"/>
+
+</shape>

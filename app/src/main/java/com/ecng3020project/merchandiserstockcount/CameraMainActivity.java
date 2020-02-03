@@ -62,14 +62,15 @@ public class CameraMainActivity extends AppCompatActivity {
 
     private int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
-    TextureView textureView;
+    TextureView scanning_TextureView;
+    TextureView outer_TextureView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.camera_screen_ver_1_0);
 
-        textureView = findViewById(R.id.view_finder);
+        scanning_TextureView = findViewById(R.id.view_finder);
 
         if(allPermissionsGranted()){
             startCamera(); //start camera if permission has been granted by user
@@ -80,54 +81,35 @@ public class CameraMainActivity extends AppCompatActivity {
 
     private void startCamera() {
         CameraX.unbindAll();
-        Rational aspectRatio = new Rational(textureView.getWidth(), textureView.getHeight());
-        Size screen = new Size(textureView.getWidth(), textureView.getHeight()); //size of the screen
+        //For scanning screen
+        Rational scanning_AspectRatio = new Rational(4, 3);
+        Size scanning_ScreenSize = new Size(scanning_TextureView.getWidth(), scanning_TextureView.getHeight()); //size of the screen
 
-        PreviewConfig previewConfig = new PreviewConfig.Builder().setTargetAspectRatio(aspectRatio).setTargetResolution(screen).build();
-        Preview preview = new Preview(previewConfig);
+        //Preview for scanning
+        PreviewConfig scanning_PreviewConfig = new PreviewConfig.Builder().setTargetAspectRatio(scanning_AspectRatio).setTargetResolution(scanning_ScreenSize).build();
+        Preview preview = new Preview(scanning_PreviewConfig);
 
         preview.setOnPreviewOutputUpdateListener(
                 new Preview.OnPreviewOutputUpdateListener() {
                     @Override
                     public void onUpdated(Preview.PreviewOutput output) {
                         //to update the surface texture we  have to destroy it first then re-add it
-                            ViewGroup parent = (ViewGroup) textureView.getParent();
-                            parent.removeView(textureView);
-                            parent.addView(textureView, 0);
+                            ViewGroup parent = (ViewGroup) scanning_TextureView.getParent();
+                            parent.removeView(scanning_TextureView);
+                            parent.addView(scanning_TextureView, 0);
 
-                            textureView.setSurfaceTexture(output.getSurfaceTexture());
+
+                            scanning_TextureView.setSurfaceTexture(output.getSurfaceTexture());
+
                             updateTransform();
+
                         }
                 }
         );
 
-
         ImageCaptureConfig imageCaptureConfig = new ImageCaptureConfig.Builder().setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
                 .setTargetRotation(getWindowManager().getDefaultDisplay().getRotation()).build();
         final ImageCapture imgCap = new ImageCapture(imageCaptureConfig);
-
-        findViewById(R.id.imgCapture).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                File file = new File(Environment.getExternalStorageDirectory() + "/" + System.currentTimeMillis() + ".png");
-                imgCap.takePicture(file, new ImageCapture.OnImageSavedListener() {
-                    @Override
-                    public void onImageSaved(@NonNull File file) {
-                        String msg = "Pic captured at " + file.getAbsolutePath();
-                        Toast.makeText(getBaseContext(), msg,Toast.LENGTH_LONG).show();
-                    }
-
-                    @Override
-                    public void onError(@NonNull ImageCapture.UseCaseError useCaseError, @NonNull String message, @Nullable Throwable cause) {
-                        String msg = "Pic capture failed : " + message;
-                        Toast.makeText(getBaseContext(), msg,Toast.LENGTH_LONG).show();
-                        if(cause != null){
-                            cause.printStackTrace();
-                        }
-                    }
-                });
-            }
-        });
 
         /***************************************************************************************
          *    Title: Analyze images
@@ -213,20 +195,21 @@ public class CameraMainActivity extends AppCompatActivity {
         );
 
         //bind to lifecycle:
-        CameraX.bindToLifecycle((LifecycleOwner)this, preview, imageAnalysis);
+        //CameraX.bindToLifecycle((LifecycleOwner)this, preview, imageAnalysis);
+        CameraX.bindToLifecycle((LifecycleOwner)this, preview);
 
     }
 
     private void updateTransform() {
         Matrix mx = new Matrix();
-        float h = textureView.getMeasuredHeight();
-        float w = textureView.getMeasuredWidth();
+        float h = scanning_TextureView.getMeasuredHeight();
+        float w = scanning_TextureView.getMeasuredWidth();
 
         float cX = w / 2f;
         float cY = h / 2f;
 
         int rotationDgr;
-        int rotation = (int)textureView.getRotation();
+        int rotation = (int)scanning_TextureView.getRotation();
 
         switch (rotation){
             case Surface.ROTATION_0:
@@ -246,7 +229,7 @@ public class CameraMainActivity extends AppCompatActivity {
 
         }
         mx.postRotate((float)rotationDgr, cX, cY);
-        textureView.setTransform(mx);
+        scanning_TextureView.setTransform(mx);
     }
 
     @Override
