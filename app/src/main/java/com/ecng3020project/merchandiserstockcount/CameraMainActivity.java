@@ -1,5 +1,6 @@
 package com.ecng3020project.merchandiserstockcount;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Camera;
 import android.graphics.Matrix;
@@ -82,7 +83,7 @@ public class CameraMainActivity extends AppCompatActivity {
     private void startCamera() {
         CameraX.unbindAll();
         //For scanning screen
-        Rational scanning_AspectRatio = new Rational(4, 3);
+        Rational scanning_AspectRatio = new Rational(4,3 );
         Size scanning_ScreenSize = new Size(scanning_TextureView.getWidth(), scanning_TextureView.getHeight()); //size of the screen
 
         //Preview for scanning
@@ -122,7 +123,7 @@ public class CameraMainActivity extends AppCompatActivity {
 
         ImageAnalysisConfig config =
                 new ImageAnalysisConfig.Builder()
-                        .setTargetResolution(new Size(1280, 720))
+                        .setTargetResolution(new Size(640, 480))
                         .setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
                         .build();
 
@@ -166,6 +167,8 @@ public class CameraMainActivity extends AppCompatActivity {
                                         // ...
                                         Log.d("Barcode Scanner", "onSuccess: Barcodescanner Successful", null);
 
+                                        //To get data from it
+
                                         for (FirebaseVisionBarcode barcode: barcodes) {
                                             Rect bounds = barcode.getBoundingBox();
                                             Point[] corners = barcode.getCornerPoints();
@@ -174,9 +177,27 @@ public class CameraMainActivity extends AppCompatActivity {
 
                                             int valueType = barcode.getValueType();
 
-                                    }
+                                            Log.i("RAW VALUE", "onSuccess: "+ rawValue, null);
+                                            Log.i("VALUE TYPE", "onSuccess: "+ valueType, null);
+                                            // See API reference for complete list of supported types
 
-                                        //To get data from it
+                                            if (valueType == 5)
+                                            {
+                                                Log.i("Testing", "SWITCH CASE WORKING ");
+                                                Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
+                                                startActivity(intent);
+                                            }
+
+                                            /*
+                                            switch (valueType) {
+                                                case '5':
+
+                                                    Log.i("Testing", "SWITCH CASE WORKING ");
+
+                                                    break;
+                                            }
+                                            */
+                                        }
 
                                     }
                                 })
@@ -195,8 +216,8 @@ public class CameraMainActivity extends AppCompatActivity {
         );
 
         //bind to lifecycle:
-        //CameraX.bindToLifecycle((LifecycleOwner)this, preview, imageAnalysis);
-        CameraX.bindToLifecycle((LifecycleOwner)this, preview);
+        CameraX.bindToLifecycle((LifecycleOwner)this, preview, imageAnalysis);
+        //CameraX.bindToLifecycle((LifecycleOwner)this, preview);
 
     }
 
