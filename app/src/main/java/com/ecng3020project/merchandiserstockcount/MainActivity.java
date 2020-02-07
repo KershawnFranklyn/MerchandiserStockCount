@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     int autoTextSection = 0;
 
+    EditText RouteNumberEdit;
     CustomAutoCompleteView CustomerNameAutoComplete;
     CustomAutoCompleteView CustomerAccountAutoComplete;
     CustomAutoCompleteView ItemNameAutoComplete;
@@ -91,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
 
+        dataFromCameraActivity();
 
 
 
@@ -190,13 +192,56 @@ public class MainActivity extends AppCompatActivity {
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RouteNumberEdit= (EditText) findViewById(R.id.routeNumberEditText);
+                String routeNumber = RouteNumberEdit.getText().toString();
+                CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
+                String customerName = CustomerNameAutoComplete.getText().toString();
+                CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
+                String customerAccount = CustomerAccountAutoComplete.getText().toString();
+
                 Intent intent = new Intent(MainActivity.this, CameraMainActivity.class);
+                intent.putExtra("routeNumberIntent", routeNumber);
+                intent.putExtra("customerNameIntent", customerName);
+                intent.putExtra("customerAccountIntent", customerAccount);
+
                 startActivity(intent);
             }
         });
 
     }
 
+    private void dataFromCameraActivity() {
+        Intent intent = getIntent();
+
+        Boolean checkTest = intent.getBooleanExtra("CheckIntent", false);
+
+        if(checkTest = true){
+            String route_numberString = intent.getStringExtra("RouteNumberIntent");
+            String customer_nameString = intent.getStringExtra("CustomerNameIntent");
+            String customer_accountString = intent.getStringExtra("CustomerAccountIntent");
+            String item_nameString = intent.getStringExtra("NameIntent");
+            String item_brandString = intent.getStringExtra("BrandIntent");
+            String item_packsizeString = intent.getStringExtra("PackSizeIntent");
+            String item_flavorString = intent.getStringExtra("FlavorIntent");
+
+            RouteNumberEdit = (EditText) findViewById(R.id.routeNumberEditText);
+            RouteNumberEdit.setText(route_numberString);
+            CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
+            CustomerNameAutoComplete.setText(customer_nameString);
+            CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
+            CustomerAccountAutoComplete.setText(customer_accountString);
+            ItemNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemNameAutoCompleteTextView);
+            ItemNameAutoComplete.setText(item_nameString);
+            ItemBrandAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemBrandAutoCompleteTextView);
+            ItemBrandAutoComplete.setText(item_brandString);
+            ItemPackSizeAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemPackSizeAutoCompleteTextView);
+            ItemPackSizeAutoComplete.setText(item_packsizeString);
+            ItemFlavorAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemFlavorAutoCompleteTextView);
+            ItemFlavorAutoComplete.setText(item_flavorString);
+
+        }
+
+    }
 
 
     /***************************************************************************************

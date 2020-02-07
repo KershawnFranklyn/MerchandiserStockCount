@@ -28,8 +28,8 @@ public class ConfirmationActivity extends AppCompatActivity {
         databaseAccess.close();
 
         Intent intent = getIntent();
-        final String routeNumberString = intent.getStringExtra("routeNumberIntent");
-        final String customerNameString = intent.getStringExtra("customerNameIntent");
+        String routeNumberString = intent.getStringExtra("routeNumberIntent");
+        String customerNameString = intent.getStringExtra("customerNameIntent");
         String customerAccountString = intent.getStringExtra("customerAccountIntent");
         String itemNameString = intent.getStringExtra("itemNameIntent");
         String itemBrandString = intent.getStringExtra("itemBrandIntent");

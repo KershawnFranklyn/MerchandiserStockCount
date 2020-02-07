@@ -65,6 +65,9 @@ public class CameraMainActivity extends AppCompatActivity {
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
     TextureView scanning_TextureView;
     TextureView outer_TextureView;
+    String routeNumber;
+    String customerName;
+    String customerAccount;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +75,11 @@ public class CameraMainActivity extends AppCompatActivity {
         setContentView(R.layout.camera_screen_ver_1_0);
 
         scanning_TextureView = findViewById(R.id.view_finder);
+
+        Intent intent = getIntent();
+        routeNumber = intent.getStringExtra("routeNumberIntent");
+        customerName = intent.getStringExtra("customerNameIntent");
+        customerAccount = intent.getStringExtra("customerAccountIntent");
 
         if(allPermissionsGranted()){
             startCamera(); //start camera if permission has been granted by user
@@ -99,18 +107,11 @@ public class CameraMainActivity extends AppCompatActivity {
                             parent.removeView(scanning_TextureView);
                             parent.addView(scanning_TextureView, 0);
 
-
                             scanning_TextureView.setSurfaceTexture(output.getSurfaceTexture());
-
                             updateTransform();
-
                         }
                 }
         );
-
-        ImageCaptureConfig imageCaptureConfig = new ImageCaptureConfig.Builder().setCaptureMode(ImageCapture.CaptureMode.MIN_LATENCY)
-                .setTargetRotation(getWindowManager().getDefaultDisplay().getRotation()).build();
-        final ImageCapture imgCap = new ImageCapture(imageCaptureConfig);
 
         /***************************************************************************************
          *    Title: Analyze images
@@ -123,7 +124,7 @@ public class CameraMainActivity extends AppCompatActivity {
 
         ImageAnalysisConfig config =
                 new ImageAnalysisConfig.Builder()
-                        .setTargetResolution(new Size(640, 480))
+                        .setTargetResolution(new Size(640, 480  ))
                         .setImageReaderMode(ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE)
                         .build();
 
@@ -167,38 +168,73 @@ public class CameraMainActivity extends AppCompatActivity {
                                         // ...
                                         Log.d("Barcode Scanner", "onSuccess: Barcodescanner Successful", null);
 
-                                        //To get data from it
-
                                         for (FirebaseVisionBarcode barcode: barcodes) {
                                             Rect bounds = barcode.getBoundingBox();
                                             Point[] corners = barcode.getCornerPoints();
 
                                             String rawValue = barcode.getRawValue();
-
                                             int valueType = barcode.getValueType();
 
                                             Log.i("RAW VALUE", "onSuccess: "+ rawValue, null);
                                             Log.i("VALUE TYPE", "onSuccess: "+ valueType, null);
                                             // See API reference for complete list of supported types
 
-                                            if (valueType == 5)
+                                            if (valueType == 1)
                                             {
-                                                Log.i("Testing", "SWITCH CASE WORKING ");
-                                                Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
-                                                startActivity(intent);
+                                                nextActivity();
                                             }
-
-                                            /*
-                                            switch (valueType) {
-                                                case '5':
-
-                                                    Log.i("Testing", "SWITCH CASE WORKING ");
-
-                                                    break;
+                                            else if (valueType == 2)
+                                            {
+                                                nextActivity();
                                             }
-                                            */
+                                            else if (valueType == 3)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 4)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 5)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 6)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 7)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 8)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 9)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 10)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 11)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 12)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else if (valueType == 13)
+                                            {
+                                                nextActivity();
+                                            }
+                                            else{
+                                                Log.e("Not Found", "Unknown barcode ",null );
+                                            }
                                         }
-
                                     }
                                 })
                                 .addOnFailureListener(new OnFailureListener() {
@@ -210,15 +246,12 @@ public class CameraMainActivity extends AppCompatActivity {
                                         toast = Toast.makeText(getBaseContext(), "Error scanning", LENGTH_SHORT);
                                     }
                                 });
-
                     }
                 }
         );
 
         //bind to lifecycle:
         CameraX.bindToLifecycle((LifecycleOwner)this, preview, imageAnalysis);
-        //CameraX.bindToLifecycle((LifecycleOwner)this, preview);
-
     }
 
     private void updateTransform() {
@@ -289,5 +322,27 @@ public class CameraMainActivity extends AppCompatActivity {
                 throw new IllegalArgumentException(
                         "Rotation must be 0, 90, 180, or 270.");
         }
+    }
+
+    public void nextActivity (){
+        Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
+
+        //Name, Brand, Pack Size, Flavor
+        String testName = "Caribbean Cool Mauby 500ml X24";
+        String testBrand = "Caribbean Cool";
+        String testPackSize = "500ml";
+        String testFlavor = "Mauby";
+        Boolean check = true;
+
+        intent.putExtra("RouteNumberIntent", routeNumber);
+        intent.putExtra("CustomerNameIntent", customerName);
+        intent.putExtra("CustomerAccountIntent", customerAccount);
+        intent.putExtra("NameIntent", testName);
+        intent.putExtra("BrandIntent", testBrand);
+        intent.putExtra("PackSizeIntent", testPackSize);
+        intent.putExtra("FlavorIntent", testFlavor);
+        intent.putExtra("CheckIntent", check);
+
+        startActivity(intent);
     }
 }
