@@ -42,75 +42,12 @@ public class DatabaseAccess {
         }
     }
 
-    public List<String> getCustomer(){
-        List<String> list = new ArrayList<>();
-        Log.i(TAG, "getCustomer: Customer Query about to start");
-        Cursor cursor = database.rawQuery("SELECT DISTINCT [Customer Name] FROM SalesData", null);
-        Log.i(TAG, "getCustomer: Customer Query was done successfully");
-        cursor.moveToFirst();
-        while(!cursor.isAfterLast()){
-            list.add(cursor.getString(cursor.getColumnIndexOrThrow("Customer Name")));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return list;
+    public void createBarcodeTable(){
+        database.execSQL("CREATE TABLE IF NOT EXISTS BarcodeData ( Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "Barcode_No TEXT NOT NULL, ITEMNAME TEXT NOT NULL," +
+                "ItemBrand TEXT NOT NULL, ItemPackSize TEXT NOT NULL, Flavor TEXT NOT NULL)");
     }
 
-    public List<String> getName(){
-        List<String> list = new ArrayList<>();
-        Log.i(TAG, "getName: Item Name Query about to start");
-        Cursor cursor = database.rawQuery("SELECT DISTINCT ITEMNAME FROM SalesData", null);
-        Log.i(TAG, "getName: Item Name Query was done successfully");
-        cursor.moveToNext();
-        while(!cursor.isAfterLast()){
-            list.add(cursor.getString(cursor.getColumnIndexOrThrow("ITEMNAME")));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return list;
-    }
-
-    public List<String> getBrand(){
-        List<String> list = new ArrayList<>();
-        Log.i(TAG, "getBrand: Item Brand Query about to start");
-        Cursor cursor = database.rawQuery("SELECT DISTINCT ItemBrand FROM SalesData", null);
-        Log.i(TAG, "getName: Item Brand Query was done successfully");
-        cursor.moveToNext();
-        while(!cursor.isAfterLast()){
-            list.add(cursor.getString(cursor.getColumnIndexOrThrow("ItemBrand")));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return list;
-    }
-
-    public List<String> getPack(){
-        List<String> list = new ArrayList<>();
-        Log.i(TAG, "getPack: Item Pack Size Query about to start");
-        Cursor cursor = database.rawQuery("SELECT DISTINCT ItemPackSize FROM SalesData", null);
-        Log.i(TAG, "getPack: Item Pack Size Query was done successfully");
-        cursor.moveToNext();
-        while(!cursor.isAfterLast()){
-            list.add(cursor.getString(cursor.getColumnIndexOrThrow("ItemPackSize")));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return list;
-    }
-
-    public List<String> getFlavor(){
-        List<String> list = new ArrayList<>();
-        Log.i(TAG, "getFlavor: Item Flavor Query about to start");
-        Cursor cursor = database.rawQuery("SELECT DISTINCT ITEMNAME FROM SalesData", null);
-        Log.i(TAG, "getFlavor: Item Flavor Query was done successfully");
-        cursor.moveToNext();
-        while(!cursor.isAfterLast()){
-            list.add(cursor.getString(cursor.getColumnIndexOrThrow("Flavor")));
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return list;
-    }
 
     public void createTable(){
         Log.i(TAG, "createTable: Testing that the Table would be created");
@@ -158,4 +95,6 @@ public class DatabaseAccess {
         }
 
     }
+
+
 }

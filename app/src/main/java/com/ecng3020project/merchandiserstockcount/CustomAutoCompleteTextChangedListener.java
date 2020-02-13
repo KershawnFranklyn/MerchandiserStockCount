@@ -44,10 +44,17 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher{
 
         // if you want to see in the logcat what the user types
         Log.e(TAG, "User input: " + userInput);
+        /*
+        String string = userInput.toString();
+        if(string.contains("'")){
+            string.replace("'", "''");
+        }
+        */
 
         MainActivity mainActivity = ((MainActivity) context);
 
         // query the database based on the user input
+
         mainActivity.CustomerNameInputItem = mainActivity.getCustomerNameFromDb(userInput.toString());
         mainActivity.CustomerAccountInputItem = mainActivity.getCustomerAccountFromDb(userInput.toString());
         mainActivity.ItemNameInputItem = mainActivity.getItemNameFromDb(userInput.toString());

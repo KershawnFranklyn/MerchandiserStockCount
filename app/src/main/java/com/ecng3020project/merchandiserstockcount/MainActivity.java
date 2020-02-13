@@ -256,6 +256,10 @@ public class MainActivity extends AppCompatActivity {
     // this function is used in CustomAutoCompleteTextChangedListener.java
     public String[] getCustomerNameFromDb(String searchTerm){
 
+        if(searchTerm.contains("'")){
+            searchTerm.replace("'", "''");
+        }
+
         //if(autoTextSection = 1)
         // add items on the array dynamically
         List<com.ecng3020project.merchandiserstockcount.MyObject> customerNameValue = databaseH.CustomerNameRead(searchTerm);

@@ -17,6 +17,7 @@ import android.view.Surface;
 import android.view.TextureView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,6 +69,7 @@ public class CameraMainActivity extends AppCompatActivity {
     String routeNumber;
     String customerName;
     String customerAccount;
+    int check;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -80,12 +82,14 @@ public class CameraMainActivity extends AppCompatActivity {
         routeNumber = intent.getStringExtra("routeNumberIntent");
         customerName = intent.getStringExtra("customerNameIntent");
         customerAccount = intent.getStringExtra("customerAccountIntent");
+        check = 1;
 
         if(allPermissionsGranted()){
             startCamera(); //start camera if permission has been granted by user
         } else{
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS);
         }
+
     }
 
     private void startCamera() {
@@ -169,6 +173,7 @@ public class CameraMainActivity extends AppCompatActivity {
                                         Log.d("Barcode Scanner", "onSuccess: Barcodescanner Successful", null);
 
                                         for (FirebaseVisionBarcode barcode: barcodes) {
+
                                             Rect bounds = barcode.getBoundingBox();
                                             Point[] corners = barcode.getCornerPoints();
 
@@ -178,6 +183,7 @@ public class CameraMainActivity extends AppCompatActivity {
                                             Log.i("RAW VALUE", "onSuccess: "+ rawValue, null);
                                             Log.i("VALUE TYPE", "onSuccess: "+ valueType, null);
                                             // See API reference for complete list of supported types
+                                            CameraX.unbindAll(); // Stops camera function
 
                                             if (valueType == 1)
                                             {
@@ -232,7 +238,7 @@ public class CameraMainActivity extends AppCompatActivity {
                                                 nextActivity();
                                             }
                                             else{
-                                                Log.e("Not Found", "Unknown barcode ",null );
+                                                break;
                                             }
                                         }
                                     }
@@ -325,24 +331,29 @@ public class CameraMainActivity extends AppCompatActivity {
     }
 
     public void nextActivity (){
-        Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
 
-        //Name, Brand, Pack Size, Flavor
-        String testName = "Caribbean Cool Mauby 500ml X24";
-        String testBrand = "Caribbean Cool";
-        String testPackSize = "500ml";
-        String testFlavor = "Mauby";
-        Boolean check = true;
+        if(check == 1){
 
-        intent.putExtra("RouteNumberIntent", routeNumber);
-        intent.putExtra("CustomerNameIntent", customerName);
-        intent.putExtra("CustomerAccountIntent", customerAccount);
-        intent.putExtra("NameIntent", testName);
-        intent.putExtra("BrandIntent", testBrand);
-        intent.putExtra("PackSizeIntent", testPackSize);
-        intent.putExtra("FlavorIntent", testFlavor);
-        intent.putExtra("CheckIntent", check);
+            check++;
+            Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
 
-        startActivity(intent);
+            //Name, Brand, Pack Size, Flavor
+            String testName = "Caribbean Cool Mauby 500ml X24";
+            String testBrand = "Caribbean Cool";
+            String testPackSize = "500ml";
+            String testFlavor = "Mauby";
+            Boolean check = true;
+
+            intent.putExtra("RouteNumberIntent", routeNumber);
+            intent.putExtra("CustomerNameIntent", customerName);
+            intent.putExtra("CustomerAccountIntent", customerAccount);
+            intent.putExtra("NameIntent", testName);
+            intent.putExtra("BrandIntent", testBrand);
+            intent.putExtra("PackSizeIntent", testPackSize);
+            intent.putExtra("FlavorIntent", testFlavor);
+            intent.putExtra("CheckIntent", check);
+
+            startActivity(intent);
+        }
     }
 }
