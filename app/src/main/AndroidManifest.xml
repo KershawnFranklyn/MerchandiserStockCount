@@ -18,7 +18,6 @@
         </activity>
         <activity android:name=".MainActivity"/>
         <activity android:name="com.ecng3020project.merchandiserstockcount.ConfirmationActivity"/>
-        <activity android:name=".BarcodeScanningActivity"/>
         <activity android:name=".CameraMainActivity"/>
 
         <meta-data  android:name="com.google.firebase.ml.vision.DEPENDENCIES"

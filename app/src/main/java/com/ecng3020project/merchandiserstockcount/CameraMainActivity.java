@@ -2,6 +2,8 @@ package com.ecng3020project.merchandiserstockcount;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Camera;
 import android.graphics.Matrix;
 import android.graphics.Point;
@@ -50,6 +52,7 @@ import java.io.File;
 import java.util.List;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class CameraMainActivity extends AppCompatActivity {
 
@@ -70,6 +73,8 @@ public class CameraMainActivity extends AppCompatActivity {
     String customerName;
     String customerAccount;
     int check;
+    final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
+    DatabaseOpenHelper databaseH;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -178,10 +183,12 @@ public class CameraMainActivity extends AppCompatActivity {
                                             Point[] corners = barcode.getCornerPoints();
 
                                             String rawValue = barcode.getRawValue();
+                                            int barcodetype = barcode.getFormat();
                                             int valueType = barcode.getValueType();
 
-                                            Log.i("RAW VALUE", "onSuccess: "+ rawValue, null);
-                                            Log.i("VALUE TYPE", "onSuccess: "+ valueType, null);
+                                            Log.i("RAW VALUE", rawValue, null);
+                                            Log.i("VALUE TYPE", "Value type: "+ valueType, null);
+                                            Log.i("FORMAT TYPE", "Barcode Format type: "+ barcodetype, null);
                                             // See API reference for complete list of supported types
                                             CameraX.unbindAll(); // Stops camera function
 
@@ -332,17 +339,18 @@ public class CameraMainActivity extends AppCompatActivity {
 
     public void nextActivity (){
 
-        if(check == 1){
 
+
+        if(check == 1){
             check++;
+
             Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
 
             //Name, Brand, Pack Size, Flavor
-            String testName = "Caribbean Cool Mauby 500ml X24";
+            String testName = "Caribbean Cool Orange 500ml X24";
             String testBrand = "Caribbean Cool";
             String testPackSize = "500ml";
-            String testFlavor = "Mauby";
-            Boolean check = true;
+            String testFlavor = "Orange";
 
             intent.putExtra("RouteNumberIntent", routeNumber);
             intent.putExtra("CustomerNameIntent", customerName);
@@ -351,9 +359,10 @@ public class CameraMainActivity extends AppCompatActivity {
             intent.putExtra("BrandIntent", testBrand);
             intent.putExtra("PackSizeIntent", testPackSize);
             intent.putExtra("FlavorIntent", testFlavor);
-            intent.putExtra("CheckIntent", check);
 
             startActivity(intent);
         }
     }
+
+
 }

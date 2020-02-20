@@ -42,13 +42,6 @@ public class DatabaseAccess {
         }
     }
 
-    public void createBarcodeTable(){
-        database.execSQL("CREATE TABLE IF NOT EXISTS BarcodeData ( Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "Barcode_No TEXT NOT NULL, ITEMNAME TEXT NOT NULL," +
-                "ItemBrand TEXT NOT NULL, ItemPackSize TEXT NOT NULL, Flavor TEXT NOT NULL)");
-    }
-
-
     public void createTable(){
         Log.i(TAG, "createTable: Testing that the Table would be created");
 
@@ -95,6 +88,5 @@ public class DatabaseAccess {
         }
 
     }
-
 
 }

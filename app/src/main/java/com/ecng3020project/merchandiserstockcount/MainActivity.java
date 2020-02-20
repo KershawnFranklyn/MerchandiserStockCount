@@ -60,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     // for database operations
     DatabaseOpenHelper databaseH;
 
+
     // just to add some initial value
     String[] CustomerNameInputItem = new String[] {"Please search..."};
     String[] CustomerAccountInputItem = new String[] {"Please search..."};
@@ -213,9 +214,6 @@ public class MainActivity extends AppCompatActivity {
     private void dataFromCameraActivity() {
         Intent intent = getIntent();
 
-        Boolean checkTest = intent.getBooleanExtra("CheckIntent", false);
-
-        if(checkTest = true){
             String route_numberString = intent.getStringExtra("RouteNumberIntent");
             String customer_nameString = intent.getStringExtra("CustomerNameIntent");
             String customer_accountString = intent.getStringExtra("CustomerAccountIntent");
@@ -238,8 +236,6 @@ public class MainActivity extends AppCompatActivity {
             ItemPackSizeAutoComplete.setText(item_packsizeString);
             ItemFlavorAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemFlavorAutoCompleteTextView);
             ItemFlavorAutoComplete.setText(item_flavorString);
-
-        }
 
     }
 
