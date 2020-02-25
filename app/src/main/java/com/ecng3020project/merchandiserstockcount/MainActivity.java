@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
         setTitle("Enter Information");
         setSupportActionBar(toolbar);
         final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
-
         dataFromCameraActivity();
 
 
@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity {
             ItemBrandAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemBrandAutoCompleteTextView);
             ItemPackSizeAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemPackSizeAutoCompleteTextView);
             ItemFlavorAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemFlavorAutoCompleteTextView);
+
+            onClickListenerFunction();
 
             // add the listener so it will tries to suggest while the user types
             CustomerNameAutoComplete.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
@@ -211,34 +213,126 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void dataFromCameraActivity() {
-        Intent intent = getIntent();
+    private void onClickListenerFunction(){
+        //ONClickListener used to check when an item is clicked. After it is clicked, the necessary data in other text fields are autofilled
+        //Customer Name OnClickListener
+        CustomerNameAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Autofill Customer Account Using Customer Name
+                List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerAccountQuery = databaseH.CustomerAccountTypedQuery(CustomerNameAutoComplete.getText().toString());
+                int CustomerAccountNoRowCount = CustomerAccountQuery.size();
+                String[] CustomerAccountStringArray = new String[CustomerAccountNoRowCount];
+                int x = 0;
 
-            String route_numberString = intent.getStringExtra("RouteNumberIntent");
-            String customer_nameString = intent.getStringExtra("CustomerNameIntent");
-            String customer_accountString = intent.getStringExtra("CustomerAccountIntent");
-            String item_nameString = intent.getStringExtra("NameIntent");
-            String item_brandString = intent.getStringExtra("BrandIntent");
-            String item_packsizeString = intent.getStringExtra("PackSizeIntent");
-            String item_flavorString = intent.getStringExtra("FlavorIntent");
+                for (com.ecng3020project.merchandiserstockcount.MyObject record : CustomerAccountQuery) {
 
-            RouteNumberEdit = (EditText) findViewById(R.id.routeNumberEditText);
-            RouteNumberEdit.setText(route_numberString);
-            CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
-            CustomerNameAutoComplete.setText(customer_nameString);
-            CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
-            CustomerAccountAutoComplete.setText(customer_accountString);
-            ItemNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemNameAutoCompleteTextView);
-            ItemNameAutoComplete.setText(item_nameString);
-            ItemBrandAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemBrandAutoCompleteTextView);
-            ItemBrandAutoComplete.setText(item_brandString);
-            ItemPackSizeAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemPackSizeAutoCompleteTextView);
-            ItemPackSizeAutoComplete.setText(item_packsizeString);
-            ItemFlavorAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemFlavorAutoCompleteTextView);
-            ItemFlavorAutoComplete.setText(item_flavorString);
+                    CustomerAccountStringArray[x] = record.objectName;
+                    x++;
+                }
+                CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
+                CustomerAccountAutoComplete.setText(CustomerAccountStringArray[0]);
+
+            }
+        });
+
+        //Customer Account OnClickListener
+        CustomerAccountAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Autofill Customer Name Using Customer Account Number
+                List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerNameQuery = databaseH.CustomerNameTypedQuery(CustomerAccountAutoComplete.getText().toString());
+                int CustomerNameRowCount = CustomerNameQuery.size();
+                String[] CustomerNameStringArray = new String[CustomerNameRowCount];
+                int x = 0;
+
+                for (com.ecng3020project.merchandiserstockcount.MyObject record : CustomerNameQuery) {
+
+                    CustomerNameStringArray[x] = record.objectName;
+                    x++;
+                }
+                CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
+                CustomerNameAutoComplete.setText(CustomerNameStringArray[0]);
+            }
+        });
+
+        //Item Name OnClick Listener
+        ItemNameAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //Autofill Item Brand Using Item Name
+                List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandQuery = databaseH.ItemBrandTypedQuery(ItemNameAutoComplete.getText().toString());
+                int ItemBrandRowCount = ItemBrandQuery.size();
+                String[] ItemBrandStringArray = new String[ItemBrandRowCount];
+                int itemBrandVar = 0;
+
+                for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemBrandQuery) {
+
+                    ItemBrandStringArray[itemBrandVar] = record.objectName;
+                    itemBrandVar++;
+                }
+                ItemBrandAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemBrandAutoCompleteTextView);
+                ItemBrandAutoComplete.setText(ItemBrandStringArray[0]);
+
+                //Autofill Item Pack Size Using Item Name
+                List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeQuery = databaseH.ItemPackSizeTypedQuery(ItemNameAutoComplete.getText().toString());
+                int ItemPackSizeRowCount = ItemPackSizeQuery.size();
+                String[] ItemPackSizeStringArray = new String[ItemPackSizeRowCount];
+                int itemPackSizeVar= 0;
+
+                for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemPackSizeQuery) {
+
+                    ItemPackSizeStringArray[itemPackSizeVar] = record.objectName;
+                    itemPackSizeVar++;
+                }
+                ItemPackSizeAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemPackSizeAutoCompleteTextView);
+                ItemPackSizeAutoComplete.setText(ItemPackSizeStringArray[0]);
+
+                //Autofill Item Flavor Using Item Name
+                List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorQuery = databaseH.ItemFlavorTypedQuery(ItemNameAutoComplete.getText().toString());
+                int ItemFlavorRowCount = ItemFlavorQuery.size();
+                String[] ItemFlavorStringArray = new String[ItemFlavorRowCount];
+                int itemFlavorVar= 0;
+
+                for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemFlavorQuery) {
+
+                    ItemFlavorStringArray[itemFlavorVar] = record.objectName;
+                    itemFlavorVar++;
+                }
+                ItemFlavorAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemFlavorAutoCompleteTextView);
+                ItemFlavorAutoComplete.setText(ItemFlavorStringArray[0]);
+            }
+        });
 
     }
 
+    private void dataFromCameraActivity() {
+        Intent intent = getIntent();
+
+        String customer_accountString = intent.getStringExtra("CustomerAccountIntent");
+        String item_nameString = intent.getStringExtra("ItemNameIntent");
+        String item_brandString = intent.getStringExtra("ItemBrandIntent");
+        String item_packsizeString = intent.getStringExtra("ItemPackSizeIntent");
+        String item_flavorString = intent.getStringExtra("ItemFlavorIntent");
+        String route_numberString = intent.getStringExtra("RouteNumberIntent");
+        String customer_nameString = intent.getStringExtra("CustomerNameIntent");
+
+        RouteNumberEdit = (EditText) findViewById(R.id.routeNumberEditText);
+        RouteNumberEdit.setText(route_numberString);
+        CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
+        CustomerNameAutoComplete.setText(customer_nameString);
+        CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
+        CustomerAccountAutoComplete.setText(customer_accountString);
+        ItemNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemNameAutoCompleteTextView);
+        ItemNameAutoComplete.setText(item_nameString);
+        ItemBrandAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemBrandAutoCompleteTextView);
+        ItemBrandAutoComplete.setText(item_brandString);
+        ItemPackSizeAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemPackSizeAutoCompleteTextView);
+        ItemPackSizeAutoComplete.setText(item_packsizeString);
+        ItemFlavorAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemFlavorAutoCompleteTextView);
+        ItemFlavorAutoComplete.setText(item_flavorString);
+
+    }
 
     /***************************************************************************************
  *    Title: Android AutocompleteTextView with Database Data as Suggestions
@@ -270,6 +364,7 @@ public class MainActivity extends AppCompatActivity {
             x++;
         }
         Log.i(TAG, "getCustomerNameFromDb: Test");
+
         return CustomerNameItem;
     }
 

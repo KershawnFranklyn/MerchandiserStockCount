@@ -9,6 +9,7 @@ import android.util.Log;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -210,4 +211,203 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
 
 
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameScannedQuery(String itemIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'",  null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '1'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemNameList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectItemName = cursor.getString(cursor.getColumnIndex("item_Name"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemNameObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemName);
+                itemNameList.add(itemNameObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return itemNameList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeScannedQuery(String itemIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '1'", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemBrandList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectItemBrand = cursor.getString(cursor.getColumnIndex("item_Pack_Size"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemBrandObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemBrand);
+                itemBrandList.add(itemBrandObject);
+            }
+            while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+
+        return itemBrandList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandScannedQuery(String itemIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '1'", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemPackSizeList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectItemPackSize = cursor.getString(cursor.getColumnIndex("item_Brand"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemPackSizeObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemPackSize);
+                itemPackSizeList.add(itemPackSizeObject);
+            }
+            while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+
+        return itemPackSizeList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorScannedQuery(String itemIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Flavor FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE item_ID LIKE '1'", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemFlavorList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectItemFlavor = cursor.getString(cursor.getColumnIndex("flavor"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemPackSizeObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemFlavor);
+                itemFlavorList.add(itemPackSizeObject);
+            }
+            while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+
+        return itemFlavorList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerNameTypedQuery(String customerAccountNo){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT customer_Name FROM Customer_Info WHERE customer_Account_No LIKE '"+customerAccountNo+"'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> customerNameList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectItemName = cursor.getString(cursor.getColumnIndex("customer_Name"));
+                com.ecng3020project.merchandiserstockcount.MyObject customerNameObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemName);
+                customerNameList.add(customerNameObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return customerNameList;
+    }
+
+    //Function used to query for result using the chosen customer name. This is for the autocomplete funciton
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerAccountTypedQuery(String customerName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT customer_Account_No FROM Customer_Info WHERE customer_Name LIKE '"+customerName+"'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> customerAccountNoList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectItemName = cursor.getString(cursor.getColumnIndex("customer_Account_No"));
+                com.ecng3020project.merchandiserstockcount.MyObject customerAccountNoObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemName);
+                customerAccountNoList.add(customerAccountNoObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return customerAccountNoList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandTypedQuery(String itemName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_Name LIKE '"+itemName+"'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemBrandList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectItemBrand = cursor.getString(cursor.getColumnIndex("item_Brand"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemBrandObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemBrand);
+                itemBrandList.add(itemBrandObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return itemBrandList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeTypedQuery(String itemName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_Name LIKE '"+itemName+"'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemPackSizeList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectItemPackSize = cursor.getString(cursor.getColumnIndex("item_Pack_Size"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemPackSizeObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemPackSize);
+                itemPackSizeList.add(itemPackSizeObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return itemPackSizeList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorTypedQuery(String itemName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE item_Name LIKE '"+itemName+"'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemFlavorList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectItemFlavor = cursor.getString(cursor.getColumnIndex("flavor"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemFlavorObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemFlavor);
+                itemFlavorList.add(itemFlavorObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return itemFlavorList;
+    }
 }

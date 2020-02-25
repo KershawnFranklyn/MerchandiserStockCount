@@ -72,6 +72,7 @@ public class CameraMainActivity extends AppCompatActivity {
     String routeNumber;
     String customerName;
     String customerAccount;
+    String rawValue;
     int check;
     final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
     DatabaseOpenHelper databaseH;
@@ -159,7 +160,8 @@ public class CameraMainActivity extends AppCompatActivity {
                         FirebaseVisionBarcodeDetectorOptions options =
                                 new FirebaseVisionBarcodeDetectorOptions.Builder()
                                         .setBarcodeFormats(
-                                                FirebaseVisionBarcode.FORMAT_ALL_FORMATS)
+                                                FirebaseVisionBarcode.FORMAT_QR_CODE,
+                                                FirebaseVisionBarcode.FORMAT_UPC_A)
                                         .build();
 
                         FirebaseVisionBarcodeDetector detector = FirebaseVision.getInstance()
@@ -182,7 +184,7 @@ public class CameraMainActivity extends AppCompatActivity {
                                             Rect bounds = barcode.getBoundingBox();
                                             Point[] corners = barcode.getCornerPoints();
 
-                                            String rawValue = barcode.getRawValue();
+                                            rawValue = barcode.getRawValue();
                                             int barcodetype = barcode.getFormat();
                                             int valueType = barcode.getValueType();
 
@@ -192,60 +194,9 @@ public class CameraMainActivity extends AppCompatActivity {
                                             // See API reference for complete list of supported types
                                             CameraX.unbindAll(); // Stops camera function
 
-                                            if (valueType == 1)
+                                            if (valueType == 5)
                                             {
                                                 nextActivity();
-                                            }
-                                            else if (valueType == 2)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 3)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 4)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 5)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 6)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 7)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 8)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 9)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 10)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 11)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 12)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else if (valueType == 13)
-                                            {
-                                                nextActivity();
-                                            }
-                                            else{
-                                                break;
                                             }
                                         }
                                     }
@@ -339,26 +290,64 @@ public class CameraMainActivity extends AppCompatActivity {
 
     public void nextActivity (){
 
-
-
         if(check == 1){
             check++;
 
-            Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
+            databaseH = new DatabaseOpenHelper(CameraMainActivity.this);
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameQuery = databaseH.ItemNameScannedQuery(rawValue);
+            int itemNameRowCount = ItemNameQuery.size();
 
-            //Name, Brand, Pack Size, Flavor
-            String testName = "Caribbean Cool Orange 500ml X24";
-            String testBrand = "Caribbean Cool";
-            String testPackSize = "500ml";
-            String testFlavor = "Orange";
+            String[] itemNameStringArray = new String[itemNameRowCount];
+            int x = 0;
+
+            for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemNameQuery) {
+
+                itemNameStringArray[x] = record.objectName;
+                x++;
+            }
+
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandQuery = databaseH.ItemBrandScannedQuery(rawValue);
+            int itemBrandRowCount = ItemNameQuery.size();
+            String[] itemBrandStringArray = new String[itemBrandRowCount];
+            x = 0;
+
+            for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemBrandQuery) {
+
+                itemBrandStringArray[x] = record.objectName;
+                x++;
+            }
+
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeQuery = databaseH.ItemPackSizeScannedQuery(rawValue);
+            int itemPackSizeRowCount = ItemNameQuery.size();
+            String[] itemPackSizeStringArray = new String[itemPackSizeRowCount];
+            x = 0;
+
+            for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemPackSizeQuery) {
+
+                itemPackSizeStringArray[x] = record.objectName;
+                x++;
+            }
+
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorQuery = databaseH.ItemFlavorScannedQuery(rawValue);
+            int itemFlavorRowCount = ItemNameQuery.size();
+            String[] itemFlavorStringArray = new String[itemFlavorRowCount];
+            x = 0;
+
+            for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemFlavorQuery) {
+
+                itemFlavorStringArray[x] = record.objectName;
+                x++;
+            }
+
+            Intent intent = new Intent(CameraMainActivity.this, MainActivity.class);
 
             intent.putExtra("RouteNumberIntent", routeNumber);
             intent.putExtra("CustomerNameIntent", customerName);
             intent.putExtra("CustomerAccountIntent", customerAccount);
-            intent.putExtra("NameIntent", testName);
-            intent.putExtra("BrandIntent", testBrand);
-            intent.putExtra("PackSizeIntent", testPackSize);
-            intent.putExtra("FlavorIntent", testFlavor);
+            intent.putExtra("ItemNameIntent", itemNameStringArray[0]);
+            intent.putExtra("ItemBrandIntent", itemBrandStringArray[0]);
+            intent.putExtra("ItemPackSizeIntent", itemPackSizeStringArray[0]);
+            intent.putExtra("ItemFlavorIntent", itemFlavorStringArray[0]);
 
             startActivity(intent);
         }
