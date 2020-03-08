@@ -294,11 +294,23 @@ public class CameraMainActivity extends AppCompatActivity {
             check++;
 
             databaseH = new DatabaseOpenHelper(CameraMainActivity.this);
-            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameQuery = databaseH.ItemNameScannedQuery(rawValue);
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemIDQuery = databaseH.BarcodeIDtoItemID(rawValue);
+            int itemIDRowCount = ItemIDQuery.size();
+
+            String[] itemIDStringArray = new String[itemIDRowCount];
+            int x = 0;
+
+            for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemIDQuery) {
+
+                itemIDStringArray[x] = record.objectName;
+                x++;
+            }
+
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameQuery = databaseH.ItemNameScannedQuery(itemIDStringArray[0]);
             int itemNameRowCount = ItemNameQuery.size();
 
             String[] itemNameStringArray = new String[itemNameRowCount];
-            int x = 0;
+            x = 0;
 
             for (com.ecng3020project.merchandiserstockcount.MyObject record : ItemNameQuery) {
 
@@ -306,7 +318,7 @@ public class CameraMainActivity extends AppCompatActivity {
                 x++;
             }
 
-            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandQuery = databaseH.ItemBrandScannedQuery(rawValue);
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandQuery = databaseH.ItemBrandScannedQuery(itemIDStringArray[0]);
             int itemBrandRowCount = ItemNameQuery.size();
             String[] itemBrandStringArray = new String[itemBrandRowCount];
             x = 0;
@@ -317,7 +329,7 @@ public class CameraMainActivity extends AppCompatActivity {
                 x++;
             }
 
-            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeQuery = databaseH.ItemPackSizeScannedQuery(rawValue);
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeQuery = databaseH.ItemPackSizeScannedQuery(itemIDStringArray[0]);
             int itemPackSizeRowCount = ItemNameQuery.size();
             String[] itemPackSizeStringArray = new String[itemPackSizeRowCount];
             x = 0;
@@ -328,7 +340,7 @@ public class CameraMainActivity extends AppCompatActivity {
                 x++;
             }
 
-            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorQuery = databaseH.ItemFlavorScannedQuery(rawValue);
+            List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorQuery = databaseH.ItemFlavorScannedQuery(itemIDStringArray[0]);
             int itemFlavorRowCount = ItemNameQuery.size();
             String[] itemFlavorStringArray = new String[itemFlavorRowCount];
             x = 0;

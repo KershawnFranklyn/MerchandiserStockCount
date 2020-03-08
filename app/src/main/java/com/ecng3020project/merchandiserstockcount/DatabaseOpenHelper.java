@@ -40,7 +40,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT customer_Name FROM Order_Info WHERE customer_Name LIKE '" + searchTerm + "%' ORDER BY customer_Name ASC", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT customer_Name FROM Customer_Info WHERE customer_Name LIKE '" + searchTerm + "%' ORDER BY customer_Name ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -69,7 +69,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT customer_Account_No FROM Order_Info WHERE customer_Account_No LIKE '" + searchTerm + "%'ORDER BY customer_Account_No ASC", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT customer_Account_No FROM Customer_Info WHERE customer_Account_No LIKE '" + searchTerm + "%'ORDER BY customer_Account_No ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -98,7 +98,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Order_Info WHERE item_Name LIKE '" + searchTerm + "%' ORDER BY item_Name ASC", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_Name LIKE '" + searchTerm + "%' ORDER BY item_Name ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -127,7 +127,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Order_Info WHERE item_Brand LIKE '" + searchTerm + "%' ORDER BY item_Brand ASC", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_Brand LIKE '" + searchTerm + "%' ORDER BY item_Brand ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -156,7 +156,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Order_Info WHERE item_Pack_Size LIKE '" + searchTerm + "%' ORDER BY item_Pack_Size ASC", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_Pack_Size LIKE '" + searchTerm + "%' ORDER BY item_Pack_Size ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
@@ -186,14 +186,14 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         SQLiteDatabase db = this.getWritableDatabase();
 
         // execute the query
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Flavor FROM Order_Info WHERE item_Flavor LIKE '" + searchTerm + "%' ORDER BY item_Flavor ASC", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE flavor LIKE '" + searchTerm + "%' ORDER BY flavor ASC", null);
 
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
 
                 // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
-                String objectName = cursor.getString(cursor.getColumnIndex("item_Flavor"));
+                String objectName = cursor.getString(cursor.getColumnIndex("flavor"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
                 // add to list
@@ -209,13 +209,34 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> BarcodeIDtoItemID(String barcodeIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
 
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_ID FROM Barcode_Info WHERE barcode_ID LIKE '"+barcodeIDString+"'",  null);
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '1'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemIDList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectItemID = cursor.getString(cursor.getColumnIndex("item_ID"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemIDObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemID);
+                itemIDList.add(itemIDObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return itemIDList;
+    }
 
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameScannedQuery(String itemIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'",  null);
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '1'",  null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'",  null);
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '1'",  null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemNameList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         if (cursor.moveToFirst()){
@@ -237,8 +258,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeScannedQuery(String itemIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '1'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '1'", null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemBrandList = new ArrayList<MyObject>();
 
         if(cursor.moveToFirst()){
@@ -259,8 +280,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandScannedQuery(String itemIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '1'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '1'", null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemPackSizeList = new ArrayList<MyObject>();
 
         if(cursor.moveToFirst()){
@@ -281,8 +302,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorScannedQuery(String itemIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Flavor FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
-        Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE item_ID LIKE '1'", null);
+        Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
+        //Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE item_ID LIKE '1'", null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemFlavorList = new ArrayList<MyObject>();
 
         if(cursor.moveToFirst()){
