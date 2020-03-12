@@ -55,6 +55,7 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher{
 
         // query the database based on the user input
 
+        mainActivity.RouteNumberInputItem = mainActivity.getRouteNumberFromDb(userInput.toString());
         mainActivity.CustomerNameInputItem = mainActivity.getCustomerNameFromDb(userInput.toString());
         mainActivity.CustomerAccountInputItem = mainActivity.getCustomerAccountFromDb(userInput.toString());
         mainActivity.ItemNameInputItem = mainActivity.getItemNameFromDb(userInput.toString());
@@ -63,6 +64,9 @@ public class CustomAutoCompleteTextChangedListener implements TextWatcher{
         mainActivity.ItemFlavorInputItem = mainActivity.getItemFlavorFromDb(userInput.toString());
 
         // update the adapater
+        mainActivity.RouteNumberAdapter.notifyDataSetChanged();
+        mainActivity.RouteNumberAdapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.RouteNumberInputItem);
+        mainActivity.RouteNumberAutoComplete.setAdapter(mainActivity.RouteNumberAdapter);
 
         mainActivity.CustomerNameAdapter.notifyDataSetChanged();
         mainActivity.CustomerNameAdapter = new ArrayAdapter<String>(mainActivity, android.R.layout.simple_dropdown_item_1line, mainActivity.CustomerNameInputItem);

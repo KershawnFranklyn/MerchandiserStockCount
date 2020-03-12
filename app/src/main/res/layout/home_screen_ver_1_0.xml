@@ -46,6 +46,26 @@
             android:layout_marginRight="5sp"
             android:textSize="24sp" />
 
+        <Space
+            android:id="@+id/spacer_for_button_Test"
+            android:layout_width="match_parent"
+            android:layout_height="45sp" />
+
+        <Button
+            android:id="@+id/testResultsBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginBottom="5sp"
+            android:background="@drawable/rounded_button"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:text="Goto Results"
+            android:textColor="@color/GhostWhite"
+            android:textSize="24sp" />
+
     </LinearLayout>
 
 

@@ -33,6 +33,35 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
  *    Availability: https://www.androidcode.ninja/android-autocompletetextview-example-sqlite-database/
  *    Code Adapted to fit this project
  ***************************************************************************************/
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> RouteNumberRead(String searchTerm){
+        List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<MyObject>();
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        // execute the query
+        Cursor cursor = db.rawQuery("SELECT DISTINCT route_No FROM Customer_Info WHERE route_No LIKE '" + searchTerm + "%' ORDER BY route_No ASC", null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+
+                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
+                String objectName = cursor.getString(cursor.getColumnIndex("route_No"));
+                com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
+
+                // add to list
+                recordsList.add(myObject);
+
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        // return the list of records
+        return recordsList;
+    }
+
 
     public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerNameRead(String searchTerm) {
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
@@ -431,4 +460,25 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
         return itemFlavorList;
     }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> listing_ItemNames(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT item_Name FROM TempInputData", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemNameList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectItemName = cursor.getString(cursor.getColumnIndex("item_Name"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemNameObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemName);
+                itemNameList.add(itemNameObject);
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return itemNameList;
+    }
+
 }

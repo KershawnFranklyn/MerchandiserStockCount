@@ -25,6 +25,7 @@ public class ConfirmationActivity extends AppCompatActivity {
         final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
         databaseAccess.createTable();
+        databaseAccess.createTempDataTable();
         databaseAccess.close();
 
         Intent intent = getIntent();
@@ -66,30 +67,68 @@ public class ConfirmationActivity extends AppCompatActivity {
         numOfCasesTextView.setText(numOfCasesString);
 
 
-        final Button button = findViewById(R.id.submitBtn);
-        button.setOnClickListener(new View.OnClickListener() {
+        final Button savedDataButton = findViewById(R.id.submitBtn);
+        savedDataButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 databaseAccess.open();
-                Boolean test = databaseAccess.insertData(routeNumTextView.getText().toString(),
+                Boolean saveDataBoolean = databaseAccess.insertData(routeNumTextView.getText().toString(),
+                        custAccTextView.getText().toString(), custNameTextView.getText().toString(),
+                        itemNameTextView.getText().toString(), itemBrandTextView.getText().toString(),
+                        itemPackSizeTextView.getText().toString(), itemFlavorTextView.getText().toString(),
+                        numOfCasesTextView.getText().toString());
+
+                Boolean tempDataBoolean = databaseAccess.insertTempData(routeNumTextView.getText().toString(),
                         custAccTextView.getText().toString(), custNameTextView.getText().toString(),
                         itemNameTextView.getText().toString(), itemBrandTextView.getText().toString(),
                         itemPackSizeTextView.getText().toString(), itemFlavorTextView.getText().toString(),
                         numOfCasesTextView.getText().toString());
                 databaseAccess.close();
 
-
-                if(test == true){
+                if(saveDataBoolean && tempDataBoolean == true){
                     Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
-                    Intent intent = new Intent(ConfirmationActivity.this, HomePageActivity.class);
+                    Intent intent = new Intent(ConfirmationActivity.this, ResultsActivity.class);
                     startActivity(intent);
                     toast.show();
                 }
 
-                if(test == false){
+                else if(saveDataBoolean ||tempDataBoolean == false){
                     Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Unsuccessfully", Toast.LENGTH_SHORT);
                     toast.show();
                 }
+
+            }
+        });
+
+        final Button tempDataButton = findViewById(R.id.tempSaveBtn);
+        tempDataButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                databaseAccess.open();
+                Boolean saveDataBoolean = databaseAccess.insertData(routeNumTextView.getText().toString(),
+                        custAccTextView.getText().toString(), custNameTextView.getText().toString(),
+                        itemNameTextView.getText().toString(), itemBrandTextView.getText().toString(),
+                        itemPackSizeTextView.getText().toString(), itemFlavorTextView.getText().toString(),
+                        numOfCasesTextView.getText().toString());
+
+                Boolean tempDataBoolean = databaseAccess.insertTempData(routeNumTextView.getText().toString(),
+                        custAccTextView.getText().toString(), custNameTextView.getText().toString(),
+                        itemNameTextView.getText().toString(), itemBrandTextView.getText().toString(),
+                        itemPackSizeTextView.getText().toString(), itemFlavorTextView.getText().toString(),
+                        numOfCasesTextView.getText().toString());
+                databaseAccess.close();
+
+                if(tempDataBoolean && saveDataBoolean == true){
+                    Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
+                    Intent intent = new Intent(ConfirmationActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    toast.show();
+                }
+                else if(tempDataBoolean || saveDataBoolean == false){
+                    Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Unsuccessfully", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+
 
             }
         });

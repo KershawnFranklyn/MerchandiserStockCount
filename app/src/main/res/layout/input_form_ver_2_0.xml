@@ -34,18 +34,18 @@
                 android:textColor="@color/SMJTextBlue"
                 android:textSize="24sp" />
 
-            <EditText
-                android:id="@+id/routeNumberEditText"
+            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
+                android:id="@+id/routeNumberAutoCompleteTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:textSize="24sp"
-                android:textColor="@color/SMJTextBlue"
                 android:background="@color/GhostWhite"
-                android:textColorHint="@color/LightGrey"
                 android:hint="@string/routeNumberEditTextViewString"
-                android:inputType="number" />
+                android:inputType="number"
+                android:textColor="@color/SMJTextBlue"
+                android:textColorHint="@color/LightGrey"
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                 <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
                     android:id="@+id/itemNameAutoCompleteTextView"
                     android:layout_width="300sp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="20sp"
                     android:layout_marginRight="20sp"
                     android:layout_weight="1"
@@ -143,14 +143,18 @@
                     android:textSize="24sp"/>
 
                 <!--                -->
-                <ImageButton
-                    android:id="@+id/cameraImageButton"
+                <Button
+                    android:id="@+id/cameraScanButton"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/icons8_camera_40"
-                    android:background="@color/SMJBackground"
-                    android:contentDescription="@string/cameraButtonString"/>
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/rounded_button"
+                    android:text="Scan"
+                    android:paddingStart="10sp"
+                    android:paddingEnd="10sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_marginBottom="5sp"
+                    android:textSize="24sp"/>
 
             </LinearLayout>
 

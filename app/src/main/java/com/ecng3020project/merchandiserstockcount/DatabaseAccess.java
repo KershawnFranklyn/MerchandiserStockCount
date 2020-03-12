@@ -46,9 +46,23 @@ public class DatabaseAccess {
         Log.i(TAG, "createTable: Testing that the Table would be created");
 
         database.execSQL("CREATE TABLE IF NOT EXISTS SavedInputData (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                "Route TEXT NOT NULL,CustAcct TEXT NOT NULL, [Customer Name] TEXT    NOT NULL," +
-                "ITEMNAME TEXT NOT NULL, ItemBrand TEXT NOT NULL, ItemPackSize TEXT NOT NULL, " +
-                "Flavor TEXT NOT NULL, NumberOfCases TEXT NOT NULL )");
+                "route_No TEXT NOT NULL,customer_Account_No TEXT NOT NULL, customer_Name TEXT    NOT NULL," +
+                "item_Name TEXT NOT NULL, item_Brand TEXT NOT NULL, item_Pack_Size TEXT NOT NULL, " +
+                "flavor TEXT NOT NULL, number_Of_Cases TEXT NOT NULL )");
+    }
+
+    public void createTempDataTable(){
+        Log.i(TAG, "createTempDataTableTable: Testing that the Table would be created");
+
+        database.execSQL("CREATE TABLE IF NOT EXISTS TempInputData (Id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                "route_No TEXT NOT NULL,customer_Account_No TEXT NOT NULL, customer_Name TEXT    NOT NULL," +
+                "item_Name TEXT NOT NULL, item_Brand TEXT NOT NULL, item_Pack_Size TEXT NOT NULL, " +
+                "flavor TEXT NOT NULL, number_Of_Cases TEXT NOT NULL )");
+    }
+
+    //Need to add delete table when finish display results
+    public void dropTempTable(){
+        database.execSQL("DROP TABLE TempInputData");
     }
 
     /***************************************************************************************
@@ -67,17 +81,16 @@ public class DatabaseAccess {
         createTable();
 
         ContentValues contextValues = new ContentValues();
-        contextValues.put("Route", routeNoVar);
-        contextValues.put("CustAcct", customerNoVar);
-        contextValues.put("[Customer Name]", custNameVar);
-        contextValues.put("ITEMNAME", itemNameVar);
-        contextValues.put("ItemBrand", itemBrandNameVar);
-        contextValues.put("ItemPackSize", itemPackSizeVar);
-        contextValues.put("Flavor", flavorVar);
-        contextValues.put("NumberOfCases", numOfCasesVar);
+        contextValues.put("route_No", routeNoVar);
+        contextValues.put("customer_Account_No", customerNoVar);
+        contextValues.put("customer_Name", custNameVar);
+        contextValues.put("item_Name", itemNameVar);
+        contextValues.put("item_Brand", itemBrandNameVar);
+        contextValues.put("item_Pack_Size", itemPackSizeVar);
+        contextValues.put("flavor", flavorVar);
+        contextValues.put("number_Of_Cases", numOfCasesVar);
 
         Long result = database.insert("SavedInputData", null, contextValues );
-
 
         if(result == -1)
         {
@@ -88,5 +101,34 @@ public class DatabaseAccess {
         }
 
     }
+
+    public Boolean insertTempData(String routeNoVar, String customerNoVar, String custNameVar,
+                              String itemNameVar, String itemBrandNameVar, String itemPackSizeVar,
+                              String flavorVar, String numOfCasesVar){
+        Log.i(TAG, "insertData: Testing that the data is inputted into the database");
+        createTable();
+
+        ContentValues contextValues = new ContentValues();
+        contextValues.put("route_No", routeNoVar);
+        contextValues.put("customer_Account_No", customerNoVar);
+        contextValues.put("customer_Name", custNameVar);
+        contextValues.put("item_Name", itemNameVar);
+        contextValues.put("item_Brand", itemBrandNameVar);
+        contextValues.put("item_Pack_Size", itemPackSizeVar);
+        contextValues.put("flavor", flavorVar);
+        contextValues.put("number_Of_Cases", numOfCasesVar);
+
+        Long result = database.insert("TempInputData", null, contextValues );
+
+        if(result == -1)
+        {
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
 
 }

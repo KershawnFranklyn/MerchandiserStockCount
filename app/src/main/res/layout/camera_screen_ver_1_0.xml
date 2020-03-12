@@ -22,5 +22,4 @@
         app:layout_constraintTop_toTopOf="parent"
         android:alpha="0.2"/>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

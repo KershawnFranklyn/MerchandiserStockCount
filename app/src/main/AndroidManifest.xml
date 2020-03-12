@@ -19,6 +19,8 @@
         <activity android:name=".MainActivity"/>
         <activity android:name="com.ecng3020project.merchandiserstockcount.ConfirmationActivity"/>
         <activity android:name=".CameraMainActivity"/>
+        <activity android:name="com.ecng3020project.merchandiserstockcount.ResultsActivity"/>
+
 
         <meta-data  android:name="com.google.firebase.ml.vision.DEPENDENCIES"
             android:value="barcode"/>

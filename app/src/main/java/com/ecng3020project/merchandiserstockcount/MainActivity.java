@@ -10,8 +10,10 @@ import androidx.lifecycle.LifecycleOwner;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.View;
+import android.view.autofill.AutofillManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
     int autoTextSection = 0;
 
-    EditText RouteNumberEdit;
+    CustomAutoCompleteView RouteNumberAutoComplete;
     CustomAutoCompleteView CustomerNameAutoComplete;
     CustomAutoCompleteView CustomerAccountAutoComplete;
     CustomAutoCompleteView ItemNameAutoComplete;
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     CustomAutoCompleteView ItemFlavorAutoComplete;
 
     // adapter for auto-complete
+    ArrayAdapter<String> RouteNumberAdapter;
     ArrayAdapter<String> CustomerNameAdapter;
     ArrayAdapter<String> CustomerAccountAdapter;
     ArrayAdapter<String> ItemNameAdapter;
@@ -63,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     // just to add some initial value
+    String[] RouteNumberInputItem = new String[] {"Please search..."};
     String[] CustomerNameInputItem = new String[] {"Please search..."};
     String[] CustomerAccountInputItem = new String[] {"Please search..."};
     String[] ItemNameInputItem = new String[]{"Please search..."};
@@ -111,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
             // instantiate database handler
             databaseH = new DatabaseOpenHelper(MainActivity.this);
 
+            RouteNumberAutoComplete = (CustomAutoCompleteView) findViewById(R.id.routeNumberAutoCompleteTextView);
             CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
             CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
             ItemNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemNameAutoCompleteTextView);
@@ -121,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             onClickListenerFunction();
 
             // add the listener so it will tries to suggest while the user types
+            RouteNumberAutoComplete.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
             CustomerNameAutoComplete.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
             CustomerAccountAutoComplete.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
             ItemNameAutoComplete.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
@@ -129,6 +135,9 @@ public class MainActivity extends AppCompatActivity {
             ItemFlavorAutoComplete.addTextChangedListener(new CustomAutoCompleteTextChangedListener(this));
 
             // set our adapter
+            RouteNumberAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, RouteNumberInputItem);
+            RouteNumberAutoComplete.setAdapter(RouteNumberAdapter);
+
             CustomerNameAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, CustomerNameInputItem);
             CustomerNameAutoComplete.setAdapter(CustomerNameAdapter);
 
@@ -159,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                EditText routeNum = findViewById(R.id.routeNumberEditText);
+                EditText routeNum = findViewById(R.id.routeNumberAutoCompleteTextView);
                 routeNumber = routeNum.getText().toString();
                 EditText customerNameEdit = findViewById(R.id.customerNameAutoCompleteTextView);
                 custName = customerNameEdit.getText().toString();
@@ -191,12 +200,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        final ImageButton imageButton = findViewById(R.id.cameraImageButton);
-        imageButton.setOnClickListener(new View.OnClickListener() {
+        final Button scanButton = findViewById(R.id.cameraScanButton);
+        scanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RouteNumberEdit= (EditText) findViewById(R.id.routeNumberEditText);
-                String routeNumber = RouteNumberEdit.getText().toString();
+                RouteNumberAutoComplete= (CustomAutoCompleteView) findViewById(R.id.routeNumberAutoCompleteTextView);
+                String routeNumber = RouteNumberAutoComplete.getText().toString();
                 CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
                 String customerName = CustomerNameAutoComplete.getText().toString();
                 CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
@@ -317,8 +326,8 @@ public class MainActivity extends AppCompatActivity {
         String route_numberString = intent.getStringExtra("RouteNumberIntent");
         String customer_nameString = intent.getStringExtra("CustomerNameIntent");
 
-        RouteNumberEdit = (EditText) findViewById(R.id.routeNumberEditText);
-        RouteNumberEdit.setText(route_numberString);
+        RouteNumberAutoComplete = (CustomAutoCompleteView) findViewById(R.id.routeNumberAutoCompleteTextView);
+        RouteNumberAutoComplete.setText(route_numberString);
         CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
         CustomerNameAutoComplete.setText(customer_nameString);
         CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
@@ -344,6 +353,23 @@ public class MainActivity extends AppCompatActivity {
  ***************************************************************************************/
 
     // this function is used in CustomAutoCompleteTextChangedListener.java
+    public String[] getRouteNumberFromDb(String searchTerm){
+        List<com.ecng3020project.merchandiserstockcount.MyObject> routeNumberValue = databaseH.RouteNumberRead(searchTerm);
+        int rowCount = routeNumberValue.size();
+
+        String[] RouteNumberItem = new String[rowCount];
+        int x =0;
+
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : routeNumberValue){
+
+            RouteNumberItem[x] = record.objectName;
+            x++;
+        }
+
+        return RouteNumberItem;
+    }
+
+
     public String[] getCustomerNameFromDb(String searchTerm){
 
         if(searchTerm.contains("'")){
@@ -363,7 +389,6 @@ public class MainActivity extends AppCompatActivity {
             CustomerNameItem[x] = record.objectName;
             x++;
         }
-        Log.i(TAG, "getCustomerNameFromDb: Test");
 
         return CustomerNameItem;
     }

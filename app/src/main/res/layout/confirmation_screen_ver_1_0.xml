@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/SMJBackground">
 
     <include
@@ -12,13 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <Space
@@ -83,7 +79,7 @@
                 <EditText
                     android:id="@+id/displayCustomerNameInputEditTextView"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:background="@color/GhostWhite"
                     android:textColor="@color/SMJTextBlue"
@@ -304,25 +300,48 @@
 
             <Space
                 android:layout_width="match_parent"
-                android:layout_height="229sp"/>
-
-            <Button
-                android:id="@+id/submitBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="5sp"
-                android:layout_marginRight="5sp"
-                android:layout_marginBottom="5sp"
-                android:background="@drawable/rounded_button"
-                android:paddingStart="10sp"
-                android:paddingEnd="10sp"
-                android:text="Submit"
-                android:textSize="24sp" />
+                android:layout_height="215sp"/>
 
         </LinearLayout>
 
-    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|left"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="5sp"
+            android:background="@drawable/rounded_button"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:text="Submit"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/tempSaveBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|right"
+            android:layout_marginTop="5sp"
+            android:layout_marginRight="5sp"
+            android:layout_marginBottom="5sp"
+            android:background="@drawable/rounded_button"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:text="Add New Entry"
+            android:textSize="24sp" />
+    </LinearLayout>
 
 
 </LinearLayout>

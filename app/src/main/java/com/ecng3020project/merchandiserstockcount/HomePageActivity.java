@@ -17,7 +17,6 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_screen_ver_1_0);
         toolbar = findViewById(R.id.toolBar);
-        //setTitle("Confirm Information");
         setSupportActionBar(toolbar);
 
         final Button button = findViewById(R.id.newEntryButton);
@@ -25,6 +24,15 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomePageActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        final Button testBtn = findViewById(R.id.testResultsBtn);
+        testBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HomePageActivity.this, ResultsActivity.class);
                 startActivity(intent);
             }
         });
