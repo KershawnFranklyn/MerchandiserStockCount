@@ -96,8 +96,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolBar);
         setTitle("Enter Information");
         setSupportActionBar(toolbar);
-        final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         dataFromCameraActivity();
+        dataFromConfirmationActivity();
 
 
 
@@ -341,6 +341,21 @@ public class MainActivity extends AppCompatActivity {
         ItemFlavorAutoComplete = (CustomAutoCompleteView) findViewById(R.id.itemFlavorAutoCompleteTextView);
         ItemFlavorAutoComplete.setText(item_flavorString);
 
+    }
+
+    private void dataFromConfirmationActivity() {
+        Intent intent = getIntent();
+
+        String route_numberConfirmationString = intent.getStringExtra("RouteNumberIntent");
+        String customer_accountConfirmationString = intent.getStringExtra("CustomerAccountIntent");
+        String customer_nameConfirmationString = intent.getStringExtra("CustomerNameIntent");
+
+        RouteNumberAutoComplete = (CustomAutoCompleteView) findViewById(R.id.routeNumberAutoCompleteTextView);
+        RouteNumberAutoComplete.setText(route_numberConfirmationString);
+        CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
+        CustomerNameAutoComplete.setText(customer_nameConfirmationString);
+        CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
+        CustomerAccountAutoComplete.setText(customer_accountConfirmationString);
     }
 
     /***************************************************************************************

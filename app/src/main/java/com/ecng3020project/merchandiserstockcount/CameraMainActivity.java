@@ -68,13 +68,11 @@ public class CameraMainActivity extends AppCompatActivity {
     private int REQUEST_CODE_PERMISSIONS = 101;
     private final String[] REQUIRED_PERMISSIONS = new String[]{"android.permission.CAMERA", "android.permission.WRITE_EXTERNAL_STORAGE"};
     TextureView scanning_TextureView;
-    TextureView outer_TextureView;
     String routeNumber;
     String customerName;
     String customerAccount;
     String rawValue;
     int check;
-    final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
     DatabaseOpenHelper databaseH;
 
     @Override

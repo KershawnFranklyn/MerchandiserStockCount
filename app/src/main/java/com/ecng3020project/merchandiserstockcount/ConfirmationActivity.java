@@ -14,6 +14,9 @@ import androidx.appcompat.widget.Toolbar;
 public class ConfirmationActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    String routeNumber;
+    String customerName;
+    String customerAccount;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -87,7 +90,10 @@ public class ConfirmationActivity extends AppCompatActivity {
 
                 if(saveDataBoolean && tempDataBoolean == true){
                     Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
+                    EditText customerNameEdit = findViewById(R.id.displayCustomerNameInputEditTextView);
+                    customerName = customerNameEdit.getText().toString();
                     Intent intent = new Intent(ConfirmationActivity.this, ResultsActivity.class);
+                    intent.putExtra("CustomerNameIntent", customerName);
                     startActivity(intent);
                     toast.show();
                 }
@@ -120,7 +126,17 @@ public class ConfirmationActivity extends AppCompatActivity {
 
                 if(tempDataBoolean && saveDataBoolean == true){
                     Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
+                    EditText routeNum = findViewById(R.id.displayRouteNumberInputEditTextView);
+                    routeNumber = routeNum.getText().toString();
+                    EditText customerNameEdit = findViewById(R.id.displayCustomerNameInputEditTextView);
+                    customerName = customerNameEdit.getText().toString();
+                    EditText customerAccEdit = findViewById(R.id.displayCustomerAccountInputEditTextView);
+                    customerAccount = customerAccEdit.getText().toString();
+
                     Intent intent = new Intent(ConfirmationActivity.this, MainActivity.class);
+                    intent.putExtra("RouteNumberIntent", routeNumber);
+                    intent.putExtra("CustomerNameIntent", customerName);
+                    intent.putExtra("CustomerAccountIntent", customerAccount);
                     startActivity(intent);
                     toast.show();
                 }

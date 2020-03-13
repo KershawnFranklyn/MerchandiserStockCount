@@ -1,40 +1,46 @@
 package com.ecng3020project.merchandiserstockcount;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
-import android.widget.Toolbar;
-
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import com.google.android.gms.vision.text.Line;
+import org.w3c.dom.Text;
 
 import java.util.List;
 
 public class ResultsActivity extends AppCompatActivity {
     DatabaseOpenHelper databaseH;
+    Toolbar toolbar;
+    TextView CustomerNameResultTextView;
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.results_screen_ver_1_0);
-        Context context = this;
         final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(ResultsActivity.this);
         databaseAccess.open();
         databaseAccess.createTable();
         databaseAccess.createTempDataTable();
         databaseAccess.close();
-        Toolbar toolbar;
+        toolbar = findViewById(R.id.toolBar);
+        setSupportActionBar(toolbar);
+        setTitle("Suggested Orders");
+
+        Intent intent = getIntent();
+        String customer_nameConfirmationString = intent.getStringExtra("CustomerNameIntent");
+        CustomerNameResultTextView = (TextView) findViewById(R.id.customerNameResult);
+        CustomerNameResultTextView.setText(customer_nameConfirmationString);
 
         databaseH = new DatabaseOpenHelper(ResultsActivity.this);
 
