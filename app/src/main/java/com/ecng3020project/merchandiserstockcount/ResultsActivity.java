@@ -44,25 +44,24 @@ public class ResultsActivity extends AppCompatActivity {
 
         databaseH = new DatabaseOpenHelper(ResultsActivity.this);
 
-        LinearLayout verticalLinearLayout = (LinearLayout) findViewById(R.id.dynamicLinearLayout);
+        LinearLayout verticalLinearLayout = (LinearLayout) findViewById(R.id.dynamicLinearLayout);          //Linear Layout containing all dynamically added text
         LinearLayout.LayoutParams itemTxtParams = new LinearLayout.LayoutParams(
-                407,
+                407,        //Equivalent to 155sp width with 420dpi
                 LinearLayout.LayoutParams.WRAP_CONTENT
         );
         LinearLayout.LayoutParams horizontalSpaceParams = new LinearLayout.LayoutParams(
-                13,
+                8,         //Equivalent to 3sp width with 420 dpi
                 LinearLayout.LayoutParams.MATCH_PARENT
         );
         LinearLayout.LayoutParams verticalSpaceParams = new LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
-                26
+                6          //Equivalent to 3sp width with 420 dpi
         );
         LinearLayout.LayoutParams orderTxtParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
+                276,
                 ViewGroup.LayoutParams.MATCH_PARENT
         );
 
-        //Autofill Item Flavor Using Item Name
         List<MyObject> DisplayItemNameList = databaseH.listing_ItemNames();
         int ItemNameRowCount = DisplayItemNameList.size();
         String[] ItemNameStringArray = new String[ItemNameRowCount];
@@ -76,36 +75,46 @@ public class ResultsActivity extends AppCompatActivity {
 
         for (int i =0; i < ItemNameRowCount; i++){
             TextView itemTextView = new TextView(this);
-            TextView orderTextView = new TextView(this);
+            TextView orderResult1TextView = new TextView(this);
+            TextView orderResult2TextView = new TextView(this);
             LinearLayout horizontalLinearLayout = new LinearLayout(this);
             horizontalLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
-            Space horizontalSpace = new Space(this);
-            horizontalSpace.setLayoutParams(horizontalSpaceParams);
+            Space horizontalSpace1 = new Space(this);
+            horizontalSpace1.setLayoutParams(horizontalSpaceParams);
+            Space horizontalSpace2 = new Space(this);
+            horizontalSpace2.setLayoutParams(horizontalSpaceParams);
             Space verticalSpace = new Space(this);
             verticalSpace.setLayoutParams(verticalSpaceParams);
 
             itemTextView.setText(ItemNameStringArray[i]);
             itemTextView.setLayoutParams(itemTxtParams);
+            itemTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
             itemTextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));          //Sets text color to: SMJTextBlue
             itemTextView.setTextSize(20);
 
-            orderTextView.setText("Test");
-            orderTextView.setLayoutParams(orderTxtParams);
-            orderTextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
-            orderTextView.setTextSize(20);
-            orderTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
+            orderResult1TextView.setText("Test");
+            orderResult1TextView.setLayoutParams(orderTxtParams);
+            orderResult1TextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
+            orderResult1TextView.setTextSize(20);
+            orderResult1TextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            orderResult1TextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
+
+            orderResult2TextView.setText("Test");
+            orderResult2TextView.setLayoutParams(orderTxtParams);
+            orderResult2TextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
+            orderResult2TextView.setTextSize(20);
+            orderResult2TextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            orderResult2TextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
 
             horizontalLinearLayout.addView(itemTextView);
-            horizontalLinearLayout.addView(horizontalSpace);
-            horizontalLinearLayout.addView(orderTextView);
+            horizontalLinearLayout.addView(horizontalSpace1);
+            horizontalLinearLayout.addView(orderResult1TextView);
+            horizontalLinearLayout.addView(horizontalSpace2);
+            horizontalLinearLayout.addView(orderResult2TextView);
             verticalLinearLayout.addView(horizontalLinearLayout);
             verticalLinearLayout.addView(verticalSpace);
         }
-
-        //params.setMarginStart(60);
-        //params.setMarginEnd(60);
-
 
         final Button finishBtn = findViewById(R.id.finishBtn);
         finishBtn.setOnClickListener(new View.OnClickListener(){
