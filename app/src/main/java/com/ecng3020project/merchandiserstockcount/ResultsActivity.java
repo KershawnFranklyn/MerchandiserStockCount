@@ -3,6 +3,7 @@ package com.ecng3020project.merchandiserstockcount;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -92,6 +93,8 @@ public class ResultsActivity extends AppCompatActivity {
             itemTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
             itemTextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));          //Sets text color to: SMJTextBlue
             itemTextView.setTextSize(20);
+            itemTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            itemTextView.setPadding(8, itemTextView.getPaddingTop(), 8, itemTextView.getPaddingBottom());
 
             orderResult1TextView.setText("Test");
             orderResult1TextView.setLayoutParams(orderTxtParams);
