@@ -92,8 +92,11 @@ public class ConfirmationActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
                     EditText customerNameEdit = findViewById(R.id.displayCustomerNameInputEditTextView);
                     customerName = customerNameEdit.getText().toString();
+                    EditText customerAccEdit = findViewById(R.id.displayCustomerAccountInputEditTextView);
+                    customerAccount = customerAccEdit.getText().toString();
                     Intent intent = new Intent(ConfirmationActivity.this, ResultsActivity.class);
                     intent.putExtra("CustomerNameIntent", customerName);
+                    intent.putExtra("CustomerAccountNoIntent", customerAccount);
                     startActivity(intent);
                     toast.show();
                 }

@@ -481,4 +481,45 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemNameList;
     }
 
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAverage(String ItemNameString, String CustomerAccounNumberString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccounNumberString +"')", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAvgResultList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectSimpleAvgResult = cursor.getString(cursor.getColumnIndex("avg(no_Of_Cases)"));
+                com.ecng3020project.merchandiserstockcount.MyObject simpleAvgResultObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectSimpleAvgResult);
+                simpleAvgResultList.add(simpleAvgResultObject);
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return simpleAvgResultList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> movingAverage(String ItemNameString, String CustomerAccountNumberString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases)FROM (SELECT no_Of_Cases FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"')  ORDER BY order_ID DESC LIMIT 5)", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectMovingAvgResult = cursor.getString(cursor.getColumnIndex("avg(no_Of_Cases)"));
+                com.ecng3020project.merchandiserstockcount.MyObject movingAvgResultObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectMovingAvgResult);
+                movingAvgResultList.add(movingAvgResultObject);
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return movingAvgResultList;
+    }
+
 }

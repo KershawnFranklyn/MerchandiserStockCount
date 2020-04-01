@@ -23,6 +23,10 @@ public class ResultsActivity extends AppCompatActivity {
     DatabaseOpenHelper databaseH;
     Toolbar toolbar;
     TextView CustomerNameResultTextView;
+    String customer_nameConfirmationString;
+    String customer_AccountNoString;
+    String[] ItemNameStringArray;
+    float simpleAvgerageValue = 0;
 
     @SuppressLint("ResourceType")
     @Override
@@ -39,9 +43,10 @@ public class ResultsActivity extends AppCompatActivity {
         setTitle("Suggested Orders");
 
         Intent intent = getIntent();
-        String customer_nameConfirmationString = intent.getStringExtra("CustomerNameIntent");
+        customer_nameConfirmationString = intent.getStringExtra("CustomerNameIntent");
         CustomerNameResultTextView = (TextView) findViewById(R.id.customerNameResult);
         CustomerNameResultTextView.setText(customer_nameConfirmationString);
+        customer_AccountNoString = intent.getStringExtra("CustomerAccountNoIntent");
 
         databaseH = new DatabaseOpenHelper(ResultsActivity.this);
 
@@ -65,7 +70,7 @@ public class ResultsActivity extends AppCompatActivity {
 
         List<MyObject> DisplayItemNameList = databaseH.listing_ItemNames();
         int ItemNameRowCount = DisplayItemNameList.size();
-        String[] ItemNameStringArray = new String[ItemNameRowCount];
+        ItemNameStringArray = new String[ItemNameRowCount];
         int itemNameVar= 0;
 
         for (com.ecng3020project.merchandiserstockcount.MyObject record : DisplayItemNameList) {
@@ -96,14 +101,14 @@ public class ResultsActivity extends AppCompatActivity {
             itemTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             itemTextView.setPadding(8, itemTextView.getPaddingTop(), 8, itemTextView.getPaddingBottom());
 
-            orderResult1TextView.setText("Test");
+            orderResult1TextView.setText(simpleAvg(ItemNameStringArray[i], customer_AccountNoString));
             orderResult1TextView.setLayoutParams(orderTxtParams);
             orderResult1TextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
             orderResult1TextView.setTextSize(20);
             orderResult1TextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             orderResult1TextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
 
-            orderResult2TextView.setText("Test");
+            orderResult2TextView.setText(movingAvg(ItemNameStringArray[i], customer_AccountNoString));
             orderResult2TextView.setLayoutParams(orderTxtParams);
             orderResult2TextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
             orderResult2TextView.setTextSize(20);
@@ -131,5 +136,43 @@ public class ResultsActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    public String simpleAvg(String itemNameSearchString, String customerAccountSearchTerm) {
+
+        List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAvgResultValue = databaseH.simpleAverage(itemNameSearchString, customer_AccountNoString);
+        int rowCount = simpleAvgResultValue.size();
+
+        String[] simpleAvgResultItem = new String[rowCount];
+        int x = 0;
+
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : simpleAvgResultValue) {
+
+            simpleAvgResultItem[x] = record.objectName;
+            x++;
+        }
+        Log.i("Testing result", "The result of te avgerage is: "+ simpleAvgResultItem[0]);
+        return simpleAvgResultItem[0];
+    }
+
+    public String movingAvg(String itemNameSearchString, String customerAccountSearchTerm){
+        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultValue = databaseH.movingAverage(itemNameSearchString, customer_AccountNoString);
+        int rowCount = movingAvgResultValue.size();
+
+        String[] movingAvgResultItem = new String[rowCount];
+        int x = 0;
+
+        for (com.ecng3020project.merchandiserstockcount.MyObject record : movingAvgResultValue) {
+
+            movingAvgResultItem[x] = record.objectName;
+            x++;
+        }
+
+        double avg = Double.parseDouble(movingAvgResultItem[0]);
+        avg = Math.ceil(avg);
+        long intAvg = Math.round(avg);
+        String result = String.valueOf(intAvg);
+        Log.i("Testing result", "The result of te avgerage is: "+ movingAvgResultItem[0]);
+        return result;
     }
 }
