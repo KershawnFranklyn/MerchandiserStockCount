@@ -10,27 +10,19 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.media.Image;
 import android.os.Bundle;
-import android.os.Environment;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.util.Rational;
 import android.util.Size;
 import android.view.Surface;
 import android.view.TextureView;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraX;
 import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageAnalysisConfig;
-import androidx.camera.core.ImageCapture;
-import androidx.camera.core.ImageCaptureConfig;
 import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
 import androidx.camera.core.PreviewConfig;
@@ -48,11 +40,9 @@ import com.google.firebase.ml.vision.barcode.FirebaseVisionBarcodeDetectorOption
 import com.google.firebase.ml.vision.common.FirebaseVisionImage;
 import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 
-import java.io.File;
 import java.util.List;
 
 import static android.widget.Toast.LENGTH_SHORT;
-import static androidx.constraintlayout.widget.Constraints.TAG;
 
 public class CameraMainActivity extends AppCompatActivity {
 
@@ -95,7 +85,7 @@ public class CameraMainActivity extends AppCompatActivity {
         }
 
     }
-
+//
     private void startCamera() {
         CameraX.unbindAll();
         //For scanning screen

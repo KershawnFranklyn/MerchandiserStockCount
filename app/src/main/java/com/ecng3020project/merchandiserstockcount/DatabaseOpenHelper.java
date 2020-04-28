@@ -33,6 +33,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
  *    Availability: https://www.androidcode.ninja/android-autocompletetextview-example-sqlite-database/
  *    Code Adapted to fit this project
  ***************************************************************************************/
+//This function is used for the auto suggested options for the route number autocomplete text view
     public List<com.ecng3020project.merchandiserstockcount.MyObject> RouteNumberRead(String searchTerm){
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<MyObject>();
 
@@ -45,7 +46,6 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         if (cursor.moveToFirst()) {
             do {
 
-                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("route_No"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
@@ -62,7 +62,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
-
+    //This function is used for the auto suggested options for the customer name autocomplete text view
     public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerNameRead(String searchTerm) {
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
@@ -75,7 +75,6 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         if (cursor.moveToFirst()) {
             do {
 
-                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("customer_Name"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
@@ -92,6 +91,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
+    //This function is used for the auto suggested options for the customer account autocomplete text view
     public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerAccountRead(String searchTerm) {
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
@@ -104,7 +104,6 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         if (cursor.moveToFirst()) {
             do {
 
-                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("customer_Account_No"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
@@ -121,6 +120,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
+    //This function is used for the auto suggested options for the item name autocomplete text view
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameRead(String searchTerm) {
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
@@ -133,7 +133,6 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         if (cursor.moveToFirst()) {
             do {
 
-                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("item_Name"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
@@ -150,6 +149,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
+    //This function is used for the auto suggested options for the item brand autocomplete text view
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandRead(String searchTerm) {
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
@@ -162,7 +162,6 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         if (cursor.moveToFirst()) {
             do {
 
-                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("item_Brand"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
@@ -179,6 +178,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
+    //This function is used for the auto suggested options for the item pack size autocomplete text view
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeRead(String searchTerm) {
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
@@ -191,7 +191,6 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         if (cursor.moveToFirst()) {
             do {
 
-                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("item_Pack_Size"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
@@ -208,6 +207,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
+    //This function is used for the auto suggested options for the item flavor autocomplete text view
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorRead(String searchTerm) {
         List<com.ecng3020project.merchandiserstockcount.MyObject> recordsList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
@@ -221,7 +221,6 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         if (cursor.moveToFirst()) {
             do {
 
-                // int productId = Integer.parseInt(cursor.getString(cursor.getColumnIndex(fieldProductId)));
                 String objectName = cursor.getString(cursor.getColumnIndex("flavor"));
                 com.ecng3020project.merchandiserstockcount.MyObject myObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectName);
 
@@ -238,11 +237,11 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return recordsList;
     }
 
+    //This function finds the corresponding item Id for the scanned barcode ID
     public List<com.ecng3020project.merchandiserstockcount.MyObject> BarcodeIDtoItemID(String barcodeIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT DISTINCT item_ID FROM Barcode_Info WHERE barcode_ID LIKE '"+barcodeIDString+"'",  null);
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '1'",  null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemIDList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         if (cursor.moveToFirst()){
@@ -261,11 +260,11 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemIDList;
     }
 
+    //This function auto fills the item name autocomplete text view when the barcode is successfully scanned
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemNameScannedQuery(String itemIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'",  null);
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Name FROM Item_Info WHERE item_ID LIKE '1'",  null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemNameList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
 
         if (cursor.moveToFirst()){
@@ -284,38 +283,16 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemNameList;
     }
 
+    //This function auto fills the item pack size autocomplete text view when the barcode is successfully scanned
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeScannedQuery(String itemIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Pack_Size FROM Item_Info WHERE item_ID LIKE '1'", null);
-        List<com.ecng3020project.merchandiserstockcount.MyObject> itemBrandList = new ArrayList<MyObject>();
-
-        if(cursor.moveToFirst()){
-            do{
-                String objectItemBrand = cursor.getString(cursor.getColumnIndex("item_Pack_Size"));
-                com.ecng3020project.merchandiserstockcount.MyObject itemBrandObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemBrand);
-                itemBrandList.add(itemBrandObject);
-            }
-            while (cursor.moveToNext());
-
-        }
-        cursor.close();
-        db.close();
-
-        return itemBrandList;
-    }
-
-    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandScannedQuery(String itemIDString){
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '1'", null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemPackSizeList = new ArrayList<MyObject>();
 
         if(cursor.moveToFirst()){
             do{
-                String objectItemPackSize = cursor.getString(cursor.getColumnIndex("item_Brand"));
+                String objectItemPackSize = cursor.getString(cursor.getColumnIndex("item_Pack_Size"));
                 com.ecng3020project.merchandiserstockcount.MyObject itemPackSizeObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemPackSize);
                 itemPackSizeList.add(itemPackSizeObject);
             }
@@ -328,18 +305,40 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemPackSizeList;
     }
 
+    //This function auto fills the item brand autocomplete text view when the barcode is successfully scanned
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandScannedQuery(String itemIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_Brand FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> itemBrandList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectItemBrand = cursor.getString(cursor.getColumnIndex("item_Brand"));
+                com.ecng3020project.merchandiserstockcount.MyObject itemBrandObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemBrand);
+                itemBrandList.add(itemBrandObject);
+            }
+            while (cursor.moveToNext());
+
+        }
+        cursor.close();
+        db.close();
+
+        return itemBrandList;
+    }
+
+    //This function auto fills the item flavor autocomplete text view when the barcode is successfully scanned
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorScannedQuery(String itemIDString){
         SQLiteDatabase db = this.getWritableDatabase();
 
         Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'", null);
-        //Cursor cursor = db.rawQuery("SELECT DISTINCT flavor FROM Item_Info WHERE item_ID LIKE '1'", null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> itemFlavorList = new ArrayList<MyObject>();
 
         if(cursor.moveToFirst()){
             do{
                 String objectItemFlavor = cursor.getString(cursor.getColumnIndex("flavor"));
-                com.ecng3020project.merchandiserstockcount.MyObject itemPackSizeObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemFlavor);
-                itemFlavorList.add(itemPackSizeObject);
+                com.ecng3020project.merchandiserstockcount.MyObject itemFlavorObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemFlavor);
+                itemFlavorList.add(itemFlavorObject);
             }
             while (cursor.moveToNext());
 
@@ -350,6 +349,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemFlavorList;
     }
 
+    //This function is used for auto-filling the customer name autocomplete text view when the customer account number is typed
     public List<com.ecng3020project.merchandiserstockcount.MyObject> CustomerNameTypedQuery(String customerAccountNo){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -358,8 +358,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
         if (cursor.moveToFirst()){
             do {
-                String objectItemName = cursor.getString(cursor.getColumnIndex("customer_Name"));
-                com.ecng3020project.merchandiserstockcount.MyObject customerNameObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemName);
+                String objectCustomerName = cursor.getString(cursor.getColumnIndex("customer_Name"));
+                com.ecng3020project.merchandiserstockcount.MyObject customerNameObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectCustomerName);
                 customerNameList.add(customerNameObject);
 
             }
@@ -381,8 +381,8 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
 
         if (cursor.moveToFirst()){
             do {
-                String objectItemName = cursor.getString(cursor.getColumnIndex("customer_Account_No"));
-                com.ecng3020project.merchandiserstockcount.MyObject customerAccountNoObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectItemName);
+                String objectCustomerAccountNo = cursor.getString(cursor.getColumnIndex("customer_Account_No"));
+                com.ecng3020project.merchandiserstockcount.MyObject customerAccountNoObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectCustomerAccountNo);
                 customerAccountNoList.add(customerAccountNoObject);
 
             }
@@ -395,6 +395,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return customerAccountNoList;
     }
 
+    //This function is used for auto-filling the brand autocomplete text view when the item name is typed
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandTypedQuery(String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -417,6 +418,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemBrandList;
     }
 
+    //This function is used for auto-filling the pack size autocomplete text view when the item name is typed
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemPackSizeTypedQuery(String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -439,6 +441,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemPackSizeList;
     }
 
+    //This function is used for auto-filling the flavor autocomplete text view when the item name is typed
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemFlavorTypedQuery(String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -461,6 +464,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemFlavorList;
     }
 
+    //This is used for the ResultsActivity class where it returns the itemName for the inputted entries from the TempInputData table
     public List<com.ecng3020project.merchandiserstockcount.MyObject> listing_ItemNames(){
         SQLiteDatabase db = this.getWritableDatabase();
 
@@ -482,10 +486,10 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
     }
 
 
-    public List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAverage(String ItemNameString, String CustomerAccounNumberString){
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAverage(String ItemNameString, String CustomerAccountNumberString){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccounNumberString +"')", null);
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"')", null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAvgResultList = new ArrayList<MyObject>();
 
         if(cursor.moveToFirst()){

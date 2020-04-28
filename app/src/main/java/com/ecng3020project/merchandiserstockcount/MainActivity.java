@@ -10,25 +10,14 @@ import androidx.lifecycle.LifecycleOwner;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.storage.StorageManager;
 import android.util.Log;
 import android.view.View;
-import android.view.autofill.AutofillManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-
-import com.google.common.util.concurrent.ListenableFuture;
-import com.google.firebase.ml.vision.FirebaseVision;
-import com.google.firebase.ml.vision.cloud.FirebaseVisionCloudDetectorOptions;
-import com.google.firebase.ml.vision.common.FirebaseVisionImage;
-import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
-import com.google.firebase.ml.vision.label.FirebaseVisionCloudImageLabelerOptions;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -63,7 +52,6 @@ public class MainActivity extends AppCompatActivity {
 
     // for database operations
     DatabaseOpenHelper databaseH;
-
 
     // just to add some initial value
     String[] RouteNumberInputItem = new String[] {"Please search..."};
@@ -222,6 +210,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    //Display Autocomplete Suggestions Function
     private void onClickListenerFunction(){
         //ONClickListener used to check when an item is clicked. After it is clicked, the necessary data in other text fields are autofilled
         //Customer Name OnClickListener
