@@ -63,7 +63,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/GhostWhite"
                 android:textSize="24sp"
-                android:text="Item Name" />
+                android:text="Product Name" />
 
             <TextView
                 android:id="@+id/tableSpacerTextView"

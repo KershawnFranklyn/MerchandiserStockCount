@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="New Entry"
+            android:text="Start Stock Check"
             android:background="@drawable/rounded_button"
             android:textColor="@color/GhostWhite"
             android:paddingStart="10sp"

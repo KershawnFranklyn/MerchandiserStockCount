@@ -137,7 +137,7 @@
                     android:id="@+id/displayItemNameTextView"
                     android:layout_width="155sp"
                     android:layout_height="match_parent"
-                    android:text="Item Name:"
+                    android:text="Product Name:"
                     android:textColor="@color/SMJTextBlue"
                     android:textSize="20sp"
                     android:layout_marginLeft="5sp"/>
@@ -172,7 +172,7 @@
                     android:id="@+id/displayItemBrandTextView"
                     android:layout_width="155sp"
                     android:layout_height="match_parent"
-                    android:text="Item Brand:"
+                    android:text="Product Brand:"
                     android:textColor="@color/SMJTextBlue"
                     android:textSize="20sp"
                     android:layout_marginLeft="5sp"/>
@@ -207,7 +207,7 @@
                     android:id="@+id/displayItemPackSizeTextView"
                     android:layout_width="155sp"
                     android:layout_height="match_parent"
-                    android:text="Item Pack Size:"
+                    android:text="Product Pack Size:"
                     android:textColor="@color/SMJTextBlue"
                     android:textSize="20sp"
                     android:layout_marginLeft="5sp"/>
@@ -242,7 +242,7 @@
                     android:id="@+id/displayItemFlavorTextView"
                     android:layout_width="155sp"
                     android:layout_height="match_parent"
-                    android:text="Item Flavor:"
+                    android:text="Product Flavor:"
                     android:textColor="@color/SMJTextBlue"
                     android:textSize="20sp"
                     android:layout_marginLeft="5sp"/>
