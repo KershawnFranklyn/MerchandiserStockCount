@@ -22,42 +22,6 @@
                 android:layout_height="10sp" />
 
             <LinearLayout
-                android:id="@+id/routeLinearLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/displayRouteNumberTextView"
-                    android:layout_width="155sp"
-                    android:layout_height="match_parent"
-                    android:text="Route Number:"
-                    android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginLeft="5sp"
-                    />
-
-                <Space
-                    android:layout_width="5sp"
-                    android:layout_height="match_parent" />
-
-                <EditText
-                    android:id="@+id/displayRouteNumberInputEditTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@color/GhostWhite"
-                    android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
-
-            </LinearLayout>
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="10sp" />
-
-            <LinearLayout
                 android:id="@+id/customerNameLinearLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,11 +44,11 @@
                     android:id="@+id/displayCustomerNameInputEditTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="5sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -115,11 +79,46 @@
                     android:id="@+id/displayCustomerAccountInputEditTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="5sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
+                    android:textSize="20sp" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="10sp" />
+
+            <LinearLayout
+                android:id="@+id/routeLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/displayRouteNumberTextView"
+                    android:layout_width="155sp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5sp"
+                    android:text="Route Number:"
+                    android:textColor="@color/SMJTextBlue"
+                    android:textSize="20sp" />
+
+                <Space
+                    android:layout_width="5sp"
+                    android:layout_height="match_parent" />
+
+                <EditText
+                    android:id="@+id/displayRouteNumberInputEditTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="5sp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_button_ghostwhite"
+                    android:textColor="@color/SMJTextBlue"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -150,11 +149,11 @@
                     android:id="@+id/displayItemNameInputEditTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="5sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -185,11 +184,11 @@
                     android:id="@+id/displayItemBrandInputEditTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="5sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -220,11 +219,11 @@
                     android:id="@+id/displayItemPackSizeInputEditTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="5sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -255,11 +254,11 @@
                     android:id="@+id/displayItemFlavorInputEditTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="5sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -290,11 +289,11 @@
                     android:id="@+id/displayNoOfCasesInputEditTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
+                    android:layout_marginRight="5sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:textColor="@color/SMJTextBlue"
-                    android:textSize="20sp"
-                    android:layout_marginRight="5sp"/>
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -310,17 +309,17 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/submitBtn"
+            android:id="@+id/tempSaveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|left"
+            android:layout_gravity="bottom|right"
             android:layout_marginLeft="5sp"
             android:layout_marginTop="5sp"
             android:layout_marginBottom="5sp"
             android:background="@drawable/rounded_button"
             android:paddingStart="10sp"
             android:paddingEnd="10sp"
-            android:text="Submit"
+            android:text="Add Product"
             android:textSize="24sp" />
 
         <Space
@@ -329,18 +328,19 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/tempSaveBtn"
+            android:id="@+id/submitBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|left"
             android:layout_marginTop="5sp"
             android:layout_marginRight="5sp"
             android:layout_marginBottom="5sp"
             android:background="@drawable/rounded_button"
             android:paddingStart="10sp"
             android:paddingEnd="10sp"
-            android:text="Add New Entry"
+            android:text="Submit"
             android:textSize="24sp" />
+
     </LinearLayout>
 
 

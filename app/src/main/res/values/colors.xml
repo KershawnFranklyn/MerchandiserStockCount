@@ -144,6 +144,7 @@
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
     <color name="SMJTextBlue">#3860B2</color>
+    <color name="SMJTextBlueLighter">#487DF1</color>
     <color name="SMJTextBlueDarker">#284481</color>
     <color name="SMJBlue">#5B6C95EC</color>
     <color name="BorderBlue">#00126B</color>

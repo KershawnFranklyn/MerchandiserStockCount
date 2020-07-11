@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Merchandiser Stock Count</string>
+    <string name="app_name">Stock Count</string>
     <string name="routeNumberString">Route Number</string>
     <string name="routeNumberEditTextViewString">Enter Route Number</string>
     <string name="customerNameString">Customer Name</string>

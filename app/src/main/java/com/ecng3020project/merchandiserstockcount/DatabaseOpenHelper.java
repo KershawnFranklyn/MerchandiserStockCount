@@ -395,6 +395,52 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return customerAccountNoList;
     }
 
+    //Function used to query for result using the chosen customer name. This is for the autocomplete function
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> RouteNumberTypedQuery(String customerName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT route_No FROM Customer_Info WHERE customer_Name LIKE '"+customerName+"'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> routeNoList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectRouteNo = cursor.getString(cursor.getColumnIndex("route_No"));
+                com.ecng3020project.merchandiserstockcount.MyObject routeNoObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectRouteNo);
+                routeNoList.add(routeNoObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return routeNoList;
+    }
+
+    //This function is used for auto-filling the customer name autocomplete text view when the customer account number is typed
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> RouteNoTypedQuery(String customerAccountNo){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT route_No FROM Customer_Info WHERE customer_Account_No LIKE '"+customerAccountNo+"'",  null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> routeNoList = new ArrayList<com.ecng3020project.merchandiserstockcount.MyObject>();
+
+        if (cursor.moveToFirst()){
+            do {
+                String objectRouteNo = cursor.getString(cursor.getColumnIndex("route_No"));
+                com.ecng3020project.merchandiserstockcount.MyObject routeNoObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectRouteNo);
+                routeNoList.add(routeNoObject);
+
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+
+        return routeNoList;
+    }
+
     //This function is used for auto-filling the brand autocomplete text view when the item name is typed
     public List<com.ecng3020project.merchandiserstockcount.MyObject> ItemBrandTypedQuery(String itemName){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -485,6 +531,27 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return itemNameList;
     }
 
+    //This is used for the ResultsActivity class where it returns the number_Of_Cases for the inputted entries from the TempInputData table
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> listing_NumberOfCases(){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT number_Of_Cases FROM TempInputData", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> numberOfCasesList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectNumberOfCases = cursor.getString(cursor.getColumnIndex("number_Of_Cases"));
+                com.ecng3020project.merchandiserstockcount.MyObject numberOfCasesObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectNumberOfCases);
+                numberOfCasesList.add(numberOfCasesObject);
+            }
+            while(cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return numberOfCasesList;
+    }
+
 
     public List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAverage(String ItemNameString, String CustomerAccountNumberString){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -509,7 +576,7 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
     public List<com.ecng3020project.merchandiserstockcount.MyObject> movingAverage(String ItemNameString, String CustomerAccountNumberString){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases)FROM (SELECT no_Of_Cases FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"')  ORDER BY order_ID DESC LIMIT 5)", null);
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM (SELECT no_Of_Cases FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"') ORDER BY order_ID DESC LIMIT 5)", null);
         List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultList = new ArrayList<MyObject>();
 
         if(cursor.moveToFirst()){
@@ -524,6 +591,106 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         db.close();
         cursor.close();
         return movingAvgResultList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> movingAverageValue4(String ItemNameString, String CustomerAccountNumberString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM (SELECT no_Of_Cases FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"') ORDER BY order_ID DESC LIMIT 4)", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectMovingAvgResult = cursor.getString(cursor.getColumnIndex("avg(no_Of_Cases)"));
+                com.ecng3020project.merchandiserstockcount.MyObject movingAvgResultObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectMovingAvgResult);
+                movingAvgResultList.add(movingAvgResultObject);
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return movingAvgResultList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> movingAverageValue3(String ItemNameString, String CustomerAccountNumberString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM (SELECT no_Of_Cases FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"') ORDER BY order_ID DESC LIMIT 3)", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectMovingAvgResult = cursor.getString(cursor.getColumnIndex("avg(no_Of_Cases)"));
+                com.ecng3020project.merchandiserstockcount.MyObject movingAvgResultObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectMovingAvgResult);
+                movingAvgResultList.add(movingAvgResultObject);
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return movingAvgResultList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> movingAverageValue2(String ItemNameString, String CustomerAccountNumberString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM (SELECT no_Of_Cases FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"') ORDER BY order_ID DESC LIMIT 2)", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectMovingAvgResult = cursor.getString(cursor.getColumnIndex("avg(no_Of_Cases)"));
+                com.ecng3020project.merchandiserstockcount.MyObject movingAvgResultObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectMovingAvgResult);
+                movingAvgResultList.add(movingAvgResultObject);
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return movingAvgResultList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> movingAverageValue1(String ItemNameString, String CustomerAccountNumberString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM (SELECT no_Of_Cases FROM Order_Line WHERE item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"') AND order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"')", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectMovingAvgResult = cursor.getString(cursor.getColumnIndex("avg(no_Of_Cases)"));
+                com.ecng3020project.merchandiserstockcount.MyObject movingAvgResultObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectMovingAvgResult);
+                movingAvgResultList.add(movingAvgResultObject);
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return movingAvgResultList;
+    }
+
+    public List<com.ecng3020project.merchandiserstockcount.MyObject> noResultAverage(String ItemNameString, String CustomerAccountNumberString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT avg(no_Of_Cases) FROM Order_Line WHERE order_ID IN (SELECT order_ID FROM Order_Info WHERE customer_Account_No IN (SELECT customer_Account_No FROM Customer_Info WHERE route_No IN (SELECT route_No FROM Customer_Info WHERE customer_Account_No LIKE '"+ CustomerAccountNumberString +"'))) AND item_ID IN (SELECT item_ID FROM Item_Info WHERE item_Name LIKE '"+ ItemNameString +"')", null);
+        List<com.ecng3020project.merchandiserstockcount.MyObject> noResultAvgList = new ArrayList<MyObject>();
+
+        if(cursor.moveToFirst()){
+            do{
+                String objectNoResultAvg = cursor.getString(cursor.getColumnIndex("avg(no_Of_Cases)"));
+                com.ecng3020project.merchandiserstockcount.MyObject noResultAvgObject = new com.ecng3020project.merchandiserstockcount.MyObject(objectNoResultAvg);
+                noResultAvgList.add(noResultAvgObject);
+            }
+            while (cursor.moveToNext());
+        }
+
+        db.close();
+        cursor.close();
+        return noResultAvgList;
     }
 
 }

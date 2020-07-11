@@ -24,34 +24,6 @@
                 android:layout_height="20sp" />
 
             <TextView
-                android:id="@+id/routeNumberTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_marginRight="20sp"
-                android:layout_marginBottom="5sp"
-                android:text="@string/routeNumberString"
-                android:textColor="@color/SMJTextBlue"
-                android:textSize="24sp" />
-
-            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
-                android:id="@+id/routeNumberAutoCompleteTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20sp"
-                android:layout_marginRight="20sp"
-                android:background="@color/GhostWhite"
-                android:hint="@string/routeNumberEditTextViewString"
-                android:inputType="number"
-                android:textColor="@color/SMJTextBlue"
-                android:textColorHint="@color/LightGrey"
-                android:textSize="24sp" />
-
-            <Space
-                android:layout_width="match_parent"
-                android:layout_height="20sp" />
-
-            <TextView
                 android:id="@+id/customerNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -68,13 +40,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:background="@color/GhostWhite"
+                android:background="@drawable/rounded_button_ghostwhite"
                 android:completionThreshold="1"
                 android:hint="@string/customerNameAutoCompleteTextViewString"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
-                android:textSize="24sp">
-            </com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView>
+                android:textSize="24sp"></com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView>
 
 
             <Space
@@ -98,14 +69,42 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:background="@color/GhostWhite"
+                android:background="@drawable/rounded_button_ghostwhite"
                 android:completionThreshold="1"
                 android:hint="@string/customerAccountAutoCompleteTextViewString"
+                android:inputType="number"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
-                android:textSize="24sp"
-                android:inputType="number"/>
+                android:textSize="24sp" />
 
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="20sp" />
+
+            <TextView
+                android:id="@+id/routeNumberTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:layout_marginBottom="5sp"
+                android:text="@string/routeNumberString"
+                android:textColor="@color/SMJTextBlue"
+                android:textSize="24sp" />
+
+            <com.ecng3020project.merchandiserstockcount.CustomAutoCompleteView
+                android:id="@+id/routeNumberAutoCompleteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20sp"
+                android:layout_marginRight="20sp"
+                android:background="@drawable/rounded_button_ghostwhite"
+                android:hint="@string/routeNumberEditTextViewString"
+                android:inputType="number"
+                android:textColor="@color/SMJTextBlue"
+                android:textColorHint="@color/LightGrey"
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -135,12 +134,12 @@
                     android:layout_marginLeft="20sp"
                     android:layout_marginRight="20sp"
                     android:layout_weight="1"
-                    android:background="@color/GhostWhite"
+                    android:background="@drawable/rounded_button_ghostwhite"
                     android:completionThreshold="1"
                     android:hint="@string/itemNameAutoCompleteTextViewString"
                     android:textColor="@color/SMJTextBlue"
                     android:textColorHint="@color/LightGrey"
-                    android:textSize="24sp"/>
+                    android:textSize="24sp" />
 
                 <!--                -->
                 <Button
@@ -179,12 +178,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:background="@color/GhostWhite"
+                android:background="@drawable/rounded_button_ghostwhite"
                 android:completionThreshold="1"
                 android:hint="@string/itemBrandAutoCompleteTextViewString"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -207,12 +206,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:background="@color/GhostWhite"
+                android:background="@drawable/rounded_button_ghostwhite"
                 android:completionThreshold="1"
                 android:hint="@string/itemPackSizeAutoCompleteTextViewString"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -235,12 +234,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:background="@color/GhostWhite"
+                android:background="@drawable/rounded_button_ghostwhite"
                 android:completionThreshold="1"
                 android:hint="@string/itemFlavorAutoCompleteTextViewString"
                 android:textColor="@color/SMJTextBlue"
                 android:textColorHint="@color/LightGrey"
-                android:textSize="24sp"/>
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="match_parent"
@@ -263,12 +262,12 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20sp"
                 android:layout_marginRight="20sp"
-                android:textSize="24sp"
-                android:textColor="@color/SMJTextBlue"
-                android:background="@color/GhostWhite"
-                android:textColorHint="@color/LightGrey"
+                android:background="@drawable/rounded_button_ghostwhite"
                 android:hint="@string/numberOfCasesEditTextViewString"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textColor="@color/SMJTextBlue"
+                android:textColorHint="@color/LightGrey"
+                android:textSize="24sp" />
 
             <Space
                 android:layout_width="match_parent"

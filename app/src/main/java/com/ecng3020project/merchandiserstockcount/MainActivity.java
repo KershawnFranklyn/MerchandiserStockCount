@@ -231,6 +231,20 @@ public class MainActivity extends AppCompatActivity {
                 CustomerAccountAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerAccountAutoCompleteTextView);
                 CustomerAccountAutoComplete.setText(CustomerAccountStringArray[0]);
 
+                //Autofill Route No Using Customer Name
+                List<com.ecng3020project.merchandiserstockcount.MyObject> RouteNoQuery = databaseH.RouteNumberTypedQuery(CustomerNameAutoComplete.getText().toString());
+                int RouteNoRowCount = RouteNoQuery.size();
+                String[] RouteNoStringArray = new String[RouteNoRowCount];
+                int routeNoVar = 0;
+
+                for (com.ecng3020project.merchandiserstockcount.MyObject record : RouteNoQuery) {
+
+                    RouteNoStringArray[routeNoVar] = record.objectName;
+                    routeNoVar++;
+                }
+                RouteNumberAutoComplete = (CustomAutoCompleteView) findViewById(R.id.routeNumberAutoCompleteTextView);
+                RouteNumberAutoComplete.setText(RouteNoStringArray[0]);
+
             }
         });
 
@@ -251,6 +265,21 @@ public class MainActivity extends AppCompatActivity {
                 }
                 CustomerNameAutoComplete = (CustomAutoCompleteView) findViewById(R.id.customerNameAutoCompleteTextView);
                 CustomerNameAutoComplete.setText(CustomerNameStringArray[0]);
+
+                //Autofill Route No Using Customer Account Number
+                List<com.ecng3020project.merchandiserstockcount.MyObject> RouteNoQuery = databaseH.RouteNoTypedQuery(CustomerAccountAutoComplete.getText().toString());
+                int RouteNoRowCount = RouteNoQuery.size();
+                String[] RouteNoStringArray = new String[RouteNoRowCount];
+                int routeNoVar = 0;
+
+                for (com.ecng3020project.merchandiserstockcount.MyObject record : RouteNoQuery) {
+
+                    RouteNoStringArray[routeNoVar] = record.objectName;
+                    routeNoVar++;
+                }
+                RouteNumberAutoComplete = (CustomAutoCompleteView) findViewById(R.id.routeNumberAutoCompleteTextView);
+                RouteNumberAutoComplete.setText(RouteNoStringArray[0]);
+
             }
         });
 

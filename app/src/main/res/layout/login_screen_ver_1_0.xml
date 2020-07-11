@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/SMJBackground"
+    android:elevation="5sp"
     android:orientation="vertical">
 
     <LinearLayout
@@ -13,42 +14,91 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="25sp" />
+            android:layout_height="45sp" />
 
-        <TextView
-            android:id="@+id/textView"
+        <ImageView
+            android:id="@+id/imageView3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="SM Jaleel"
-            android:textColor="@color/SMJTextBlue"
-            android:textSize="36sp" />
+            app:srcCompat="@drawable/smjpic_image" />
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="50sp" />
+            android:layout_height="75sp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/UserNameEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/GhostWhite"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:background="@drawable/rounded_button_ghostwhite"
             android:ems="10"
+            android:hint="Enter Username"
             android:inputType="textPersonName"
-            android:text="Name"
-            android:textColor="@color/LightGrey" />
+            android:paddingStart="10sp"
+            android:paddingRight="10sp"
+            android:textAlignment="center"
+            android:textColor="@color/SMJTextBlue"
+            android:textColorHint="@color/LightGrey"
+            android:textSize="24sp" />
 
         <Space
             android:layout_width="match_parent"
             android:layout_height="25sp" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/PasswordEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/GhostWhite"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:background="@drawable/rounded_button_ghostwhite"
             android:ems="10"
-            android:inputType="textPassword" />
+            android:hint="Enter Password"
+            android:inputType="textPassword"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:textAlignment="center"
+            android:textColor="@color/SMJTextBlue"
+            android:textColorHint="@color/LightGrey"
+            android:textSize="24sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="15sp" />
+
+        <TextView
+            android:id="@+id/ForgotPasswordTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginStart="30sp"
+            android:layout_marginEnd="30sp"
+            android:text="Forgot password?"
+            android:textAlignment="textEnd"
+            android:textColor="@color/SMJTextBlue"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="75sp" />
+
+        <Button
+            android:id="@+id/LoginBtn"
+            android:layout_width="250sp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="5sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginRight="5sp"
+            android:background="@drawable/rounded_button"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
+            android:text="Login"
+            android:textSize="24sp" />
 
     </LinearLayout>
 </LinearLayout>

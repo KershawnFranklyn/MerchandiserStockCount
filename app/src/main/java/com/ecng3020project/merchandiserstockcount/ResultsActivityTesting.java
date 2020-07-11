@@ -2,38 +2,36 @@ package com.ecng3020project.merchandiserstockcount;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Space;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-public class ResultsActivity extends AppCompatActivity {
+public class ResultsActivityTesting extends AppCompatActivity {
     DatabaseOpenHelper databaseH;
     Toolbar toolbar;
     TextView CustomerNameResultTextView;
     String customer_nameConfirmationString;
     String customer_AccountNoString;
     String[] ItemNameStringArray;
-    String[] NumberOfCasesStringArray;
 
     @SuppressLint("ResourceType")
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.results_screen_ver_1_0);
-        final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(ResultsActivity.this);
+        final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(ResultsActivityTesting.this);
         databaseAccess.open();
         databaseAccess.createTable();
         databaseAccess.createTempDataTable();
@@ -48,7 +46,7 @@ public class ResultsActivity extends AppCompatActivity {
         CustomerNameResultTextView.setText(customer_nameConfirmationString);
         customer_AccountNoString = intent.getStringExtra("CustomerAccountNoIntent");
 
-        databaseH = new DatabaseOpenHelper(ResultsActivity.this);
+        databaseH = new DatabaseOpenHelper(ResultsActivityTesting.this);
 
         LinearLayout verticalLinearLayout = (LinearLayout) findViewById(R.id.dynamicLinearLayout);          //Linear Layout containing all dynamically added text
         LinearLayout.LayoutParams itemTxtParams = new LinearLayout.LayoutParams(
@@ -73,26 +71,16 @@ public class ResultsActivity extends AppCompatActivity {
         ItemNameStringArray = new String[ItemNameRowCount];
         int itemNameVar= 0;
 
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : DisplayItemNameList) {
+        for (MyObject record : DisplayItemNameList) {
 
             ItemNameStringArray[itemNameVar] = record.objectName;
             itemNameVar++;
         }
 
-        List<MyObject> ResultsNumberOfCasesList = databaseH.listing_NumberOfCases();
-        int NumberOfCasesRowCount = ResultsNumberOfCasesList.size();
-        NumberOfCasesStringArray = new String[NumberOfCasesRowCount];
-        int numberOfCasesVar= 0;
-
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : ResultsNumberOfCasesList) {
-
-            NumberOfCasesStringArray[numberOfCasesVar] = record.objectName;
-            numberOfCasesVar++;
-        }
-
         for (int i =0; i < ItemNameRowCount; i++){
             TextView itemTextView = new TextView(this);
-            TextView orderResultTextView = new TextView(this);
+            TextView orderResult1TextView = new TextView(this);
+            TextView orderResult2TextView = new TextView(this);
             LinearLayout horizontalLinearLayout = new LinearLayout(this);
             horizontalLinearLayout.setOrientation(LinearLayout.HORIZONTAL);
 
@@ -111,16 +99,25 @@ public class ResultsActivity extends AppCompatActivity {
             itemTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             itemTextView.setPadding(8, itemTextView.getPaddingTop(), 8, itemTextView.getPaddingBottom());
 
-            orderResultTextView.setText(numOfCasesResult( NumberOfCasesStringArray[i], simpleAvg(ItemNameStringArray[i], customer_AccountNoString),  movingAvg(ItemNameStringArray[i], customer_AccountNoString)));
-            orderResultTextView.setLayoutParams(orderTxtParams);
-            orderResultTextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
-            orderResultTextView.setTextSize(20);
-            orderResultTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-            orderResultTextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
+            /*orderResult1TextView.setText(simpleAvg(ItemNameStringArray[i], customer_AccountNoString));
+            orderResult1TextView.setLayoutParams(orderTxtParams);
+            orderResult1TextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
+            orderResult1TextView.setTextSize(20);
+            orderResult1TextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            orderResult1TextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));*/
+
+            orderResult2TextView.setText(combinedAverage(simpleAvg(ItemNameStringArray[i], customer_AccountNoString), movingAvg(ItemNameStringArray[i], customer_AccountNoString)));
+            orderResult2TextView.setLayoutParams(orderTxtParams);
+            orderResult2TextView.setTextColor(ContextCompat.getColor(this, R.color.SMJTextBlue));
+            orderResult2TextView.setTextSize(20);
+            orderResult2TextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            orderResult2TextView.setBackgroundColor(ContextCompat.getColor(this, R.color.GhostWhite));
 
             horizontalLinearLayout.addView(itemTextView);
             horizontalLinearLayout.addView(horizontalSpace1);
-            horizontalLinearLayout.addView(orderResultTextView);
+            //horizontalLinearLayout.addView(orderResult1TextView);
+            //horizontalLinearLayout.addView(horizontalSpace2);
+            horizontalLinearLayout.addView(orderResult2TextView);
             verticalLinearLayout.addView(horizontalLinearLayout);
             verticalLinearLayout.addView(verticalSpace);
         }
@@ -132,7 +129,7 @@ public class ResultsActivity extends AppCompatActivity {
                 databaseAccess.open();
                 databaseAccess.dropTempTable();
                 databaseAccess.close();
-                Intent intent = new Intent(ResultsActivity.this, HomePageActivity.class);
+                Intent intent = new Intent(ResultsActivityTesting.this, HomePageActivity.class);
                 startActivity(intent);
             }
 
@@ -141,99 +138,79 @@ public class ResultsActivity extends AppCompatActivity {
 
     public String simpleAvg(String itemNameSearchString, String customerAccountSearchTerm) {
 
-        List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAvgResultValue = databaseH.simpleAverage(itemNameSearchString, customer_AccountNoString);
+        List<MyObject> simpleAvgResultValue = databaseH.simpleAverage(itemNameSearchString, customer_AccountNoString);
         int rowCount = simpleAvgResultValue.size();
 
         String[] simpleAvgResultItem = new String[rowCount];
         int x = 0;
 
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : simpleAvgResultValue) {
+        for (MyObject record : simpleAvgResultValue) {
 
             simpleAvgResultItem[x] = record.objectName;
             x++;
         }
-
-
-        List<com.ecng3020project.merchandiserstockcount.MyObject> noResultAvgValue = databaseH.noResultAverage(itemNameSearchString, customer_AccountNoString);
-        int noResultAvgRowCount = noResultAvgValue.size();
-
-        String[] noResultAvgItemValue = new String[noResultAvgRowCount];
-        int noResultVar = 0;
-
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : noResultAvgValue) {
-
-            noResultAvgItemValue[noResultVar] = record.objectName;
-            noResultVar++;
-        }
-
-        if(simpleAvgResultItem[0] == null){
-            Log.i(" No result", "The result of the average from other routes is: "+ noResultAvgItemValue[0]);
-            return noResultAvgItemValue[0];
-        }
-        else{
-            Log.i(" Simple Testing result", "The result of the average is: "+ simpleAvgResultItem[0]);
-            return simpleAvgResultItem[0];
-        }
+        Log.i("Testing result", "The result of te avgerage is: "+ simpleAvgResultItem[0]);
+        return simpleAvgResultItem[0];
     }
 
     public String movingAvg(String itemNameSearchString, String customerAccountSearchTerm){
         String average = "";
-        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultValue = databaseH.movingAverage(itemNameSearchString, customer_AccountNoString);
+        List<MyObject> movingAvgResultValue = databaseH.movingAverage(itemNameSearchString, customer_AccountNoString);
         int rowCount = movingAvgResultValue.size();
 
 
         String[] movingAvgResultItem = new String[rowCount];
         int x = 0;
 
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : movingAvgResultValue) {
+        for (MyObject record : movingAvgResultValue) {
 
             movingAvgResultItem[x] = record.objectName;
             x++;
         }
 
-        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultValue4 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
+        List<MyObject> movingAvgResultValue4 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
         int rowCount4 = movingAvgResultValue.size();
 
         String[] movingAvgResultItemValue4 = new String[rowCount4];
         int x4 = 0;
 
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : movingAvgResultValue4) {
+        for (MyObject record : movingAvgResultValue4) {
 
             movingAvgResultItemValue4[x4] = record.objectName;
             x4++;
         }
 
-        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultValue3 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
+        List<MyObject> movingAvgResultValue3 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
         int rowCount3 = movingAvgResultValue.size();
 
         String[] movingAvgResultItemValue3 = new String[rowCount3];
         int x3 = 0;
 
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : movingAvgResultValue3) {
+        for (MyObject record : movingAvgResultValue3) {
 
             movingAvgResultItemValue3[x3] = record.objectName;
             x3++;
         }
 
-        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultValue2 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
+        List<MyObject> movingAvgResultValue2 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
         int rowCount2 = movingAvgResultValue.size();
 
         String[] movingAvgResultItemValue2 = new String[rowCount2];
         int x2 = 0;
 
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : movingAvgResultValue2) {
+        for (MyObject record : movingAvgResultValue2) {
 
             movingAvgResultItemValue2[x2] = record.objectName;
             x2++;
         }
 
-        List<com.ecng3020project.merchandiserstockcount.MyObject> movingAvgResultValue1 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
+        List<MyObject> movingAvgResultValue1 = databaseH.movingAverageValue4(itemNameSearchString, customer_AccountNoString);
         int rowCount1 = movingAvgResultValue.size();
 
         String[] movingAvgResultItemValue1 = new String[rowCount1];
         int x1 = 0;
 
-        for (com.ecng3020project.merchandiserstockcount.MyObject record : movingAvgResultValue1) {
+        for (MyObject record : movingAvgResultValue1) {
 
             movingAvgResultItemValue1[x1] = record.objectName;
             x1++;
@@ -262,41 +239,18 @@ public class ResultsActivity extends AppCompatActivity {
             Log.i("Value 1", "movingAvg: "+average);
         }
 
-        if(movingAvgResultItemValue1[0] == null){
-            return movingAvgResultItemValue1[0];
-        }
-
-        double avg = Double.parseDouble(average);
-        avg = Math.ceil(avg);
-        long intAvg = Math.round(avg);
-        String result = String.valueOf(intAvg);
-        Log.i("Moving Testing result", "The result of the average is: "+ average);
-        return result;
+        return average;
     }
 
-    public String numOfCasesResult (String numberOfCasesEnteredString, String simpleAvg, String movingAvg) {
-        double simple_Avg = Double.parseDouble(simpleAvg);
-        double moving_Avg;
-        if(movingAvg == null ){
-            moving_Avg = Double.parseDouble(simpleAvg);
-            Log.i("No Result", "numOfCasesResult: The value of moving_Avg = simple_Avg which is "+movingAvg);
-        }
-        else {
-            moving_Avg = Double.parseDouble(movingAvg);
-            Log.i("Result", "numOfCasesResult: The result of the moving avg from query is"+simpleAvg);
-        }
-        double combined_Avg = (simple_Avg+moving_Avg)/2;
-        Log.i("Combined Avg", "The combined average is "+combined_Avg);
+    public String combinedAverage(String simAvgResult, String movAvgResult){
+        double simAvg = Double.parseDouble(simAvgResult);
+        double movAvg = Double.parseDouble(movAvgResult);
+        double combinedAvg = (simAvg + movAvg)/2;
 
-        double enteredNumber = Double.parseDouble(numberOfCasesEnteredString);
-        double numberResult = combined_Avg - enteredNumber;
+        combinedAvg = Math.ceil(combinedAvg);
+        long intCombinedAvg = Math.round(combinedAvg);
 
-        numberResult = Math.ceil(numberResult);
-        if(numberResult <= 0){
-            numberResult = 0; //Add function to search other customers from the same route for the same item (avg value)
-        }
-        long intNumberResult = Math.round(numberResult);
-        String result = String.valueOf(intNumberResult);
+        String result = String.valueOf(intCombinedAvg);
         return result;
     }
 }
