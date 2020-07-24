@@ -292,6 +292,7 @@
                     android:layout_marginRight="5sp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_button_ghostwhite"
+                    android:inputType="number"
                     android:textColor="@color/SMJTextBlue"
                     android:textSize="20sp" />
 

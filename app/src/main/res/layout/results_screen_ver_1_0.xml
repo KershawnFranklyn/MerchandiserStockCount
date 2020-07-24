@@ -57,13 +57,13 @@
             <TextView
                 android:id="@+id/itemNameDisplayTextView"
                 android:layout_width="233sp"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@color/SMJTextBlue"
+                android:paddingTop="0sp"
+                android:text="Product Name"
                 android:textAlignment="center"
                 android:textColor="@color/GhostWhite"
-                android:textSize="24sp"
-                android:paddingTop="0sp"
-                android:text="Product Name" />
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/tableSpacerTextView"
@@ -74,9 +74,9 @@
             <TextView
                 android:id="@+id/analysisResultTextView"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:background="@color/SMJTextBlue"
-                android:text="Result"
+                android:text="Next Order"
                 android:textAlignment="center"
                 android:textColor="@color/GhostWhite"
                 android:textSize="24sp" />

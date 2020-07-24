@@ -2,6 +2,7 @@ package com.ecng3020project.merchandiserstockcount;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -11,19 +12,24 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ConfirmationActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     String routeNumber;
     String customerName;
     String customerAccount;
+    final FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference databaseReference = database.getReference("SavedInputData");
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.confirmation_screen_ver_1_0);
         toolbar = findViewById(R.id.toolBar);
-        setTitle("Confirm Information");
+        setTitle("Please Confirm Entered Information");
         setSupportActionBar(toolbar);
         final DatabaseAccess databaseAccess = DatabaseAccess.getInstance(this);
         databaseAccess.open();
@@ -88,6 +94,12 @@ public class ConfirmationActivity extends AppCompatActivity {
                         numOfCasesTextView.getText().toString());
                 databaseAccess.close();
 
+                saveDataToFireBase(routeNumTextView.getText().toString(),
+                        custAccTextView.getText().toString(), custNameTextView.getText().toString(),
+                        itemNameTextView.getText().toString(), itemBrandTextView.getText().toString(),
+                        itemPackSizeTextView.getText().toString(), itemFlavorTextView.getText().toString(),
+                        numOfCasesTextView.getText().toString());
+
                 if(saveDataBoolean && tempDataBoolean == true){
                     Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
                     EditText customerNameEdit = findViewById(R.id.displayCustomerNameInputEditTextView);
@@ -127,8 +139,14 @@ public class ConfirmationActivity extends AppCompatActivity {
                         numOfCasesTextView.getText().toString());
                 databaseAccess.close();
 
+                saveDataToFireBase(routeNumTextView.getText().toString(),
+                        custAccTextView.getText().toString(), custNameTextView.getText().toString(),
+                        itemNameTextView.getText().toString(), itemBrandTextView.getText().toString(),
+                        itemPackSizeTextView.getText().toString(), itemFlavorTextView.getText().toString(),
+                        numOfCasesTextView.getText().toString());
+
                 if(tempDataBoolean && saveDataBoolean == true){
-                    Toast toast = Toast.makeText(    ConfirmationActivity.this, "Saved Successfully", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(    ConfirmationActivity.this, "Please Enter Product Descriptions", Toast.LENGTH_SHORT);
                     EditText routeNum = findViewById(R.id.displayRouteNumberInputEditTextView);
                     routeNumber = routeNum.getText().toString();
                     EditText customerNameEdit = findViewById(R.id.displayCustomerNameInputEditTextView);
@@ -152,7 +170,17 @@ public class ConfirmationActivity extends AppCompatActivity {
             }
         });
 
+    }
 
+    private void saveDataToFireBase(String route_Number, String customer_Account_Number,
+                                    String customer_Name, String item_Name, String item_Brand,
+                                    String item_Pack_Size, String flavor, String number_Of_Cases) {
+        Log.i("Successful Saving", "saveDataToFireBase: Successful Saving to the Firebase Realtime Database");
+
+        SavedData savedData = new SavedData(route_Number, customer_Account_Number, customer_Name, item_Name,
+                                                item_Brand, item_Pack_Size, flavor, number_Of_Cases);
+
+        databaseReference.push().setValue(savedData);
     }
 
 

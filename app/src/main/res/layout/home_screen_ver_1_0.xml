@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/SMJBackground">
@@ -8,65 +9,34 @@
     <include
         layout="@layout/toolbar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:visibility="visible" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <Space
-            android:id="@+id/header_space"
-            android:layout_width="match_parent"
-            android:layout_height="100sp" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/smjpic" />
-
-        <Space
-            android:id="@+id/spacer_for_button"
-            android:layout_width="match_parent"
-            android:layout_height="45sp" />
+        android:layout_height="match_parent">
 
         <Button
             android:id="@+id/newEntryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_marginStart="77dp"
+            android:layout_marginTop="335dp"
+            android:layout_marginEnd="77dp"
+            android:layout_marginBottom="335dp"
+            android:background="@drawable/rounded_button"
+            android:gravity="center|center_vertical"
+            android:paddingStart="10sp"
+            android:paddingEnd="10sp"
             android:text="Start Stock Check"
-            android:background="@drawable/rounded_button"
             android:textColor="@color/GhostWhite"
-            android:paddingStart="10sp"
-            android:paddingEnd="10sp"
-            android:layout_marginTop="5sp"
-            android:layout_marginBottom="5sp"
-            android:layout_marginRight="5sp"
-            android:textSize="24sp" />
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:id="@+id/spacer_for_button_Test"
-            android:layout_width="match_parent"
-            android:layout_height="45sp" />
-
-        <Button
-            android:id="@+id/testResultsBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5sp"
-            android:layout_marginRight="5sp"
-            android:layout_marginBottom="5sp"
-            android:background="@drawable/rounded_button"
-            android:paddingStart="10sp"
-            android:paddingEnd="10sp"
-            android:text="Goto Results"
-            android:textColor="@color/GhostWhite"
-            android:textSize="24sp" />
-
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </LinearLayout>

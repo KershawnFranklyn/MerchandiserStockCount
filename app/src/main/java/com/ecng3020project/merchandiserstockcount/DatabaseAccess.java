@@ -18,6 +18,7 @@ public class DatabaseAccess {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase database;
     private static DatabaseAccess instance;
+    DatabaseOpenHelper databaseOpenHelper;
 
     DatabaseAccess(Context context){
         this.openHelper = new DatabaseOpenHelper(context);
@@ -106,7 +107,7 @@ public class DatabaseAccess {
                               String itemNameVar, String itemBrandNameVar, String itemPackSizeVar,
                               String flavorVar, String numOfCasesVar){
         Log.i(TAG, "insertData: Testing that the data is inputted into the database");
-        createTable();
+        createTempDataTable();
 
         ContentValues contextValues = new ContentValues();
         contextValues.put("route_No", routeNoVar);
@@ -128,6 +129,119 @@ public class DatabaseAccess {
             return true;
         }
 
+    }
+
+    public Boolean insertReadBarcodeCloudData(String barcode_ID_String, String item_ID_String, String warehouse_String,
+                                          String expiry_Date_String, String unit_Of_Measure_String, String batch_Number_String ){
+
+            Long barcode_ID_Long = Long.valueOf(barcode_ID_String);
+
+            ContentValues contentValues = new ContentValues();
+            contentValues.put("barcode_ID", barcode_ID_Long);
+            contentValues.put("item_ID", item_ID_String);
+            contentValues.put("warehouse", warehouse_String);
+            contentValues.put("expiry_Date", expiry_Date_String);
+            contentValues.put("unit_Of_Measure", unit_Of_Measure_String);
+            contentValues.put("batch_No", batch_Number_String);
+
+            Long result = database.insert("Barcode_Info", null, contentValues);
+
+            if(result == -1){
+                Log.i(TAG, "insertReadBarcodeCloudData: Unsuccessfully entered barcode data");
+                return false;
+            }
+            else {
+                Log.i(TAG, "insertReadBarcodeCloudData: Successfully entered barcode data");
+                return true;
+            }
+    }
+
+    public Boolean insertReadCustomerCloudData(String customer_Account_No_String, String route_No_String, String customer_Name_String ){
+
+        Long customer_Account_No_Long = Long.valueOf(customer_Account_No_String);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("customer_Account_No", customer_Account_No_Long);
+        contentValues.put("route_No", route_No_String);
+        contentValues.put("customer_Name", customer_Name_String);
+
+        Long result = database.insert("Customer_Info", null, contentValues);
+
+        if(result == -1){
+            Log.i(TAG, "insertReadCustomerCloudData: Unsuccessfully entered barcode data");
+            return false;
+        }
+        else {
+            Log.i(TAG, "insertReadCustomerCloudData: Successfully entered barcode data");
+            return true;
+        }
+    }
+
+    public Boolean insertReadItemCloudData(String item_ID_String, String item_Brand_String, String item_Pack_Size_String,
+                                              String flavor_String, String item_Name_String){
+
+        Long item_ID_Long = Long.valueOf(item_ID_String);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("item_ID", item_ID_Long);
+        contentValues.put("item_Brand", item_Brand_String);
+        contentValues.put("item_Pack_Size", item_Pack_Size_String);
+        contentValues.put("flavor", flavor_String);
+        contentValues.put("item_Name", item_Name_String);
+
+        Long result = database.insert("Item_Info", null, contentValues);
+
+        if(result == -1){
+            Log.i(TAG, "insertReadBarcodeItemData: Unsuccessfully entered barcode data");
+            return false;
+        }
+        else {
+            Log.i(TAG, "insertReadBarcodeItemData: Successfully entered barcode data");
+            return true;
+        }
+    }
+
+    public Boolean insertReadOrderCloudData(String order_ID_String, String order_Date_String, String customer_Account_No_String) {
+
+        Long order_ID_Long = Long.valueOf(order_ID_String);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("order_ID", order_ID_Long);
+        contentValues.put("order_Date", order_Date_String);
+        contentValues.put("customer_Account_No", customer_Account_No_String);
+
+        Long result = database.insert("Order_Info", null, contentValues);
+
+        if (result == -1) {
+            Log.i(TAG, "insertReadBarcodeOrderData: Unsuccessfully entered barcode data");
+            return false;
+        } else {
+            Log.i(TAG, "insertReadBarcodeOrderData: Successfully entered barcode data");
+            return true;
+        }
+    }
+
+    public Boolean insertReadOrderLineCloudData(String order_ID_String, String item_ID_String, String no_Of_Cases_String){
+
+        Long order_ID_Long = Long.valueOf(order_ID_String);
+        Long item_ID_Long = Long.valueOf(item_ID_String);
+        Long no_Of_Cases_Long = Long.valueOf(no_Of_Cases_String);
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("order_ID", order_ID_Long);
+        contentValues.put("item_ID", item_ID_Long);
+        contentValues.put("no_Of_Cases", no_Of_Cases_Long);
+
+        Long result = database.insert("Order_Line", null, contentValues);
+
+        if(result == -1){
+            Log.i(TAG, "insertReadOrderLineCloudData: Unsuccessfully entered barcode data");
+            return false;
+        }
+        else {
+            Log.i(TAG, "insertReadOrderLineCloudData: Successfully entered barcode data");
+            return true;
+        }
     }
 
 }

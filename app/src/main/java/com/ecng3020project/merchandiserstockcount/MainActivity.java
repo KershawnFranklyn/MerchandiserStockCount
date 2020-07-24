@@ -16,6 +16,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -82,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.input_form_ver_2_0);
         toolbar = findViewById(R.id.toolBar);
-        setTitle("Enter Information");
+        setTitle("Enter Customer and Product Information");
         setSupportActionBar(toolbar);
         dataFromCameraActivity();
         dataFromConfirmationActivity();
@@ -174,6 +175,7 @@ public class MainActivity extends AppCompatActivity {
                 numOfCases = numOfCasesEdit.getText().toString();
 
                 Intent intent = new Intent(MainActivity.this, ConfirmationActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("routeNumberIntent", routeNumber);
                 intent.putExtra("customerNameIntent", custName);
                 intent.putExtra("customerAccountIntent", custAccount);
@@ -200,6 +202,7 @@ public class MainActivity extends AppCompatActivity {
                 String customerAccount = CustomerAccountAutoComplete.getText().toString();
 
                 Intent intent = new Intent(MainActivity.this, CameraMainActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("routeNumberIntent", routeNumber);
                 intent.putExtra("customerNameIntent", customerName);
                 intent.putExtra("customerAccountIntent", customerAccount);
@@ -335,7 +338,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void dataFromCameraActivity() {
         Intent intent = getIntent();
-
+        Toast toast = Toast.makeText(MainActivity.this,"Successful Scanned.", Toast.LENGTH_LONG);
         String customer_accountString = intent.getStringExtra("CustomerAccountIntent");
         String item_nameString = intent.getStringExtra("ItemNameIntent");
         String item_brandString = intent.getStringExtra("ItemBrandIntent");

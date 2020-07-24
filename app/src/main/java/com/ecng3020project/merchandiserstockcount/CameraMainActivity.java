@@ -43,6 +43,7 @@ import com.google.firebase.ml.vision.common.FirebaseVisionImageMetadata;
 import java.util.List;
 
 import static android.widget.Toast.LENGTH_SHORT;
+import static android.widget.Toast.makeText;
 
 public class CameraMainActivity extends AppCompatActivity {
 

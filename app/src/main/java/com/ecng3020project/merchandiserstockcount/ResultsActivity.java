@@ -140,7 +140,6 @@ public class ResultsActivity extends AppCompatActivity {
     }
 
     public String simpleAvg(String itemNameSearchString, String customerAccountSearchTerm) {
-
         List<com.ecng3020project.merchandiserstockcount.MyObject> simpleAvgResultValue = databaseH.simpleAverage(itemNameSearchString, customer_AccountNoString);
         int rowCount = simpleAvgResultValue.size();
 
@@ -152,7 +151,6 @@ public class ResultsActivity extends AppCompatActivity {
             simpleAvgResultItem[x] = record.objectName;
             x++;
         }
-
 
         List<com.ecng3020project.merchandiserstockcount.MyObject> noResultAvgValue = databaseH.noResultAverage(itemNameSearchString, customer_AccountNoString);
         int noResultAvgRowCount = noResultAvgValue.size();
@@ -279,11 +277,11 @@ public class ResultsActivity extends AppCompatActivity {
         double moving_Avg;
         if(movingAvg == null ){
             moving_Avg = Double.parseDouble(simpleAvg);
-            Log.i("No Result", "numOfCasesResult: The value of moving_Avg = simple_Avg which is "+movingAvg);
+            Log.i("No Result", "numOfCasesResult: The value of moving_Avg = simple_Avg which is "+simpleAvg);
         }
         else {
             moving_Avg = Double.parseDouble(movingAvg);
-            Log.i("Result", "numOfCasesResult: The result of the moving avg from query is"+simpleAvg);
+            Log.i("Result", "numOfCasesResult: The result of the moving avg from query is"+movingAvg);
         }
         double combined_Avg = (simple_Avg+moving_Avg)/2;
         Log.i("Combined Avg", "The combined average is "+combined_Avg);

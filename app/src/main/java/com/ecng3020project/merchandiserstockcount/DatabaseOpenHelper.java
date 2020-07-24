@@ -693,4 +693,71 @@ public class DatabaseOpenHelper extends SQLiteAssetHelper{
         return noResultAvgList;
     }
 
+
+    //This function searches for if barcodeID exists
+    public Boolean BarcodeIDExist(String barcodeIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT barcode_ID FROM Barcode_Info WHERE barcode_ID LIKE '"+barcodeIDString+"'",  null);
+
+        if(cursor == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public Boolean CustomerAccountNoExist(String customerAccountNoString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT customer_Account_No FROM Customer_Info WHERE customer_Account_No LIKE '"+customerAccountNoString+"'",  null);
+
+        if(cursor == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public Boolean ItemIDExist(String itemIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT item_ID FROM Item_Info WHERE item_ID LIKE '"+itemIDString+"'",  null);
+
+        if(cursor == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public Boolean OrderIDExist(String orderIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT order_ID FROM Order_Info WHERE order_ID LIKE '"+orderIDString+"'",  null);
+
+        if(cursor == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
+    public Boolean OrderLineExist(String orderLineString, String itemIDString){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        Cursor cursor = db.rawQuery("SELECT DISTINCT order_ID FROM Order_Line WHERE order_ID LIKE '"+orderLineString+"' AND item_ID LIKE '"+itemIDString+"'",  null);
+
+        if(cursor == null){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 }
