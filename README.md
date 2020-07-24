@@ -5,3 +5,4 @@ Welcome to Merchandiser Stock Count Repository
 
 This repository contains the development code for the ECNG3020 project. To run this application, an android emulator would be needed
 or downloading this apk file to an android device [CLICK HERE](https://drive.google.com/drive/u/0/folders/13lt43tKw0bZGZu6GiKLHSd4HHRV5QP5-). 
+Link to the Appendices [CLICK HERE](https://drive.google.com/drive/folders/1MIOcctZMTTgv4labzj71uxgYTYidMkhZ?usp=sharing)
